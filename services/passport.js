@@ -1,5 +1,6 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const FacebookStrategy = require('passport-facebook').Strategy;
 const mongoose = require('mongoose');
 const keys = require('../config/dev');
 
@@ -21,6 +22,7 @@ passport.use(
       clientID: keys.googleClientId,
       clientSecret: keys.googleClientSecretKey,
       callbackURL: 'http://localhost:5000/auth/google/callback',
+      proxy: true,
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
@@ -51,6 +53,43 @@ passport.use(
         const user = await new User({
           googleId: profile.id,
           profilePic: profile._json.picture,
+          profileName: profile.name.givenName,
+        }).save();
+        done(null, user);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  )
+);
+
+passport.use(
+  new FacebookStrategy(
+    {
+      clientID: keys.facebookAppID,
+      clientSecret: keys.facebookClientSecret,
+      callbackURL: '/auth/facebook/callback',
+      profileFields: ['name', 'id', 'picture.type(large)', 'displayName'],
+      proxy: true,
+    },
+    async (accessToken, refreshToken, profile, done) => {
+      const profilePhoto = profile.photos
+        ? profile.photos[0].value
+        : '/img/faces/unknown-user-pic.jpg';
+      try {
+        const existingUser = await User.findOne({ facebookId: profile.id });
+        if (existingUser) {
+          existingUser.profilePic = profilePhoto;
+          existingUser.profileName = profile.name.givenName;
+          const userUpdated = await existingUser.save();
+          return done(null, userUpdated);
+        }
+
+        const user = await new User({
+          facebookId: profile.id,
+          profilePic: profile.photos
+            ? profile.photos[0].value
+            : '/img/faces/unknown-user-pic.jpg',
           profileName: profile.name.givenName,
         }).save();
         done(null, user);

@@ -16,6 +16,20 @@ const authRoutes = (app) => {
     }
   );
 
+  app.get('/auth/facebook', passport.authenticate('facebook'));
+
+  app.get(
+    '/auth/facebook/callback',
+    passport.authenticate('facebook', {
+      failureRedirect: '/login',
+      failureFlash: true,
+    }),
+    function (req, res) {
+      // Successful authentication, redirect home.
+      res.redirect('/');
+    }
+  );
+
   app.get('/auth/current_user', (req, res) => {
     res.send(req.user);
   });
