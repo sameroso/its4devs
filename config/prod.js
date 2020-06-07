@@ -8,3 +8,5 @@ const keys = {
   gitHubClientId: process.env.GITHUB_CLIENT_ID,
   gitHubClientSecret: process.env.GITHUB_CLIENT_SECRET,
 };
+
+module.exports = keys;
