@@ -1,7 +1,6 @@
 const passport = require('passport');
 
 const authRoutes = (app) => {
-  app.get('/', (req, res) => res.send('Hello World!'));
   app.get(
     '/auth/google',
     passport.authenticate('google', { scope: ['profile'] })

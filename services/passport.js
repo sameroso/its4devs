@@ -3,7 +3,7 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
 var GitHubStrategy = require('passport-github2').Strategy;
 const mongoose = require('mongoose');
-const keys = require('../config/dev');
+const keys = require('../config/keys');
 
 const User = mongoose.model('users');
 
@@ -22,7 +22,7 @@ passport.use(
     {
       clientID: keys.googleClientId,
       clientSecret: keys.googleClientSecretKey,
-      callbackURL: 'http://localhost:5000/auth/google/callback',
+      callbackURL: '/auth/google/callback',
       proxy: true,
     },
     async (accessToken, refreshToken, profile, done) => {
@@ -113,7 +113,7 @@ passport.use(
     {
       clientID: keys.gitHubClientId,
       clientSecret: keys.gitHubClientSecret,
-      callbackURL: 'http://localhost:5000/auth/github/callback',
+      callbackURL: '/auth/github/callback',
       proxy: true,
     },
     async (accessToken, refreshToken, profile, done) => {
