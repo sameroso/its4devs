@@ -13,7 +13,7 @@ const mongoose = require('mongoose');
 require('./models/userModel');
 require('./services/passport');
 
-mongoose.connect(keys.mongoURI, { dbName: 'todoando' });
+mongoose.connect(keys.mongoURI, { dbName: 'forDevs' });
 
 app.use(bodyParser.json());
 

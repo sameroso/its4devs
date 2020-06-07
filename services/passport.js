@@ -1,6 +1,7 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
+var GitHubStrategy = require('passport-github2').Strategy;
 const mongoose = require('mongoose');
 const keys = require('../config/dev');
 
@@ -27,7 +28,6 @@ passport.use(
     async (accessToken, refreshToken, profile, done) => {
       try {
         const existingUser = await User.findOne({ googleId: profile.id });
-        console.log(existingUser);
         if (existingUser) {
           if (
             existingUser.profileName === profile.name.givenName &&
@@ -54,6 +54,10 @@ passport.use(
           googleId: profile.id,
           profilePic: profile._json.picture,
           profileName: profile.name.givenName,
+          whatsApp: '',
+          facebookLink: '',
+          gitHub: '',
+          description: '',
         }).save();
         done(null, user);
       } catch (err) {
@@ -91,6 +95,60 @@ passport.use(
             ? profile.photos[0].value
             : '/img/faces/unknown-user-pic.jpg',
           profileName: profile.name.givenName,
+          whatsApp: '',
+          facebookLink: '',
+          gitHub: '',
+          description: '',
+        }).save();
+        done(null, user);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  )
+);
+
+passport.use(
+  new GitHubStrategy(
+    {
+      clientID: keys.gitHubClientId,
+      clientSecret: keys.gitHubClientSecret,
+      callbackURL: 'http://localhost:5000/auth/github/callback',
+      proxy: true,
+    },
+    async (accessToken, refreshToken, profile, done) => {
+      try {
+        const existingUser = await User.findOne({ gitHubId: profile.id });
+        if (existingUser) {
+          if (
+            existingUser.profileName === profile.name &&
+            existingUser.profilePic === profile.photos[0].value
+          ) {
+            return done(null, existingUser);
+          } else if (existingUser.profileName !== profile.name) {
+            existingUser.profileName = profile.name;
+            const userUpdated = await existingUser.save();
+            return done(null, userUpdated);
+          } else if (existingUser.profilePic !== profile.photos[0].value) {
+            console.log('pic changed');
+            existingUser.profilePic = profile.photos[0].value;
+            const userUpdated = await existingUser.save();
+            return done(null, userUpdated);
+          } else {
+            existingUser.profileName = profile.name;
+            existingUser.profilePic = profile.photos[0].value;
+            const userUpdated = await existingUser.save();
+            return done(null, userUpdated);
+          }
+        }
+        const user = await new User({
+          gitHubId: profile.id,
+          profilePic: profile.photos[0].value,
+          profileName: profile.name,
+          whatsApp: '',
+          facebookLink: '',
+          gitHub: '',
+          description: profile._json.bio,
         }).save();
         done(null, user);
       } catch (err) {

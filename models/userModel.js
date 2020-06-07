@@ -3,18 +3,17 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
   googleId: String,
   facebookId: String,
+  gitHubId: String,
   profilePic: String,
   profileName: String,
   description: String,
   whatsApp: String,
   facebookLink: String,
-  votes: String,
-  donations: [{ title: String, body: String, date: Date }],
-  date: { type: Date, default: Date.now },
-  meta: {
-    votes: Number,
-    favs: Number,
-  },
+  gitHub: String,
+  posts: [
+    { title: String, body: String, date: Date, likes: [{ userId: String }] },
+  ],
+  dateCreated: { type: Date, default: Date },
 });
 
 mongoose.connection.useDb('todoando');
