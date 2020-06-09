@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { fetchMyUser } from '../../actions';
 import { BrowserRouter, Route } from 'react-router-dom';
 
-import LandingPage from '../LandingPage/LandinPage';
+import LandingPage from '../LandingPage/LandingPage';
 
-function App() {
+import './App.scss';
+
+function App({ fetchMyUser }) {
+  useEffect(() => {
+    fetchMyUser();
+  }, []);
   return (
     <BrowserRouter>
       <Route path="/" component={LandingPage} />

@@ -18,7 +18,7 @@ describe('fetchMyUser action dispatcher', () => {
   };
 
   let store;
-  const initialState = { auth: null };
+  const initialState = { user: null };
   beforeEach(() => {
     moxios.install();
     store = storeFactory(initialState);
@@ -37,7 +37,7 @@ describe('fetchMyUser action dispatcher', () => {
     return store.dispatch(fetchMyUser()).then(() => {
       const newState = store.getState();
       const expectedState = {
-        auth: user,
+        user: user,
       };
       expect(newState).toEqual(expectedState);
     });
