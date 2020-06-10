@@ -1,0 +1,19 @@
+$background-color: #008f91;
+
+@mixin ui95-btn {
+  color: #000;
+  background-color: #8b8585;
+  border-color: #555151;
+}
+
+@font-face {
+  font-family: 'windows95';
+  src: url('../../assets/fonts/ms-sans-serif.ttf');
+  src: url('../../assets/fonts/w-95-sans-serif.woff') format('woff'),
+    url('../../assets/fonts/w-95-sans-serif.woff2') format('woff2'),
+    url('../../assets/fonts/ms-sans-serif.ttf') format('ttf');
+}
+
+.font {
+  font-family: windows95, sans-serif;
+}

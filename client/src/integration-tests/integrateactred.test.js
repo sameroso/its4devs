@@ -38,6 +38,7 @@ describe('fetchMyUser action dispatcher', () => {
       const newState = store.getState();
       const expectedState = {
         user: user,
+        form: {},
       };
       expect(newState).toEqual(expectedState);
     });

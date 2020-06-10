@@ -1,24 +1,13 @@
-@font-face {
-  font-family: 'windows95';
-  src: url('../../assets/fonts/ms-sans-serif.ttf');
-  src: url('../../assets/fonts/w-95-sans-serif.woff') format('woff'),
-    url('../../assets/fonts/w-95-sans-serif.woff2') format('woff2'),
-    url('../../assets/fonts/ms-sans-serif.ttf') format('ttf');
-}
-
-.font {
-  font-family: windows95, sans-serif;
-}
+@import '../style/variables.scss';
 
 .windows-btn {
-  color: #000;
-  background-color: #c0c0c0;
-  border-color: #a0a0a0;
+  @include ui95-btn;
   padding: 2px 15px;
 }
 
 .login-title {
   font-size: 50px;
-  margin-top: 100px;
-  margin-bottom: 100px;
+  margin-top: 90px;
+  margin-bottom: 90px;
+  color: rgb(0, 0, 0);
 }

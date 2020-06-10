@@ -1,8 +1,6 @@
 import React from 'react';
 import './LoginPage.scss';
 
-import googleIcon from '../../assets/google-plus-icon.png';
-
 const LoginPage = () => {
   return (
     <>
@@ -12,20 +10,24 @@ const LoginPage = () => {
             <span className="font mx-auto login-title">its4Devs</span>
           </div>
           <div className="row">
-            <a className="mx-auto mb-1" href="/auth/github">
-              <button className="windows-btn">
-                <span className="font">login with github</span>
+            <a className="mx-auto mb-3" href="/auth/github">
+              <button className="windows-btn" data-test="github-btn">
+                <span className="font">login com github</span>
               </button>
             </a>
           </div>
-          <div className="row mb-1">
+          <div className="row mb-3">
             <a className="mx-auto font" href="/auth/facebook">
-              <button className="windows-btn">login with facebook</button>
+              <button className="windows-btn" data-test="facebook-btn">
+                login com facebook
+              </button>
             </a>
           </div>
           <div className="row">
             <a className="mx-auto font" href="/auth/google">
-              <button className="windows-btn">login with google</button>
+              <button className="windows-btn" data-test="google-btn">
+                login com google
+              </button>
             </a>
           </div>
         </div>

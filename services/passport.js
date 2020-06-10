@@ -58,6 +58,7 @@ passport.use(
           facebookLink: '',
           gitHub: '',
           description: '',
+          initialformFilled: false,
         }).save();
         done(null, user);
       } catch (err) {
@@ -99,6 +100,7 @@ passport.use(
           facebookLink: '',
           gitHub: '',
           description: '',
+          initialformFilled: false,
         }).save();
         done(null, user);
       } catch (err) {
@@ -117,16 +119,17 @@ passport.use(
       proxy: true,
     },
     async (accessToken, refreshToken, profile, done) => {
+      console.log(profile);
       try {
         const existingUser = await User.findOne({ gitHubId: profile.id });
         if (existingUser) {
           if (
-            existingUser.profileName === profile.name &&
+            existingUser.profileName === profile.username &&
             existingUser.profilePic === profile.photos[0].value
           ) {
             return done(null, existingUser);
-          } else if (existingUser.profileName !== profile.name) {
-            existingUser.profileName = profile.name;
+          } else if (existingUser.profileName !== profile.username) {
+            existingUser.profileName = profile.username;
             const userUpdated = await existingUser.save();
             return done(null, userUpdated);
           } else if (existingUser.profilePic !== profile.photos[0].value) {
@@ -135,7 +138,7 @@ passport.use(
             const userUpdated = await existingUser.save();
             return done(null, userUpdated);
           } else {
-            existingUser.profileName = profile.name;
+            existingUser.profileName = profile.username;
             existingUser.profilePic = profile.photos[0].value;
             const userUpdated = await existingUser.save();
             return done(null, userUpdated);
@@ -144,11 +147,12 @@ passport.use(
         const user = await new User({
           gitHubId: profile.id,
           profilePic: profile.photos[0].value,
-          profileName: profile.name,
+          profileName: profile.username,
           whatsApp: '',
           facebookLink: '',
-          gitHub: '',
+          gitHub: profile.profileUrl,
           description: profile._json.bio,
+          initialformFilled: false,
         }).save();
         done(null, user);
       } catch (err) {

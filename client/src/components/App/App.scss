@@ -1,5 +1,6 @@
+@import '../style/variables.scss';
 #root,
 body,
 html {
-  background-color: #008f91;
+  background-color: $background-color;
 }
