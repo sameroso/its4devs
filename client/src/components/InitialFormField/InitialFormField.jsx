@@ -1,13 +1,14 @@
 import React from 'react';
+import './InitialFormField.scss';
 
 function InitialFormField({ input, label }) {
   return (
-    <>
-      <span className="font">{label}</span>
-      <div>
-        <input {...input} className="font" />
+    <div className="pb-3">
+      <span className="font initial-form-label-position">{label}</span>
+      <div className="row">
+        <input {...input} className="initial-form-input" />
       </div>
-    </>
+    </div>
   );
 }
 

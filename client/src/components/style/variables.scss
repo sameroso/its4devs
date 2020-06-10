@@ -1,8 +1,9 @@
 $background-color: #008f91;
+$card-color: #bbb0b0;
 
 @mixin ui95-btn {
   color: #000;
-  background-color: #8b8585;
+  background-color: $card-color;
   border-color: #555151;
 }
 
