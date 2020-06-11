@@ -4,7 +4,16 @@ $card-color: #bbb0b0;
 @mixin ui95-btn {
   color: #000;
   background-color: $card-color;
-  border-color: #555151;
+  border-color: #f5efef;
+  cursor: pointer;
+  &:focus {
+    outline: none;
+  }
+  &:active {
+    background-color: $card-color;
+    box-shadow: 0 2px #666;
+    transform: translateY(4px);
+  }
 }
 
 @font-face {

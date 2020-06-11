@@ -10,7 +10,7 @@ const userSchema = new Schema({
   whatsApp: String,
   facebookLink: String,
   gitHub: String,
-  initialformFilled: Boolean,
+  initialFormFilled: Boolean,
   posts: [
     { title: String, body: String, date: Date, likes: [{ userId: String }] },
   ],

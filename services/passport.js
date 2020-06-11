@@ -29,22 +29,9 @@ passport.use(
       try {
         const existingUser = await User.findOne({ googleId: profile.id });
         if (existingUser) {
-          if (
-            existingUser.profileName === profile.name.givenName &&
-            existingUser.profilePic === profile._json.picture
-          ) {
+          if (existingUser.profilePic === profile._json.picture) {
             return done(null, existingUser);
-          } else if (existingUser.profileName !== profile.name.givenName) {
-            existingUser.profileName = profile.name.givenName;
-            const userUpdated = await existingUser.save();
-            return done(null, userUpdated);
           } else if (existingUser.profilePic !== profile._json.picture) {
-            console.log('pic changed');
-            existingUser.profilePic = profile._json.picture;
-            const userUpdated = await existingUser.save();
-            return done(null, userUpdated);
-          } else {
-            existingUser.profileName = profile.name.givenName;
             existingUser.profilePic = profile._json.picture;
             const userUpdated = await existingUser.save();
             return done(null, userUpdated);
@@ -85,7 +72,6 @@ passport.use(
         const existingUser = await User.findOne({ facebookId: profile.id });
         if (existingUser) {
           existingUser.profilePic = profilePhoto;
-          existingUser.profileName = profile.name.givenName;
           const userUpdated = await existingUser.save();
           return done(null, userUpdated);
         }
@@ -123,22 +109,9 @@ passport.use(
       try {
         const existingUser = await User.findOne({ gitHubId: profile.id });
         if (existingUser) {
-          if (
-            existingUser.profileName === profile.username &&
-            existingUser.profilePic === profile.photos[0].value
-          ) {
+          if (existingUser.profilePic === profile.photos[0].value) {
             return done(null, existingUser);
-          } else if (existingUser.profileName !== profile.username) {
-            existingUser.profileName = profile.username;
-            const userUpdated = await existingUser.save();
-            return done(null, userUpdated);
           } else if (existingUser.profilePic !== profile.photos[0].value) {
-            console.log('pic changed');
-            existingUser.profilePic = profile.photos[0].value;
-            const userUpdated = await existingUser.save();
-            return done(null, userUpdated);
-          } else {
-            existingUser.profileName = profile.username;
             existingUser.profilePic = profile.photos[0].value;
             const userUpdated = await existingUser.save();
             return done(null, userUpdated);

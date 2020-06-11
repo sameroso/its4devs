@@ -4,6 +4,7 @@ const app = express();
 const keys = require('./config/keys');
 
 const authRoutes = require('./routes/authRoutes');
+const apiRoutes = require('./routes/apiRoutes');
 
 const bodyParser = require('body-parser');
 const passport = require('passport');
@@ -29,6 +30,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 authRoutes(app);
+apiRoutes(app);
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));

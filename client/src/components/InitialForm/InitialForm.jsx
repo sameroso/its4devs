@@ -1,13 +1,14 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 
 import InitialFormField from '../InitialFormField/InitialFormField';
-import InitialFormFieldTxtArea from '../InitialFormFieldTxtArea/InitialFormFieldTxtArea.jsx';
+import { updateUser } from '../../actions/index';
 import './InitialForm.scss';
 
-function InitialForm({ pic, handleSubmit }) {
-  const saveUser = () => {
-    console.log('oi');
+function InitialForm({ pic, handleSubmit, updateUser }) {
+  const onSubmit = (formValues) => {
+    updateUser(formValues);
   };
 
   return (
@@ -16,39 +17,48 @@ function InitialForm({ pic, handleSubmit }) {
         Coloque seus Dados
       </div>
       <div className="card card-secondary">
-        <form onSubmit={handleSubmit(saveUser)} data-test="initial-form">
+        <form onSubmit={handleSubmit(onSubmit)} data-test="initial-form">
           <div className="row">
-            <div className="col-12 col-sm-4 d-flex mx-auto my-auto">
+            <div className="col-12 col-sm-3 d-flex mx-auto my-auto">
               <img
                 src={pic}
                 className="form-pic mr-4 mb-3 mx-auto mt-1"
                 alt=""
               />
             </div>
-            <div className="col-12 col-sm-8 mx-auto">
+            <div className="col-12 col-sm-9 mx-auto">
               <Field
                 name="userName"
                 component={InitialFormField}
                 label="nome"
+                type="input"
               />
             </div>
           </div>
           <Field
             name="description"
-            component={InitialFormFieldTxtArea}
+            component={InitialFormField}
             label="Bio"
+            type="textarea"
           />
           <Field
-            name="facebookLInk"
+            name="facebookLink"
             component={InitialFormField}
             label="facebook"
+            type="input"
           />
           <Field
             name="whatsApp"
             component={InitialFormField}
             label="whatsapp"
+            type="input"
           />
-          <Field name="gitHub" component={InitialFormField} label="giihub" />
+          <Field
+            name="gitHub"
+            component={InitialFormField}
+            label="giihub"
+            type="input"
+          />
           <div className="d-flex justify-content-end mr-5 mb-3">
             <button type="submit" className="initial-form-btn-save font">
               Salvar
@@ -63,4 +73,4 @@ function InitialForm({ pic, handleSubmit }) {
 export default reduxForm({
   form: 'subscribe',
   enableReinitialize: true,
-})(InitialForm);
+})(connect(null, { updateUser })(InitialForm));

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import InitialForm from '../InitialForm/InitialForm';
 
 function MainPage({ user }) {
-  if (!user.InitialFormFilled) {
+  if (!user.initialFormFilled) {
     const userData = {
       userName: user.profileName,
       facebookLink: user.facebookLink,
