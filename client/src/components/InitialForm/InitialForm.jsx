@@ -6,7 +6,7 @@ import InitialFormField from '../InitialFormField/InitialFormField';
 import { updateUser } from '../../actions/index';
 import './InitialForm.scss';
 
-function InitialForm({ pic, handleSubmit, updateUser }) {
+function InitialForm({ profilePic, handleSubmit, updateUser }) {
   const onSubmit = (formValues) => {
     updateUser(formValues);
   };
@@ -21,7 +21,7 @@ function InitialForm({ pic, handleSubmit, updateUser }) {
           <div className="row">
             <div className="col-12 col-sm-3 d-flex mx-auto my-auto">
               <img
-                src={pic}
+                src={profilePic}
                 className="form-pic mr-4 mb-3 mx-auto mt-1"
                 alt=""
               />

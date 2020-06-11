@@ -2,26 +2,25 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import InitialForm from '../InitialForm/InitialForm';
+import Header from '../Header/Header';
 
 function MainPage({ user }) {
+  const userData = {
+    profileName: user.profileName,
+    facebookLink: user.facebookLink,
+    gitHub: user.gitHub,
+    description: user.description,
+    whatsApp: user.whatsApp,
+  };
   if (!user.initialFormFilled) {
-    const userData = {
-      userName: user.profileName,
-      facebookLink: user.facebookLink,
-      gitHub: user.gitHub,
-      description: user.description,
-      whatsApp: user.whatsApp,
-    };
-    return <InitialForm pic={user.profilePic} initialValues={userData} />;
+    return (
+      <InitialForm profilePic={user.profilePic} initialValues={userData} />
+    );
   }
   return (
-    <div>
-      <div className="container">
-        <div className="row">
-          <img src={user.profilePic} />
-        </div>
-      </div>
-    </div>
+    <>
+      <Header data={{ ...userData, profilePic: user.profilePic }} />
+    </>
   );
 }
 

@@ -1,16 +1,16 @@
 $background-color: #008f91;
-$card-color: #bbb0b0;
+$primary-color: #bbb0b0;
 
 @mixin ui95-btn {
   color: #000;
-  background-color: $card-color;
+  background-color: $primary-color;
   border-color: #f5efef;
   cursor: pointer;
   &:focus {
     outline: none;
   }
   &:active {
-    background-color: $card-color;
+    background-color: $primary-color;
     box-shadow: 0 2px #666;
     transform: translateY(4px);
   }
@@ -26,4 +26,5 @@ $card-color: #bbb0b0;
 
 .font {
   font-family: windows95, sans-serif;
+  font-size: small;
 }
