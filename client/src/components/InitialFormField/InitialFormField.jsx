@@ -1,7 +1,7 @@
 import React from 'react';
 import './InitialFormField.scss';
 
-function InitialFormField({ input, label, type }) {
+function InitialFormField({ input, label, type, meta: { touched, error } }) {
   const inputType =
     type === 'input' ? (
       <input type={type} {...input} className="initial-form-input" />
@@ -9,10 +9,23 @@ function InitialFormField({ input, label, type }) {
       <textarea {...input} className="initial-form-text-area mx-auto" />
     );
 
+  const renderError = (touched, error) => {
+    if (touched && error) {
+      return (
+        <small className="form-text" style={{ color: 'red' }}>
+          {error}
+        </small>
+      );
+    } else {
+      return null;
+    }
+  };
+
   return (
     <div className="pb-3">
       <span className="font initial-form-label-position">{label}</span>
       <div className="row">{inputType}</div>
+      {renderError(touched, error)}
     </div>
   );
 }

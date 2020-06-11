@@ -70,7 +70,17 @@ function InitialForm({ pic, handleSubmit, updateUser }) {
   );
 }
 
+function validate(values) {
+  const errors = {};
+  if (!values.userName) {
+    errors.userName = 'O nome é obrigatório';
+  }
+
+  return errors;
+}
+
 export default reduxForm({
   form: 'subscribe',
   enableReinitialize: true,
+  validate,
 })(connect(null, { updateUser })(InitialForm));
