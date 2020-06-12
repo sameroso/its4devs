@@ -2,9 +2,7 @@ const mongoose = require('mongoose');
 const requireLogin = require('../middlewares/requireLogin');
 
 const apiRoutes = (app) => {
-  app.use(requireLogin);
-
-  app.post('/api/updateuser', async (req, res) => {
+  app.post('/api/updateuser', requireLogin, async (req, res) => {
     const User = mongoose.model('users');
     const userData = {
       userName: req.body.profileName,
@@ -25,7 +23,7 @@ const apiRoutes = (app) => {
 
     res.send(updated);
   });
-  app.post('/api/updateuserposts', async (req, res) => {
+  app.post('/api/updateuserposts', requireLogin, async (req, res) => {
     const post = {
       postedBy: {
         profileName: req.body.profileName,
@@ -43,14 +41,14 @@ const apiRoutes = (app) => {
     res.send(updated);
   });
 
-  app.get('/api/posts', async (req, res) => {
+  app.get('/api/posts', requireLogin, async (req, res) => {
     const Posts = mongoose.model('posts');
     const posts = await Posts.findOne({ id: '1' });
 
     res.send(posts);
   });
 
-  app.post('/api/sendpost', async (req, res) => {
+  app.post('/api/sendpost', requireLogin, async (req, res) => {
     const Posts = await mongoose.model('posts');
     const options = { upsert: true };
 
