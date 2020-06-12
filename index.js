@@ -13,6 +13,7 @@ const mongoose = require('mongoose');
 
 require('./models/userModel');
 require('./services/passport');
+require('./models/postModel');
 
 mongoose.connect(keys.mongoURI, { dbName: 'forDevs' });
 

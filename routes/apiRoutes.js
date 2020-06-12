@@ -21,6 +21,12 @@ const apiRoutes = (app) => {
 
     res.send(updated);
   });
+
+  app.get('/api/posts', async (req, res) => {
+    const Posts = await mongoose.model('posts');
+
+    res.send(Posts);
+  });
 };
 
 module.exports = apiRoutes;

@@ -5,7 +5,7 @@ import './Header.scss';
 
 const Header = ({ data: { profilePic, profileName } }) => {
   return (
-    <div className="header-background fixed-top">
+    <div className="header-background">
       <div className="container">
         <div className="row">
           <DropDown profilePic={profilePic} profileName={profileName} />

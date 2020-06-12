@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import InitialForm from '../InitialForm/InitialForm';
+import PostCard from '../postcard/PostCard/PostCard';
 import Header from '../Header/Header';
 
 function MainPage({ user }) {
@@ -18,9 +19,14 @@ function MainPage({ user }) {
     );
   }
   return (
-    <>
-      <Header data={{ ...userData, profilePic: user.profilePic }} />
-    </>
+    <div>
+      <div className="fixed-top">
+        <Header data={{ ...userData, profilePic: user.profilePic }} />
+      </div>
+      <div className="mt-5">
+        <PostCard />
+      </div>
+    </div>
   );
 }
 
