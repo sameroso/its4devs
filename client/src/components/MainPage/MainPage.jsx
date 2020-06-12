@@ -1,17 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import InitialForm from '../InitialForm/InitialForm';
-import PostCard from '../postcard/PostCard/PostCard';
+import PostCard from '../posts/PostCard/PostCard';
+import PostForm from '../posts/PostForm/PostForm';
 import Header from '../Header/Header';
+import { fetchPosts } from '../../actions/index';
 
-function MainPage({ user }) {
+function MainPage({ user, fetchPosts }) {
+  useEffect(() => {
+    fetchPosts();
+  }, []);
   const userData = {
     profileName: user.profileName,
     facebookLink: user.facebookLink,
     gitHub: user.gitHub,
     description: user.description,
     whatsApp: user.whatsApp,
+  };
+  const postData = {
+    profileName: user.profileName,
+    profilePic: user.profilePic,
   };
   if (!user.initialFormFilled) {
     return (
@@ -23,7 +32,8 @@ function MainPage({ user }) {
       <div className="fixed-top">
         <Header data={{ ...userData, profilePic: user.profilePic }} />
       </div>
-      <div className="mt-5">
+      <div className="mt-5 container">
+        <PostForm postData={postData} />
         <PostCard />
       </div>
     </div>
@@ -31,7 +41,8 @@ function MainPage({ user }) {
 }
 
 const mapStateToProps = (state) => {
+  console.log(state);
   return { user: state.user };
 };
 
-export default connect(mapStateToProps)(MainPage);
+export default connect(mapStateToProps, { fetchPosts })(MainPage);

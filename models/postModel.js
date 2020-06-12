@@ -1,13 +1,14 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const postSchema = new Schema({
+  id: String,
   posts: [
     {
-      postedBy: { userName: String, profilePic: String, userId: String },
+      postedBy: { profileName: String, profilePic: String, userId: String },
       title: String,
       body: String,
-      date: Date,
       likes: [{ userId: String }],
+      dateCreated: { type: Date, default: Date },
     },
   ],
 });

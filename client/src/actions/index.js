@@ -10,3 +10,12 @@ export const updateUser = (data) => async (dispatch) => {
   const response = await axios.post('/api/updateuser', data);
   dispatch({ type: types.FETCH_MY_USER, payload: response.data });
 };
+
+export const fetchPosts = () => async (dispatch) => {
+  const response = await axios.get('/api/posts');
+  dispatch({ type: types.FETCH_POSTS, payload: response.data });
+};
+export const sendPost = (post) => async (dispatch) => {
+  const response = await axios.post('/api/sendpost', post);
+  dispatch({ type: types.FETCH_POSTS, payload: response.data });
+};
