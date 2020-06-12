@@ -12,7 +12,13 @@ const userSchema = new Schema({
   gitHub: String,
   initialFormFilled: Boolean,
   posts: [
-    { title: String, body: String, date: Date, likes: [{ userId: String }] },
+    {
+      postedBy: { profileName: String, profilePic: String, userId: String },
+      title: String,
+      body: String,
+      likes: [{ userId: String }],
+      dateCreated: { type: Date, default: Date },
+    },
   ],
   dateCreated: { type: Date, default: Date },
 });

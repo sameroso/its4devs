@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import InitialForm from '../InitialForm/InitialForm';
-import PostCard from '../posts/PostCard/PostCard';
+import PostCardList from '../posts/PostCardList/PostCardList';
 import PostForm from '../posts/PostForm/PostForm';
 import Header from '../Header/Header';
 import { fetchPosts } from '../../actions/index';
@@ -34,14 +34,13 @@ function MainPage({ user, fetchPosts }) {
       </div>
       <div className="mt-5 container">
         <PostForm postData={postData} />
-        <PostCard />
+        <PostCardList />
       </div>
     </div>
   );
 }
 
 const mapStateToProps = (state) => {
-  console.log(state);
   return { user: state.user };
 };
 

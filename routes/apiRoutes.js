@@ -7,7 +7,7 @@ const apiRoutes = (app) => {
   app.post('/api/updateuser', async (req, res) => {
     const User = mongoose.model('users');
     const userData = {
-      userName: req.body.userName,
+      userName: req.body.profileName,
       facebookLink: req.body.facebookLink,
       gitHub: req.body.gitHub,
       whatsApp: req.body.whatsApp,
@@ -15,7 +15,7 @@ const apiRoutes = (app) => {
     };
     const user = await User.findById(req.user._id);
 
-    user.userName = req.body.userName;
+    user.profileName = req.body.profileName;
     user.facebookLink = req.body.facebookLink;
     user.gitHub = req.body.gitHub;
     user.whatsApp = req.body.whatsApp;
@@ -23,6 +23,23 @@ const apiRoutes = (app) => {
     user.initialFormFilled = true;
     const updated = await user.save();
 
+    res.send(updated);
+  });
+  app.post('/api/updateuserposts', async (req, res) => {
+    const post = {
+      postedBy: {
+        profileName: req.body.profileName,
+        profilePic: req.body.profilePic,
+        userId: req.user._id,
+      },
+      title: req.body.title,
+      body: req.body.body,
+      likes: [],
+    };
+    const User = mongoose.model('users');
+    const user = await User.findById(req.user._id);
+    user.posts.push(post);
+    const updated = await user.save();
     res.send(updated);
   });
 
@@ -44,13 +61,11 @@ const apiRoutes = (app) => {
         userId: req.user._id,
       },
       title: req.body.title,
-      body: req.body.body,
+      body: req.body.postForm,
       likes: [],
     };
 
     Posts.findOneAndUpdate({ id: req.body.id }, options, (error, result) => {
-      console.log(req.body.id);
-      console.log(result);
       if (!error) {
         // If the document doesn't exist
         if (!result) {
@@ -64,7 +79,7 @@ const apiRoutes = (app) => {
                   userId: req.user._id,
                 },
                 title: req.body.title,
-                body: req.body.body,
+                body: req.body.postForm,
                 likes: [],
               },
             ],

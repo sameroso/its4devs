@@ -18,4 +18,7 @@ export const fetchPosts = () => async (dispatch) => {
 export const sendPost = (post) => async (dispatch) => {
   const response = await axios.post('/api/sendpost', post);
   dispatch({ type: types.FETCH_POSTS, payload: response.data });
+
+  const response2 = await axios.post('/api/updateuserposts', post);
+  dispatch({ type: types.FETCH_MY_USER, payload: response2.data });
 };

@@ -9,7 +9,7 @@ function InitialFormField({ input, label, type, meta: { touched, error } }) {
       <textarea {...input} className="initial-form-text-area mx-auto" />
     );
 
-  const renderError = (touched, error) => {
+  const renderError = () => {
     if (touched && error) {
       return (
         <small className="form-text" style={{ color: 'red' }}>
@@ -25,7 +25,7 @@ function InitialFormField({ input, label, type, meta: { touched, error } }) {
     <div className="pb-3">
       <span className="font initial-form-label-position">{label}</span>
       <div className="row">{inputType}</div>
-      {renderError(touched, error)}
+      {renderError()}
     </div>
   );
 }

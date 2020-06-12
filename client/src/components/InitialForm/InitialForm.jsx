@@ -28,7 +28,7 @@ function InitialForm({ profilePic, handleSubmit, updateUser }) {
             </div>
             <div className="col-12 col-sm-9 mx-auto">
               <Field
-                name="userName"
+                name="profileName"
                 component={InitialFormField}
                 label="nome"
                 type="input"
@@ -72,8 +72,8 @@ function InitialForm({ profilePic, handleSubmit, updateUser }) {
 
 function validate(values) {
   const errors = {};
-  if (!values.userName) {
-    errors.userName = 'O nome é obrigatório';
+  if (!values.profileName) {
+    errors.profileName = 'O nome é obrigatório';
   }
 
   return errors;
