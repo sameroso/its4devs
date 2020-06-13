@@ -7,7 +7,7 @@ import './PostCardList.scss';
 function PostCardList({ postsData }) {
   let renderPostCardList;
   if (postsData.length !== 0) {
-    renderPostCardList = postsData.posts.map((post) => (
+    renderPostCardList = postsData.posts.reverse().map((post) => (
       <PostCard
         key={post._id}
         post={post}
@@ -24,6 +24,7 @@ function PostCardList({ postsData }) {
 }
 
 const mapStateToProps = (state) => {
+  console.log(state);
   return { postsData: state.postsData };
 };
 

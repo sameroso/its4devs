@@ -30,3 +30,11 @@ export const deletePost = (postId) => async (dispatch) => {
   const response2 = await axios.post('/api/deleteuserpost', postId);
   dispatch({ type: types.FETCH_MY_USER, payload: response2.data });
 };
+
+export const editPost = (postId) => async (dispatch) => {
+  const response = await axios.post('/api/editpost', postId);
+  dispatch({ type: types.FETCH_POSTS, payload: response.data });
+
+  const response2 = await axios.post('/api/edituserpost', postId);
+  dispatch({ type: types.FETCH_MY_USER, payload: response2.data });
+};

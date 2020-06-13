@@ -3,12 +3,20 @@ import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 
 import { deletePost } from '../../../actions';
+import { editPost } from '../../../actions';
 import CardButtons from '../CardButtons/CardButtons';
 import PostCardField from '../PostCardField/PostCardField';
 
 import './PostCard.scss';
 
-function PostCard({ post, deletePost, reset, myUserId, handleSubmit }) {
+function PostCard({
+  post,
+  deletePost,
+  reset,
+  myUserId,
+  handleSubmit,
+  editPost,
+}) {
   const [postCardFieldMode, setPostCardFieldMode] = useState(true);
 
   const deleteCurrentPost = () => {
@@ -16,7 +24,8 @@ function PostCard({ post, deletePost, reset, myUserId, handleSubmit }) {
   };
 
   const editCurrentPost = (formValues) => {
-    console.log(formValues);
+    editPost({ ...formValues, postId: post.postId });
+    console.log({ ...formValues, postId: post.postId });
   };
 
   return (
@@ -48,6 +57,15 @@ const mapStateToProps = (state) => {
   return { myUserId: state.user._id };
 };
 
-export default reduxForm({ enableReinitialize: true })(
-  connect(mapStateToProps, { deletePost })(PostCard)
+function validate(values) {
+  const errors = {};
+  if (!values.postCardBody) {
+    errors.postCardBody = 'NÃO PODE POST VAZIO';
+  }
+
+  return errors;
+}
+
+export default reduxForm({ enableReinitialize: true, validate })(
+  connect(mapStateToProps, { deletePost, editPost })(PostCard)
 );

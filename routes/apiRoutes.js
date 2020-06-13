@@ -119,6 +119,26 @@ const apiRoutes = (app) => {
       }
     });
   });
+  app.post('/api/editpost', async (req, res) => {
+    const Posts = await mongoose.model('posts');
+    const postsData = await Posts.findOne({ id: '1' });
+    const post = postsData.posts.find((el) => {
+      return el.postId === req.body.postId;
+    });
+    post.body = await req.body.postCardBody;
+    const updated = await postsData.save();
+    res.send(updated);
+  });
+  app.post('/api/edituserpost', async (req, res) => {
+    const User = await mongoose.model('users');
+    const user = await User.findById(req.user._id);
+    const post = user.posts.find((el) => {
+      return el.postId === req.body.postId;
+    });
+    post.body = await req.body.postCardBody;
+    const updated = await user.save();
+    res.send(updated);
+  });
 };
 
 module.exports = apiRoutes;
