@@ -6,14 +6,17 @@ import InitialFormField from '../../InitialFormField/InitialFormField';
 
 function PostForm({
   handleSubmit,
-  postData: { profileName, profilePic },
+  postData: { profileName, profilePic, sequenceId },
   sendPost,
   reset,
 }) {
+  const sequence = sequenceId ? sequenceId + 1 : 1;
+
   const postData = {
     profileName,
     profilePic,
-    id: '1',
+    databasePostId: '1',
+    sequenceId: sequence,
   };
   const submitForm = async (formValues) => {
     await sendPost({ ...postData, ...formValues });

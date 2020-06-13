@@ -7,7 +7,7 @@ import PostForm from '../posts/PostForm/PostForm';
 import Header from '../Header/Header';
 import { fetchPosts } from '../../actions/index';
 
-function MainPage({ user, fetchPosts }) {
+function MainPage({ user, fetchPosts, postsData }) {
   useEffect(() => {
     fetchPosts();
   }, []);
@@ -21,6 +21,7 @@ function MainPage({ user, fetchPosts }) {
   const postData = {
     profileName: user.profileName,
     profilePic: user.profilePic,
+    sequenceId: postsData.sequenceId,
   };
   if (!user.initialFormFilled) {
     return (
@@ -41,7 +42,7 @@ function MainPage({ user, fetchPosts }) {
 }
 
 const mapStateToProps = (state) => {
-  return { user: state.user };
+  return { user: state.user, postsData: state.postsData };
 };
 
 export default connect(mapStateToProps, { fetchPosts })(MainPage);

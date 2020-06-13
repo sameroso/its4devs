@@ -105,7 +105,6 @@ passport.use(
       proxy: true,
     },
     async (accessToken, refreshToken, profile, done) => {
-      console.log(profile);
       try {
         const existingUser = await User.findOne({ gitHubId: profile.id });
         if (existingUser) {

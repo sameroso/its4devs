@@ -13,6 +13,7 @@ const userSchema = new Schema({
   initialFormFilled: Boolean,
   posts: [
     {
+      postId: Number,
       postedBy: { profileName: String, profilePic: String, userId: String },
       title: String,
       body: String,

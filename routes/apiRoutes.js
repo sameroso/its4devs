@@ -4,13 +4,6 @@ const requireLogin = require('../middlewares/requireLogin');
 const apiRoutes = (app) => {
   app.post('/api/updateuser', requireLogin, async (req, res) => {
     const User = mongoose.model('users');
-    const userData = {
-      userName: req.body.profileName,
-      facebookLink: req.body.facebookLink,
-      gitHub: req.body.gitHub,
-      whatsApp: req.body.whatsApp,
-      description: req.body.description,
-    };
     const user = await User.findById(req.user._id);
 
     user.profileName = req.body.profileName;
@@ -25,6 +18,7 @@ const apiRoutes = (app) => {
   });
   app.post('/api/updateuserposts', requireLogin, async (req, res) => {
     const post = {
+      postId: req.body.sequenceId,
       postedBy: {
         profileName: req.body.profileName,
         profilePic: req.body.profilePic,
@@ -48,6 +42,27 @@ const apiRoutes = (app) => {
     res.send(posts);
   });
 
+  app.post('/api/deletepost', async (req, res) => {
+    const Posts = mongoose.model('posts');
+    const posts = await Posts.findOneAndUpdate(
+      { id: '1' },
+      { $pull: { posts: { postId: req.body.postId } } },
+      { new: true }
+    );
+
+    res.send(posts);
+  });
+  app.post('/api/deleteuserpost', async (req, res) => {
+    const User = mongoose.model('users');
+    const user = await User.findByIdAndUpdate(
+      req.user._id,
+      { $pull: { posts: { postId: req.body.postId } } },
+      { new: true }
+    );
+
+    res.send(user);
+  });
+
   app.post('/api/sendpost', requireLogin, async (req, res) => {
     const Posts = await mongoose.model('posts');
     const options = { upsert: true };
@@ -61,14 +76,18 @@ const apiRoutes = (app) => {
       title: req.body.title,
       body: req.body.postForm,
       likes: [],
+      comments: [],
+      postId: req.body.sequenceId,
     };
 
-    Posts.findOneAndUpdate({ id: req.body.id }, options, (error, result) => {
+    Posts.findOneAndUpdate({ id: '1' }, options, (error, result) => {
       if (!error) {
         // If the document doesn't exist
         if (!result) {
           result = new Posts({
-            id: req.body.id,
+            // the database id is hardcoded
+            id: '1',
+            sequenceId: 1,
             posts: [
               {
                 postedBy: {
@@ -76,13 +95,16 @@ const apiRoutes = (app) => {
                   profilePic: req.body.profilePic,
                   userId: req.user._id,
                 },
+                postId: 1,
                 title: req.body.title,
                 body: req.body.postForm,
                 likes: [],
+                comments: [],
               },
             ],
           });
         } else {
+          result.sequenceId++;
           result.posts.push(post);
         }
         // Save the document
