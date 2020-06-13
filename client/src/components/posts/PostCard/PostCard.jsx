@@ -8,15 +8,15 @@ import PostCardField from '../PostCardField/PostCardField';
 
 import './PostCard.scss';
 
-function PostCard({ post, deletePost, reset }) {
+function PostCard({ post, deletePost, reset, myUserId, handleSubmit }) {
   const [postCardFieldMode, setPostCardFieldMode] = useState(true);
 
-  const deletecurrentPost = () => {
+  const deleteCurrentPost = () => {
     deletePost({ postId: post.postId });
   };
 
-  const editCurrentPost = () => {
-    console.log('joia');
+  const editCurrentPost = (formValues) => {
+    console.log(formValues);
   };
 
   return (
@@ -33,9 +33,11 @@ function PostCard({ post, deletePost, reset }) {
       </div>
 
       <CardButtons
-        onDelete={deletecurrentPost}
-        onEdit={editCurrentPost}
+        onDelete={deleteCurrentPost}
+        onEdit={handleSubmit(editCurrentPost)}
         onBtnChange={setPostCardFieldMode}
+        postedBy={post.postedBy.userId}
+        userId={myUserId}
         reset={reset}
       />
     </div>
@@ -43,8 +45,7 @@ function PostCard({ post, deletePost, reset }) {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state);
-  return state;
+  return { myUserId: state.user._id };
 };
 
 export default reduxForm({ enableReinitialize: true })(

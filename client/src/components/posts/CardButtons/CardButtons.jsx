@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
-import { reset } from 'redux-form';
 
-function CardButtons({ reset, onDelete, onEdit, onBtnChange }) {
+function CardButtons({
+  reset,
+  onDelete,
+  onEdit,
+  onBtnChange,
+  postedBy,
+  userId,
+}) {
   const [btnMode, setBtnMode] = useState(false);
   const deleteMode = (
     <>
@@ -32,7 +38,8 @@ function CardButtons({ reset, onDelete, onEdit, onBtnChange }) {
   );
 
   const isEditing = btnMode ? editMode : deleteMode;
-  return <div>{isEditing}</div>;
+  const renderBtns = userId === postedBy ? isEditing : null;
+  return <div>{renderBtns}</div>;
 }
 
 export default CardButtons;
