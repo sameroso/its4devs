@@ -3,14 +3,19 @@ import { connect } from 'react-redux';
 
 import PostCard from '../PostCard/PostCard';
 import './PostCardList.scss';
-import { useReducer } from 'react';
 
 function PostCardList({ postsData }) {
-  console.log(postsData);
   let renderPostCardList;
   if (postsData.length !== 0) {
     renderPostCardList = postsData.posts.map((post) => (
-      <PostCard key={post._id} post={post} />
+      <PostCard
+        key={post._id}
+        post={post}
+        form={post._id}
+        initialValues={{
+          postCardBody: post.body,
+        }}
+      />
     ));
   } else {
     renderPostCardList = <div>nada</div>;
