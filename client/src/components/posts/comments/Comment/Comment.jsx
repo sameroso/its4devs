@@ -4,6 +4,7 @@ import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
 
 import { editComment } from '../../../../actions';
+import { deleteComment } from '../../../../actions';
 import CommentBtns from '../CommentBtns/CommentBtns';
 import './Comment.scss';
 
@@ -13,11 +14,12 @@ function Comment({
   reset,
   myUserId,
   editComment,
+  deleteComment,
   postId,
 }) {
   const [commentMode, setCommentMode] = useState(true);
-  const deleteComment = () => {
-    console.log('deletar...');
+  const onDeleteComment = () => {
+    deleteComment({ postId, commentId: comment.commentId });
   };
   const updateComment = (formValues) => {
     editComment({ ...formValues, commentId: comment.commentId, postId });
@@ -26,14 +28,16 @@ function Comment({
     myUserId === comment.userId ? (
       <CommentBtns
         onUpdateComment={handleSubmit(updateComment)}
-        onDeleteComment={deleteComment}
-        commentMode={commentMode}
-        onReadMode={setCommentMode}
+        onDeleteComment={(e) => {
+          e.preventDefault();
+          onDeleteComment();
+        }}
+        commentMode={setCommentMode}
         reset={reset}
       />
     ) : null;
   return (
-    <form onSubmit={handleSubmit(updateComment)} className="my-2">
+    <form className="my-2">
       <img src={comment.profilePic} alt="" className="comment-img" />
       <Field
         name="commentFormPosted"
@@ -61,4 +65,4 @@ const mapStateToProps = (state) => {
 export default reduxForm({
   enableReinitialize: true,
   validate,
-})(connect(mapStateToProps, { editComment })(Comment));
+})(connect(mapStateToProps, { editComment, deleteComment })(Comment));

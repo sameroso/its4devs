@@ -189,6 +189,20 @@ const apiRoutes = (app) => {
     const updated = await postData.save();
     res.send(updated);
   });
+  app.post('/api/deletecomment', async (req, res) => {
+    const Posts = mongoose.model('posts');
+    const postData = await Posts.findOne({ id: '1' });
+
+    const post = postData.posts.find((post) => {
+      return post.postId === req.body.postId;
+    });
+    const comment = post.comments.find((comment) => {
+      return comment.commentId === req.body.commentId;
+    });
+    comment.remove();
+    const updated = await postData.save();
+    res.send(updated);
+  });
 };
 
 module.exports = apiRoutes;

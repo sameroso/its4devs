@@ -50,3 +50,8 @@ export const editComment = (data) => async (dispatch) => {
   const response = await axios.post('/api/editcomment', data);
   dispatch({ type: types.FETCH_POSTS, payload: response.data });
 };
+
+export const deleteComment = (data) => async (dispatch) => {
+  const response = await axios.post('/api/deletecomment', data);
+  dispatch({ type: types.FETCH_POSTS, payload: response.data });
+};

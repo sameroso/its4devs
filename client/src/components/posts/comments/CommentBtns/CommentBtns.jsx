@@ -1,27 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-function CommentBtns({ onReadMode, commentMode, reset }) {
-  const commentBtn = commentMode ? (
+function CommentBtns({ commentMode, reset, onUpdateComment, onDeleteComment }) {
+  const [commentbtnMode, setCommentbtnMode] = useState(false);
+  const commentBtn = commentbtnMode ? (
     <>
-      <button>deletar comentario</button>
+      <button onClick={onUpdateComment}>editar</button>
       <button
-        onClick={() => {
-          onReadMode(false);
-        }}
-      >
-        editar comentario
-      </button>
-    </>
-  ) : (
-    <>
-      <button>editar</button>
-      <button
-        onClick={() => {
-          onReadMode(true);
+        onClick={(e) => {
+          e.preventDefault();
+          setCommentbtnMode(false);
+          commentMode(true);
           reset();
         }}
       >
         cancelar
+      </button>
+    </>
+  ) : (
+    <>
+      <button type="text" onClick={onDeleteComment}>
+        deletar comentario
+      </button>
+
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          setCommentbtnMode(true);
+          commentMode(false);
+        }}
+      >
+        editar comentario
       </button>
     </>
   );
