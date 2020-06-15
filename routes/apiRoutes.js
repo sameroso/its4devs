@@ -16,7 +16,7 @@ const apiRoutes = (app) => {
 
     res.send(updated);
   });
-  app.post('/api/updateuserposts', requireLogin, async (req, res) => {
+  /*  app.post('/api/updateuserposts', requireLogin, async (req, res) => {
     const post = {
       postId: req.body.sequenceId,
       postedBy: {
@@ -33,7 +33,7 @@ const apiRoutes = (app) => {
     user.posts.push(post);
     const updated = await user.save();
     res.send(updated);
-  });
+  }); */
 
   app.get('/api/posts', requireLogin, async (req, res) => {
     const Posts = mongoose.model('posts');
@@ -52,7 +52,7 @@ const apiRoutes = (app) => {
 
     res.send(posts);
   });
-  app.post('/api/deleteuserpost', async (req, res) => {
+  /*  app.post('/api/deleteuserpost', async (req, res) => {
     const User = mongoose.model('users');
     const user = await User.findByIdAndUpdate(
       req.user._id,
@@ -61,7 +61,7 @@ const apiRoutes = (app) => {
     );
 
     res.send(user);
-  });
+  }); */
 
   app.post('/api/sendpost', requireLogin, async (req, res) => {
     const Posts = await mongoose.model('posts');
@@ -129,7 +129,7 @@ const apiRoutes = (app) => {
     const updated = await postsData.save();
     res.send(updated);
   });
-  app.post('/api/edituserpost', async (req, res) => {
+  /*  app.post('/api/edituserpost', async (req, res) => {
     const User = await mongoose.model('users');
     const user = await User.findById(req.user._id);
     const post = user.posts.find((el) => {
@@ -137,6 +137,56 @@ const apiRoutes = (app) => {
     });
     post.body = await req.body.postCardBody;
     const updated = await user.save();
+    res.send(updated);
+  }); */
+  app.post('/api/createcommentpost', async (req, res) => {
+    const Posts = mongoose.model('posts');
+    const postsData = await Posts.findOne({ id: '1' });
+    postsData.sequenceId++;
+    const post = postsData.posts.find((post) => {
+      return post.postId === req.body.postId;
+    });
+    await post.comments.push({
+      commentId: req.body.commentId,
+      profileName: req.body.profileName,
+      profilePic: req.body.profilePic,
+      userId: req.user._id,
+      body: req.body.commentForm,
+    });
+    const updated = await postsData.save();
+    res.send(updated);
+  });
+  /*  app.post('/api/createcommentuser', requireLogin, async (req, res) => {
+    const postData = {
+      commentId: req.body.commentId,
+      profileName: req.body.profileName,
+      profilePic: req.body.profilePic,
+      userId: req.user._id,
+      body: req.body.commentForm,
+    };
+    const User = mongoose.model('users');
+    const user = await User.findById(req.user._id);
+    console.log(user);
+    const post = user.posts.find((post) => {
+      return post.postId === req.body.postId;
+    });
+    console.log(post);
+    post.comments.push(postData);
+    const updated = await user.save();
+    res.send(updated);
+  }); */
+  app.post('/api/editcomment', async (req, res) => {
+    const Posts = mongoose.model('posts');
+    const postData = await Posts.findOne({ id: '1' });
+
+    const post = postData.posts.find((post) => {
+      return post.postId === req.body.postId;
+    });
+    const comment = post.comments.find((comment) => {
+      return comment.commentId === req.body.commentId;
+    });
+    comment.body = req.body.commentFormPosted;
+    const updated = await postData.save();
     res.send(updated);
   });
 };

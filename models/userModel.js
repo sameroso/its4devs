@@ -11,7 +11,7 @@ const userSchema = new Schema({
   facebookLink: String,
   gitHub: String,
   initialFormFilled: Boolean,
-  posts: [
+  /* posts: [
     {
       postId: Number,
       postedBy: { profileName: String, profilePic: String, userId: String },
@@ -19,8 +19,18 @@ const userSchema = new Schema({
       body: String,
       likes: [{ userId: String }],
       dateCreated: { type: Date, default: Date },
+      comments: [
+        {
+          commentId: Number,
+          profileName: String,
+          profilePic: String,
+          userId: String,
+          body: String,
+          dateCreated: { type: Date, default: Date },
+        },
+      ],
     },
-  ],
+  ], */
   dateCreated: { type: Date, default: Date },
 });
 

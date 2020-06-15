@@ -1,12 +1,12 @@
 import React from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
 
-function PostCardField({ postCardFieldMode, input, meta: { touched, error } }) {
+function CommentField({ commentMode, input, meta: { touched, error }, reset }) {
   const inputType = (
     <TextareaAutosize
       {...input}
       className="initial-form-text-area mx-auto"
-      readOnly={postCardFieldMode}
+      readOnly={commentMode}
     />
   );
 
@@ -30,4 +30,4 @@ function PostCardField({ postCardFieldMode, input, meta: { touched, error } }) {
   );
 }
 
-export default PostCardField;
+export default CommentField;

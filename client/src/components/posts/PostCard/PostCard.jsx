@@ -6,6 +6,8 @@ import { deletePost } from '../../../actions';
 import { editPost } from '../../../actions';
 import CardButtons from '../CardButtons/CardButtons';
 import PostCardField from '../PostCardField/PostCardField';
+import CommentsList from '../comments/CommentsList/CommentsList';
+import CommentForm from '../comments/CommentForm/CommentForm';
 
 import './PostCard.scss';
 
@@ -25,31 +27,40 @@ function PostCard({
 
   const editCurrentPost = (formValues) => {
     editPost({ ...formValues, postId: post.postId });
-    console.log({ ...formValues, postId: post.postId });
   };
 
   return (
-    <div className="postcard-bg">
-      <div className="row">
-        <img src={post.postedBy.profilePic} className="img-card-size"></img>
-        <p>{post.postedBy.profileName}</p>
-        <Field
-          name="postCardBody"
-          component={PostCardField}
-          postCardFieldMode={postCardFieldMode}
-        />
-        <p>{post.dateCreated}</p>
-      </div>
+    <>
+      <div className="postcard-bg my-3">
+        <div className="row justify-content-around">
+          <img
+            src={post.postedBy.profilePic}
+            className="img-card-size my-auto"
+          ></img>
+          <p className="my-auto">{post.postedBy.profileName}</p>
+          <p className="my-auto">{post.dateCreated}</p>
+        </div>
+        <div className="row">
+          <Field
+            name="postCardBody"
+            component={PostCardField}
+            postCardFieldMode={postCardFieldMode}
+            className="post-card-style"
+          />
+        </div>
 
-      <CardButtons
-        onDelete={deleteCurrentPost}
-        onEdit={handleSubmit(editCurrentPost)}
-        onBtnChange={setPostCardFieldMode}
-        postedBy={post.postedBy.userId}
-        userId={myUserId}
-        reset={reset}
-      />
-    </div>
+        <CardButtons
+          onDelete={deleteCurrentPost}
+          onEdit={handleSubmit(editCurrentPost)}
+          onBtnChange={setPostCardFieldMode}
+          postedBy={post.postedBy.userId}
+          userId={myUserId}
+          reset={reset}
+        />
+      </div>
+      <CommentsList post={post} />
+      <CommentForm form={post.postId.toString()} postId={post.postId} />
+    </>
   );
 }
 

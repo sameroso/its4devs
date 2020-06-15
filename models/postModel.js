@@ -18,6 +18,7 @@ const postSchema = new Schema({
           profilePic: String,
           userId: String,
           body: String,
+          dateCreated: { type: Date, default: Date },
         },
       ],
     },

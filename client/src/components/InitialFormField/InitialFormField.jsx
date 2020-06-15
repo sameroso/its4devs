@@ -1,12 +1,13 @@
 import React from 'react';
 import './InitialFormField.scss';
+import TextareaAutosize from 'react-textarea-autosize';
 
 function InitialFormField({ input, label, type, meta: { touched, error } }) {
   const inputType =
     type === 'input' ? (
       <input type={type} {...input} className="initial-form-input" />
     ) : (
-      <textarea {...input} className="initial-form-text-area mx-auto" />
+      <TextareaAutosize {...input} className="initial-form-text-area mx-auto" />
     );
 
   const renderError = () => {

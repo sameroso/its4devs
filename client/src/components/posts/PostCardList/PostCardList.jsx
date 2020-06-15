@@ -20,7 +20,7 @@ function PostCardList({ postsData }) {
   } else {
     renderPostCardList = <div>nada</div>;
   }
-  return <div>{renderPostCardList}</div>;
+  return <div className="my-3 bg-primary">{renderPostCardList}</div>;
 }
 
 const mapStateToProps = (state) => {
