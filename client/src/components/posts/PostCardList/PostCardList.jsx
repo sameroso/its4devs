@@ -8,19 +8,20 @@ function PostCardList({ postsData }) {
   let renderPostCardList;
   if (postsData.length !== 0) {
     renderPostCardList = postsData.posts.reverse().map((post) => (
-      <PostCard
-        key={post._id}
-        post={post}
-        form={post._id}
-        initialValues={{
-          postCardBody: post.body,
-        }}
-      />
+      <div key={post._id} className="my-2">
+        <PostCard
+          post={post}
+          form={post._id}
+          initialValues={{
+            postCardBody: post.body,
+          }}
+        />
+      </div>
     ));
   } else {
     renderPostCardList = <div>nada</div>;
   }
-  return <div className="my-3 bg-primary">{renderPostCardList}</div>;
+  return <div className="my-3">{renderPostCardList}</div>;
 }
 
 const mapStateToProps = (state) => {

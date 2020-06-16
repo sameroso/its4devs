@@ -32,19 +32,16 @@ function PostCard({
 
   return (
     <>
-      <div className="d-flex top-post-card justify-content-between ">
-        <span className="text-white ml-3">{post.postedBy.profileName}</span>
-        <small className="my-auto text-white mr-2">
-          {dateHelper(post.dateCreated)}
-        </small>
+      <div className="d-flex top-post-card mt-4">
+        <img
+          src={post.postedBy.profilePic}
+          className="img-card-size my-auto ml-1 py-1 px-1"
+        ></img>
+        <span className="text-white ml-3 my-auto">
+          {post.postedBy.profileName}
+        </span>
       </div>
-      <div className="postcard-bg pb-5">
-        <div className="row justify-content-around">
-          <img
-            src={post.postedBy.profilePic}
-            className="img-card-size my-auto"
-          ></img>
-        </div>
+      <div className="postcard-bg pb-3">
         <div className="row">
           <Field
             name="postCardBody"
@@ -52,6 +49,9 @@ function PostCard({
             postCardFieldMode={postCardFieldMode}
             className="post-card-style"
           />
+        </div>
+        <div className="row justify-content-end mr-5 mt-1">
+          <small className="my-auto">{dateHelper(post.dateCreated)}</small>
         </div>
 
         <CardButtons
