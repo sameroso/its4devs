@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import './CardButtons.scss';
 import trashBtn from '../../../assets/trash95.png';
 import editBtn from '../../../assets/edit95.png';
+import cancelBtn from '../../../assets/cancel95.png';
+import saveBtn from '../../../assets/save95.png';
 
 function CardButtons({
   reset,
@@ -39,15 +41,26 @@ function CardButtons({
   const editMode = (
     <>
       <button
+        className="btn-style mr-2 my-1"
         onClick={() => {
           setBtnMode(false);
           onBtnChange(true);
           reset();
         }}
       >
-        cancelar
+        <img
+          src={cancelBtn}
+          alt="botão de editar postagem"
+          className="btn-postcard-top-size"
+        />
       </button>
-      <button onClick={onEdit}>salvar</button>
+      <button className="btn-style mr-2" onClick={onEdit}>
+        <img
+          src={saveBtn}
+          alt="botão de editar postagem"
+          className="btn-postcard-top-size"
+        />
+      </button>
     </>
   );
 
