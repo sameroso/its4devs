@@ -1,0 +1,7 @@
+@import '../../../style/variables.scss';
+.ui-95 {
+  @include ui95-btn;
+}
+.bg-comment-list-bottom-top {
+  background-color: $primary-color;
+}
