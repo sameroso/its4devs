@@ -6,6 +6,7 @@ import PostCardList from '../posts/PostCardList/PostCardList';
 import PostForm from '../posts/PostForm/PostForm';
 import Header from '../Header/Header';
 import { fetchPosts } from '../../actions/index';
+import './MainPage.scss';
 
 function MainPage({ user, fetchPosts, postsData }) {
   useEffect(() => {
@@ -33,7 +34,7 @@ function MainPage({ user, fetchPosts, postsData }) {
       <div className="fixed-top">
         <Header data={{ ...userData, profilePic: user.profilePic }} />
       </div>
-      <div className="mt-5 container">
+      <div className="margin-from-header container">
         <PostForm postData={postData} />
         <PostCardList />
       </div>

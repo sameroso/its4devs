@@ -8,6 +8,7 @@ import CardButtons from '../CardButtons/CardButtons';
 import PostCardField from '../PostCardField/PostCardField';
 import CommentsList from '../comments/CommentsList/CommentsList';
 import CommentForm from '../comments/CommentForm/CommentForm';
+import dateHelper from '../../../helpers/dateHelper';
 
 import './PostCard.scss';
 
@@ -31,14 +32,18 @@ function PostCard({
 
   return (
     <>
-      <div className="postcard-bg my-3">
+      <div className="d-flex top-post-card justify-content-between ">
+        <span className="text-white ml-3">{post.postedBy.profileName}</span>
+        <small className="my-auto text-white mr-2">
+          {dateHelper(post.dateCreated)}
+        </small>
+      </div>
+      <div className="postcard-bg pb-5">
         <div className="row justify-content-around">
           <img
             src={post.postedBy.profilePic}
             className="img-card-size my-auto"
           ></img>
-          <p className="my-auto">{post.postedBy.profileName}</p>
-          <p className="my-auto">{post.dateCreated}</p>
         </div>
         <div className="row">
           <Field

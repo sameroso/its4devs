@@ -1,3 +1,5 @@
+@import '../../style/variables.scss';
+
 .img-card-size {
   height: 40px;
 }
@@ -5,5 +7,9 @@
   width: 90%;
 }
 .postcard-bg {
-  background-color: gray;
+  background-color: $primary-color;
+}
+
+.top-post-card {
+  background-color: $top-card-color;
 }

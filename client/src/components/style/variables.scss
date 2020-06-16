@@ -1,5 +1,10 @@
 $background-color: #008f91;
 $primary-color: #bbb0b0;
+$top-card-color: #010388;
+$border-color-down: rgb(0, 0, 0);
+$border-color-right: rgb(0, 0, 0);
+$border-color-left: white;
+$border-color-up: white;
 
 @mixin ui95-btn {
   color: #000;
@@ -27,4 +32,8 @@ $primary-color: #bbb0b0;
 .font {
   font-family: windows95, sans-serif;
   font-size: small;
+}
+
+@mixin font-95 {
+  font-family: windows95, sans-serif;
 }

@@ -1,6 +1,21 @@
 @import '../style/variables.scss';
 .header-background {
-  background-color: $primary-color;
-  border-color: #f5efef;
+  border-bottom: $border-color-down solid 1px;
+  border-right: $border-color-right solid 1px;
+  border-left: $border-color-left solid 1px;
+  border-top: $border-color-up solid 1px;
   color: #000;
+}
+.header-top {
+  background-color: $top-card-color;
+}
+.font-header-top {
+  @include font-95;
+  font-size: 12px;
+}
+.border-none {
+  border-bottom: none none none !important;
+}
+.bg-card {
+  background-color: $primary-color;
 }

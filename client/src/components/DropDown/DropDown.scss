@@ -1,5 +1,7 @@
+@import '../style/variables.scss';
+
 .header-img-size {
-  height: 50px;
+  height: 30px;
 }
 .dropdown-header-link {
   text-decoration: none;
@@ -7,4 +9,8 @@
   &:hover {
     text-decoration: none;
   }
+}
+.font-size {
+  @include font-95;
+  font-size: 10px;
 }
