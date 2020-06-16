@@ -50,14 +50,14 @@ function CardButtons({
       >
         <img
           src={cancelBtn}
-          alt="botão de editar postagem"
+          alt="botão de cancelar"
           className="btn-postcard-top-size"
         />
       </button>
       <button className="btn-style mr-2" onClick={onEdit}>
         <img
           src={saveBtn}
-          alt="botão de editar postagem"
+          alt="botão de salvar postagem"
           className="btn-postcard-top-size"
         />
       </button>

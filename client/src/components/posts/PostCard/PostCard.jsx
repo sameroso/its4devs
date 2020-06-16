@@ -66,6 +66,7 @@ function PostCard({
           <small className="my-auto">{dateHelper(post.dateCreated)}</small>
         </div>
       </div>
+      <hr className="postcard-bottom-line" />
       <CommentsList post={post} />
       <CommentForm form={post.postId.toString()} postId={post.postId} />
     </>

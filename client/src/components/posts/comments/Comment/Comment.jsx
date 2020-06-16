@@ -39,13 +39,16 @@ function Comment({
     ) : null;
   return (
     <div className="mt-2">
-      <div className="bg-commment-top">
-        <img
-          src={comment.profilePic}
-          alt=""
-          className="comment-img px-1 py-1"
-        />
-        <span className="text-white ml-1">{comment.profileName}</span>
+      <div className="bg-commment-top d-flex justify-content-between">
+        <div>
+          <img
+            src={comment.profilePic}
+            alt=""
+            className="comment-img px-1 py-1"
+          />
+          <span className="text-white ml-1">{comment.profileName}</span>
+        </div>
+        <div>{showbtns}</div>
       </div>
       <div className="bg-card-comment">
         <div className="row">
@@ -55,7 +58,6 @@ function Comment({
               component={CommentField}
               commentMode={commentMode}
             />
-            {showbtns}
           </form>
         </div>
         <div className="row justify-content-end py-1 margin-date-comment">
