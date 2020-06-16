@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import './CardButtons.scss';
+import trashBtn from '../../../assets/trash95.png';
+import editBtn from '../../../assets/edit95.png';
 
 function CardButtons({
   reset,
@@ -11,14 +14,25 @@ function CardButtons({
   const [btnMode, setBtnMode] = useState(false);
   const deleteMode = (
     <>
-      <button onClick={onDelete}>deletar</button>
+      <button className="my-1 mr-1 btn-style" onClick={onDelete}>
+        <img
+          src={trashBtn}
+          alt="botão de excluir postagem"
+          className="btn-postcard-top-size"
+        />
+      </button>
       <button
+        className="btn-style mr-2"
         onClick={() => {
           setBtnMode(true);
           onBtnChange(false);
         }}
       >
-        editar
+        <img
+          src={editBtn}
+          alt="botão de editar postagem"
+          className="btn-postcard-top-size"
+        />
       </button>
     </>
   );

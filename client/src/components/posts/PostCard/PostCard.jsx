@@ -32,14 +32,26 @@ function PostCard({
 
   return (
     <>
-      <div className="d-flex top-post-card mt-4">
-        <img
-          src={post.postedBy.profilePic}
-          className="img-card-size my-auto ml-1 py-1 px-1"
-        ></img>
-        <span className="text-white ml-3 my-auto">
-          {post.postedBy.profileName}
-        </span>
+      <div className="d-flex top-post-card mt-4 justify-content-between">
+        <div>
+          <img
+            src={post.postedBy.profilePic}
+            className="img-card-size my-auto ml-1 py-1 px-1"
+          ></img>
+          <span className="text-white ml-2 my-auto">
+            {post.postedBy.profileName}
+          </span>
+        </div>
+        <div>
+          <CardButtons
+            onDelete={deleteCurrentPost}
+            onEdit={handleSubmit(editCurrentPost)}
+            onBtnChange={setPostCardFieldMode}
+            postedBy={post.postedBy.userId}
+            userId={myUserId}
+            reset={reset}
+          />
+        </div>
       </div>
       <div className="postcard-bg pb-3">
         <div className="row">
@@ -53,15 +65,6 @@ function PostCard({
         <div className="row justify-content-end mr-5 mt-1">
           <small className="my-auto">{dateHelper(post.dateCreated)}</small>
         </div>
-
-        <CardButtons
-          onDelete={deleteCurrentPost}
-          onEdit={handleSubmit(editCurrentPost)}
-          onBtnChange={setPostCardFieldMode}
-          postedBy={post.postedBy.userId}
-          userId={myUserId}
-          reset={reset}
-        />
       </div>
       <CommentsList post={post} />
       <CommentForm form={post.postId.toString()} postId={post.postId} />

@@ -19,17 +19,21 @@ function CommentsList({ post }) {
 
   const toggle = showComments ? (
     <>
-      <button className="ui-95" onClick={() => setShowComments(false)}>
-        <span className="font">esconder comentarios</span>
-      </button>
+      <div className="bg-comment-list-bottom-top py-2">
+        <button className="ui-95 ml-2" onClick={() => setShowComments(false)}>
+          <span className="font">esconder comentarios</span>
+        </button>
+      </div>
       <div>{commentsList}</div>
     </>
   ) : (
-    <button className="ui-95" onClick={() => setShowComments(true)}>
-      <span className="font">mostrar comentarios</span>
-    </button>
+    <div className="bg-comment-list-bottom-top py-2">
+      <button className="ui-95 ml-2" onClick={() => setShowComments(true)}>
+        <span className="font">mostrar comentarios</span>
+      </button>
+    </div>
   );
-  return <div className="mb-2 bg-comment-list-bottom-top pb-2">{toggle}</div>;
+  return <div className="mb-2 pb-2">{toggle}</div>;
 }
 
 export default CommentsList;

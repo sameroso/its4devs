@@ -1,3 +1,17 @@
+@import '../../../style/variables.scss';
+
 .comment-img {
-  height: 50px;
+  height: 30px;
+}
+.bg-commment-top {
+  background-color: $top-card-color;
+}
+.bg-card-comment {
+  background-color: $primary-color;
+}
+.form-comment-size {
+  width: 90%;
+}
+.margin-date-comment {
+  margin-right: 50px;
 }

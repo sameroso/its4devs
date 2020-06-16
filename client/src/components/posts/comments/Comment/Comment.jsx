@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { editComment } from '../../../../actions';
 import { deleteComment } from '../../../../actions';
 import CommentBtns from '../CommentBtns/CommentBtns';
+import dateHelper from '../../../../helpers/dateHelper';
 import './Comment.scss';
 
 function Comment({
@@ -37,15 +38,31 @@ function Comment({
       />
     ) : null;
   return (
-    <form className="my-2">
-      <img src={comment.profilePic} alt="" className="comment-img" />
-      <Field
-        name="commentFormPosted"
-        component={CommentField}
-        commentMode={commentMode}
-      />
-      {showbtns}
-    </form>
+    <div className="mt-2">
+      <div className="bg-commment-top">
+        <img
+          src={comment.profilePic}
+          alt=""
+          className="comment-img px-1 py-1"
+        />
+        <span className="text-white ml-1">{comment.profileName}</span>
+      </div>
+      <div className="bg-card-comment">
+        <div className="row">
+          <form className="mx-auto form-comment-size d-flex">
+            <Field
+              name="commentFormPosted"
+              component={CommentField}
+              commentMode={commentMode}
+            />
+            {showbtns}
+          </form>
+        </div>
+        <div className="row justify-content-end py-1 margin-date-comment">
+          <small className="">{dateHelper(comment.dateCreated)}</small>
+        </div>
+      </div>
+    </div>
   );
 }
 

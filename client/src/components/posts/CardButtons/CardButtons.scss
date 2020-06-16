@@ -1,0 +1,9 @@
+@import '../../style/variables.scss';
+
+.btn-postcard-top-size {
+  height: 15px;
+}
+.btn-style {
+  height: 30px;
+  @include ui95-btn;
+}
