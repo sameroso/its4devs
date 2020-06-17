@@ -17,7 +17,6 @@ function CommentForm({
   cbChildRef,
 }) {
   useEffect(() => {
-    ReactDOM.findDOMNode(inputEl).focus();
     cbChildRef(ReactDOM.findDOMNode(inputEl));
   }, []);
 
