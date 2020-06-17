@@ -38,7 +38,7 @@ function Comment({
       />
     ) : null;
   return (
-    <div className="mt-2">
+    <div className="mt-2 comment-commentcard-width align-center">
       <div className="bg-commment-top d-flex justify-content-between">
         <div>
           <img
@@ -46,7 +46,9 @@ function Comment({
             alt=""
             className="comment-img px-1 py-1"
           />
-          <span className="text-white ml-1">{comment.profileName}</span>
+          <span className="text-white ml-1 comment-profile-name-font-size">
+            {comment.profileName}
+          </span>
         </div>
         <div>{showbtns}</div>
       </div>

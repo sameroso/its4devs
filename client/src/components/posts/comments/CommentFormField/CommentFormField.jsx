@@ -1,11 +1,13 @@
 import React from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
 
+import './CommentFormField.scss';
+
 function CommentField({ commentMode, input, meta: { touched, error } }) {
   const inputType = (
     <TextareaAutosize
       {...input}
-      className="initial-form-text-area mx-auto"
+      className="initial-form-text-area margin-comment-form-field mb-2"
       readOnly={commentMode}
     />
   );
@@ -13,7 +15,7 @@ function CommentField({ commentMode, input, meta: { touched, error } }) {
   const renderError = () => {
     if (touched && error) {
       return (
-        <small className="form-text" style={{ color: 'red' }}>
+        <small className="form-text mx-auto" style={{ color: 'red' }}>
           {error}
         </small>
       );

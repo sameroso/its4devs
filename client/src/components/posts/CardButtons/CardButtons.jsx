@@ -16,7 +16,7 @@ function CardButtons({
   const [btnMode, setBtnMode] = useState(false);
   const deleteMode = (
     <>
-      <button className="my-1 mr-1 btn-style" onClick={onDelete}>
+      <button className="my-1 mr-2 btn-style" onClick={onDelete}>
         <img
           src={trashBtn}
           alt="botão de excluir postagem"
@@ -54,7 +54,7 @@ function CardButtons({
           className="btn-postcard-top-size"
         />
       </button>
-      <button className="btn-style mr-2" onClick={onEdit}>
+      <button className="btn-style mr-2 " onClick={onEdit}>
         <img
           src={saveBtn}
           alt="botão de salvar postagem"

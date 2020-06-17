@@ -1,0 +1,9 @@
+@import '../../../style/variables.scss';
+.img-commentbtns-top-size {
+  height: 10px;
+  margin-bottom: 5px;
+}
+.btn-commentbtns-style {
+  height: 22px;
+  @include ui95-btn;
+}

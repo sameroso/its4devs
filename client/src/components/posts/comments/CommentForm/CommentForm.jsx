@@ -1,8 +1,11 @@
-import React from 'react';
-import CommentField from '../CommentField/CommentField';
+import React, { useRef, useEffect } from 'react';
+import ReactDOM from 'react-dom';
+import CommentFormField from '../CommentFormField/CommentFormField';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 import { createComment } from '../../../../actions';
+
+import './CommentForm.scss';
 
 function CommentForm({
   handleSubmit,
@@ -11,7 +14,15 @@ function CommentForm({
   user,
   postsData,
   reset,
+  cbChildRef,
 }) {
+  useEffect(() => {
+    ReactDOM.findDOMNode(inputEl).focus();
+    cbChildRef(ReactDOM.findDOMNode(inputEl));
+  }, []);
+
+  let inputEl = useRef(null);
+
   const commentSubmit = (formValues) => {
     createComment({
       ...formValues,
@@ -21,15 +32,24 @@ function CommentForm({
     });
     reset();
   };
+
   return (
     <div>
       <form onSubmit={handleSubmit(commentSubmit)}>
-        <Field
-          name="commentForm"
-          placeholder="Gira a postagem gira comentario"
-          component={CommentField}
-        />
-        <button type="submit">comentar</button>
+        <div className="row">
+          <Field
+            ref={(input) => {
+              inputEl = input;
+            }}
+            name="commentForm"
+            component={CommentFormField}
+          />
+        </div>
+        <div className="d-flex justify-content-end">
+          <button className="comment-form-btn font mr-4" type="submit">
+            comentar
+          </button>
+        </div>
       </form>
     </div>
   );
@@ -43,7 +63,6 @@ function validate(values) {
   return errors;
 }
 const mapStateToProps = (state) => {
-  console.log(state.user);
   return { user: state.user, postsData: state.postsData };
 };
 

@@ -21,6 +21,7 @@ function PostCard({
   editPost,
 }) {
   const [postCardFieldMode, setPostCardFieldMode] = useState(true);
+  const [ref, setRef] = useState(null);
 
   const deleteCurrentPost = () => {
     deletePost({ postId: post.postId });
@@ -30,6 +31,19 @@ function PostCard({
     editPost({ ...formValues, postId: post.postId });
   };
 
+  const cbParentRef = (ref) => {
+    console.log(ref);
+    setRef(ref);
+  };
+
+  const [showCommentForm, setShowCommentForm] = useState(false);
+  const isCommentFormShowing = showCommentForm ? (
+    <CommentForm
+      cbChildRef={cbParentRef}
+      form={post.postId.toString()}
+      postId={post.postId}
+    />
+  ) : null;
   return (
     <>
       <div className="d-flex top-post-card mt-4 justify-content-between">
@@ -67,8 +81,12 @@ function PostCard({
         </div>
       </div>
       <hr className="postcard-bottom-line" />
-      <CommentsList post={post} />
-      <CommentForm form={post.postId.toString()} postId={post.postId} />
+      <CommentsList
+        cbRef={ref}
+        post={post}
+        onSetPostForm={setShowCommentForm}
+      />
+      {isCommentFormShowing}
     </>
   );
 }

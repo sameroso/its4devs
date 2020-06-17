@@ -11,7 +11,7 @@ function CommentBtns({ commentMode, reset, onUpdateComment, onDeleteComment }) {
   const commentBtn = commentbtnMode ? (
     <>
       <button
-        className="btn-style mr-2 my-1"
+        className="btn-commentbtns-style mr-2 my-1"
         onClick={(e) => {
           e.preventDefault();
           setCommentbtnMode(false);
@@ -22,33 +22,36 @@ function CommentBtns({ commentMode, reset, onUpdateComment, onDeleteComment }) {
         <img
           src={cancelBtn}
           alt="botão de cancelar"
-          className="btn-postcard-top-size"
+          className="img-commentbtns-top-size"
         />
       </button>
-      <button onClick={onUpdateComment} className="btn-style mr-2 my-1">
+      <button
+        onClick={onUpdateComment}
+        className="btn-commentbtns-style mr-2 my-1"
+      >
         <img
           src={saveBtn}
           alt="botão de salver postagem"
-          className="btn-postcard-top-size"
+          className="img-commentbtns-top-size"
         />
       </button>
     </>
   ) : (
     <>
       <button
-        className="my-1 mr-1 btn-style"
+        className="my-1 mr-1 btn-commentbtns-style"
         type="text"
         onClick={onDeleteComment}
       >
         <img
           src={trashBtn}
           alt="botão de excluir comentario"
-          className="btn-postcard-top-size"
+          className="img-commentbtns-top-size"
         />
       </button>
 
       <button
-        className="btn-style mr-2"
+        className="btn-commentbtns-style mr-2"
         onClick={(e) => {
           e.preventDefault();
           setCommentbtnMode(true);
@@ -58,7 +61,7 @@ function CommentBtns({ commentMode, reset, onUpdateComment, onDeleteComment }) {
         <img
           src={editBtn}
           alt="botão de editar postagem"
-          className="btn-postcard-top-size"
+          className="img-commentbtns-top-size"
         />
       </button>
     </>

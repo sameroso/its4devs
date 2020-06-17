@@ -1,0 +1,4 @@
+@import '../../../style/variables.scss';
+.comment-form-btn {
+  @include ui95-btn;
+}
