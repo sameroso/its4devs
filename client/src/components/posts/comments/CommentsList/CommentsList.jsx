@@ -3,7 +3,7 @@ import Comment from '../Comment/Comment';
 
 import './CommentsList.scss';
 
-function CommentsList({ post, onSetPostForm, cbRef }) {
+function CommentsList({ post, onSetPostForm }) {
   const [showComments, setShowComments] = useState(false);
 
   const commentsList = post.comments.map((comment) => (
@@ -19,21 +19,17 @@ function CommentsList({ post, onSetPostForm, cbRef }) {
   ));
   const focus = () => {
     onSetPostForm(true);
-    if (cbRef === null) {
-      return;
-    } else {
-      cbRef.focus();
-    }
   };
   const comment = (
-    <button
+    <label
+      htmlFor={post.postId.toString()}
       onClick={() => {
         focus();
       }}
-      className="ui-95 ml-2"
+      className="ml-2 comment-btn-comment-list d-flex m-0"
     >
-      <span className="font">comentar</span>
-    </button>
+      <span className="font comment-list-span-position">comentar</span>
+    </label>
   );
   const toggle = showComments ? (
     <>

@@ -3,9 +3,15 @@ import TextareaAutosize from 'react-textarea-autosize';
 
 import './CommentFormField.scss';
 
-function CommentField({ commentMode, input, meta: { touched, error } }) {
+function CommentField({
+  postId,
+  commentMode,
+  input,
+  meta: { touched, error },
+}) {
   const inputType = (
     <TextareaAutosize
+      id={postId.toString()}
       {...input}
       className="initial-form-text-area margin-comment-form-field mb-2"
       readOnly={commentMode}

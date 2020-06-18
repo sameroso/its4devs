@@ -5,3 +5,14 @@
 .bg-comment-list-bottom-top {
   background-color: $primary-color;
 }
+.comment-btn-comment-list {
+  @include ui95-btn;
+  border-top: #f5efef 2px solid;
+  border-bottom: #a19d9d 2px solid;
+  border-left: #f5efef 2px solid;
+  border-right: #a19d9d 2px solid;
+  padding: 1px 4px;
+}
+.comment-list-span-position {
+  margin: auto auto;
+}

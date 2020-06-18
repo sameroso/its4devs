@@ -14,14 +14,7 @@ function CommentForm({
   user,
   postsData,
   reset,
-  cbChildRef,
 }) {
-  useEffect(() => {
-    cbChildRef(ReactDOM.findDOMNode(inputEl));
-  }, []);
-
-  let inputEl = useRef(null);
-
   const commentSubmit = (formValues) => {
     createComment({
       ...formValues,
@@ -37,9 +30,7 @@ function CommentForm({
       <form onSubmit={handleSubmit(commentSubmit)}>
         <div className="row">
           <Field
-            ref={(input) => {
-              inputEl = input;
-            }}
+            postId={postId}
             name="commentForm"
             component={CommentFormField}
           />
