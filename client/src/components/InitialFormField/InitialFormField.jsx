@@ -13,9 +13,11 @@ function InitialFormField({ input, label, type, meta: { touched, error } }) {
   const renderError = () => {
     if (touched && error) {
       return (
-        <small className="form-text" style={{ color: 'red' }}>
-          {error}
-        </small>
+        <div className="row">
+          <small className="form-text mx-auto" style={{ color: 'black' }}>
+            {error}
+          </small>
+        </div>
       );
     } else {
       return null;

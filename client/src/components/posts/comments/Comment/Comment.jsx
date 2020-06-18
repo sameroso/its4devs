@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import CommentField from '../CommentField/CommentField';
 import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
@@ -18,7 +18,29 @@ function Comment({
   deleteComment,
   postId,
 }) {
+  const refCommentCard = useRef(null);
+  /**
+   * Alert if clicked on outside of element
+   */
+  function handleClickOutside(event) {
+    if (
+      refCommentCard.current &&
+      !refCommentCard.current.contains(event.target)
+    ) {
+      setCommentbtnMode(false);
+      setCommentMode(true);
+    }
+    // Bind the event listener
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      // Unbind the event listener on clean up
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }
+
+  const [commentbtnMode, setCommentbtnMode] = useState(false);
   const [commentMode, setCommentMode] = useState(true);
+
   const onDeleteComment = () => {
     deleteComment({ postId, commentId: comment.commentId });
   };
@@ -28,6 +50,9 @@ function Comment({
   const showbtns =
     myUserId === comment.userId ? (
       <CommentBtns
+        commentbtnMode={commentbtnMode}
+        setCommentbtnMode={setCommentbtnMode}
+        commentId={comment.commentId}
         onUpdateComment={handleSubmit(updateComment)}
         onDeleteComment={(e) => {
           e.preventDefault();
@@ -38,7 +63,11 @@ function Comment({
       />
     ) : null;
   return (
-    <div className="mt-2 comment-commentcard-width align-center">
+    <div
+      onClick={(e) => handleClickOutside(e)}
+      className="mt-2 comment-commentcard-width align-center"
+      ref={refCommentCard}
+    >
       <div className="bg-commment-top d-flex justify-content-between">
         <div>
           <img
@@ -54,8 +83,9 @@ function Comment({
       </div>
       <div className="bg-card-comment">
         <div className="row">
-          <form className="mx-auto form-comment-size d-flex">
+          <form className="mx-auto form-comment-size">
             <Field
+              commentId={comment.commentId}
               name="commentFormPosted"
               component={CommentField}
               commentMode={commentMode}
@@ -73,7 +103,7 @@ function Comment({
 function validate(values) {
   const errors = {};
   if (!values.commentFormPosted) {
-    errors.commentFormPosted = 'NÃO PODE COMENTARIO VAZIO VAZIO';
+    errors.commentFormPosted = 'Escreva alguma coisa para comentar!';
   }
 
   return errors;

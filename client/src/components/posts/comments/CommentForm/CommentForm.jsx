@@ -14,6 +14,7 @@ function CommentForm({
   user,
   postsData,
   reset,
+  setShowComments,
 }) {
   const commentSubmit = (formValues) => {
     createComment({
@@ -22,6 +23,7 @@ function CommentForm({
       ...user,
       commentId: postsData.sequenceId + 1,
     });
+    setShowComments(true);
     reset();
   };
 

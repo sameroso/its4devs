@@ -1,9 +1,23 @@
 @import '../../../style/variables.scss';
 .img-commentbtns-top-size {
   height: 10px;
+  width: 12px;
   margin-bottom: 5px;
 }
 .btn-commentbtns-style {
   height: 22px;
   @include ui95-btn;
+}
+.commentbtns-label {
+  width: 22px;
+  @include ui95-btn;
+}
+.img-label-btn {
+  margin-left: 3px;
+  height: 18px;
+  width: 16px;
+  padding: 0px;
+}
+.display-btn {
+  display: none;
 }

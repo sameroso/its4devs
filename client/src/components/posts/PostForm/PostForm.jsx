@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { sendPost } from '../../../actions';
 import InitialFormField from '../../InitialFormField/InitialFormField';
 
+import './PostForm.scss';
+
 function PostForm({
   handleSubmit,
   postData: { profileName, profilePic, sequenceId },
@@ -31,7 +33,11 @@ function PostForm({
           component={InitialFormField}
           type="textarea"
         />
-        <button type="submit">lansa a braba caraio</button>
+        <div className="row justify-content-end">
+          <button type="submit" className="mr-5 font postform-btn">
+            <span className="postform-btn-text">Postar</span>
+          </button>
+        </div>
       </form>
     </div>
   );

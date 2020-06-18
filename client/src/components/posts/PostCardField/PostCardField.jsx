@@ -1,6 +1,8 @@
 import React from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
 
+import './PostCardField.scss';
+
 function PostCardField({ postCardFieldMode, input, meta: { touched, error } }) {
   const inputType = (
     <TextareaAutosize
@@ -13,9 +15,9 @@ function PostCardField({ postCardFieldMode, input, meta: { touched, error } }) {
   const renderError = () => {
     if (touched && error) {
       return (
-        <small className="form-text" style={{ color: 'red' }}>
-          {error}
-        </small>
+        <div className="mx-auto ">
+          <small className="form-text text-postcardField-Config">{error}</small>
+        </div>
       );
     } else {
       return null;

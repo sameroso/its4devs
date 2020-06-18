@@ -3,9 +3,7 @@ import Comment from '../Comment/Comment';
 
 import './CommentsList.scss';
 
-function CommentsList({ post, onSetPostForm }) {
-  const [showComments, setShowComments] = useState(false);
-
+function CommentsList({ post, onSetPostForm, setShowComments, showComments }) {
   const commentsList = post.comments.map((comment) => (
     <Comment
       postId={post.postId}

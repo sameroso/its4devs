@@ -25,7 +25,6 @@ function PostCardList({ postsData }) {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state);
   return { postsData: state.postsData };
 };
 

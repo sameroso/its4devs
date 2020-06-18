@@ -1,15 +1,24 @@
 $background-color: #008080;
 $primary-color: #bbb0b0;
 $top-card-color: #010388;
-$border-color-down: rgb(0, 0, 0);
-$border-color-right: rgb(0, 0, 0);
-$border-color-left: white;
-$border-color-up: white;
+$border-color-down: #a19d9d;
+$border-color-right: #a19d9d;
+$border-color-left: #f5efef;
+$border-color-up: #f5efef;
+$warning-color-card: red;
+$warning-color: white;
+
+@mixin boders {
+  border-top: $border-color-up 2px solid;
+  border-bottom: $border-color-down 2px solid;
+  border-left: $border-color-left 2px solid;
+  border-right: $border-color-right 2px solid;
+}
 
 @mixin ui95-btn {
   color: #000;
   background-color: $primary-color;
-  border-color: #f5efef;
+  @include boders;
   cursor: pointer;
   &:focus {
     outline: none;

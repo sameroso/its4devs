@@ -1,21 +1,39 @@
 import React from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
 
-function CommentField({ commentMode, input, meta: { touched, error } }) {
+import './CommentField.scss';
+
+function CommentField({
+  commentId,
+  commentMode,
+  input,
+  meta: { touched, error },
+}) {
+  const inputStyle = commentMode
+    ? 'readonly-commentField-input-style'
+    : 'edit-commentField-input-style';
   const inputType = (
-    <TextareaAutosize
-      {...input}
-      className="initial-form-text-area mx-auto"
-      readOnly={commentMode}
-    />
+    <div className={`row`}>
+      <TextareaAutosize
+        id={commentId.toString()}
+        {...input}
+        className={`initial-form-text-area mx-auto ${inputStyle}`}
+        readOnly={commentMode}
+      />
+    </div>
   );
 
   const renderError = () => {
     if (touched && error) {
       return (
-        <small className="form-text" style={{ color: 'red' }}>
-          {error}
-        </small>
+        <div className="mx-auto">
+          <small
+            className="form-text mx-auto text-center"
+            style={{ color: 'red' }}
+          >
+            {error}
+          </small>
+        </div>
       );
     } else {
       return null;

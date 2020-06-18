@@ -1,0 +1,7 @@
+@import '../../style/variables.scss';
+.postform-btn-text {
+  @include font-95;
+}
+.postform-btn {
+  @include ui95-btn;
+}

@@ -21,6 +21,7 @@ function PostCard({
   editPost,
 }) {
   const [postCardFieldMode, setPostCardFieldMode] = useState(true);
+  const [showComments, setShowComments] = useState(false);
 
   const deleteCurrentPost = () => {
     deletePost({ postId: post.postId });
@@ -32,7 +33,11 @@ function PostCard({
 
   const [showCommentForm, setShowCommentForm] = useState(false);
   const isCommentFormShowing = showCommentForm ? (
-    <CommentForm form={post.postId.toString()} postId={post.postId} />
+    <CommentForm
+      setShowComments={setShowComments}
+      form={post.postId.toString()}
+      postId={post.postId}
+    />
   ) : null;
   return (
     <>
@@ -42,7 +47,7 @@ function PostCard({
             src={post.postedBy.profilePic}
             className="img-card-size my-auto ml-1 py-1 px-1"
           ></img>
-          <span className="text-white ml-2 my-auto">
+          <span className="text-white ml-2 my-auto mx-auto">
             {post.postedBy.profileName}
           </span>
         </div>
@@ -71,7 +76,12 @@ function PostCard({
         </div>
       </div>
       <hr className="postcard-bottom-line" />
-      <CommentsList post={post} onSetPostForm={setShowCommentForm} />
+      <CommentsList
+        showComments={showComments}
+        setShowComments={setShowComments}
+        post={post}
+        onSetPostForm={setShowCommentForm}
+      />
       {isCommentFormShowing}
     </>
   );

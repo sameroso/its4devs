@@ -6,8 +6,16 @@ import cancelBtn from '../../../../assets/cancel95.png';
 import saveBtn from '../../../../assets/save95.png';
 import './CommentBtns.scss';
 
-function CommentBtns({ commentMode, reset, onUpdateComment, onDeleteComment }) {
-  const [commentbtnMode, setCommentbtnMode] = useState(false);
+function CommentBtns({
+  commentId,
+  commentMode,
+  reset,
+  onUpdateComment,
+  onDeleteComment,
+  commentbtnMode,
+  setCommentbtnMode,
+}) {
+  const commentbtnClass = commentbtnMode ? 'display-btn' : '';
   const commentBtn = commentbtnMode ? (
     <>
       <button
@@ -27,11 +35,12 @@ function CommentBtns({ commentMode, reset, onUpdateComment, onDeleteComment }) {
       </button>
       <button
         onClick={onUpdateComment}
+        alt="botão de salvar comentário"
         className="btn-commentbtns-style mr-2 my-1"
       >
         <img
           src={saveBtn}
-          alt="botão de salver postagem"
+          alt="botão de salvar postagem"
           className="img-commentbtns-top-size"
         />
       </button>
@@ -49,11 +58,14 @@ function CommentBtns({ commentMode, reset, onUpdateComment, onDeleteComment }) {
           className="img-commentbtns-top-size"
         />
       </button>
-
-      <button
-        className="btn-commentbtns-style mr-2"
+    </>
+  );
+  return (
+    <div>
+      <label
+        htmlFor={commentId}
+        className={`btn-commentbtns-style mr-2 commentbtns-label ${commentbtnClass}`}
         onClick={(e) => {
-          e.preventDefault();
           setCommentbtnMode(true);
           commentMode(false);
         }}
@@ -61,12 +73,12 @@ function CommentBtns({ commentMode, reset, onUpdateComment, onDeleteComment }) {
         <img
           src={editBtn}
           alt="botão de editar postagem"
-          className="img-commentbtns-top-size"
+          className="img-commentbtns-top-size img-label-btn"
         />
-      </button>
-    </>
+      </label>
+      {commentBtn}
+    </div>
   );
-  return <div>{commentBtn}</div>;
 }
 
 export default CommentBtns;
