@@ -3,11 +3,19 @@ import TextareaAutosize from 'react-textarea-autosize';
 
 import './PostCardField.scss';
 
-function PostCardField({ postCardFieldMode, input, meta: { touched, error } }) {
+function PostCardField({
+  postId,
+  userId,
+  postCardFieldMode,
+  input,
+  meta: { touched, error },
+}) {
+  const showbgonEdit = postCardFieldMode ? 'PostcardField-bg-none' : '';
   const inputType = (
     <TextareaAutosize
+      id={postId + userId}
       {...input}
-      className="initial-form-text-area mx-auto"
+      className={`initial-form-text-area mx-auto ${showbgonEdit}`}
       readOnly={postCardFieldMode}
     />
   );

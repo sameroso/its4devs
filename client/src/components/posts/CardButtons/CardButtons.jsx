@@ -12,19 +12,16 @@ function CardButtons({
   onBtnChange,
   postedBy,
   userId,
+  postId,
+  setBtnMode,
+  btnMode,
 }) {
-  const [btnMode, setBtnMode] = useState(false);
+  const showbtnstyle = btnMode ? 'CardButtons-display-btn' : '';
   const deleteMode = (
     <>
-      <button className="my-1 mr-2 btn-style" onClick={onDelete}>
-        <img
-          src={trashBtn}
-          alt="botão de excluir postagem"
-          className="btn-postcard-top-size"
-        />
-      </button>
-      <button
-        className="btn-style mr-2"
+      <label
+        htmlFor={postId + userId}
+        className={`btn-style mr-2 ${showbtnstyle}`}
         onClick={() => {
           setBtnMode(true);
           onBtnChange(false);
@@ -33,6 +30,13 @@ function CardButtons({
         <img
           src={editBtn}
           alt="botão de editar postagem"
+          className="btn-postcard-top-size"
+        />
+      </label>
+      <button className="my-1 mr-2 btn-style" onClick={onDelete}>
+        <img
+          src={trashBtn}
+          alt="botão de excluir postagem"
           className="btn-postcard-top-size"
         />
       </button>
@@ -66,6 +70,7 @@ function CardButtons({
 
   const isEditing = btnMode ? editMode : deleteMode;
   const renderBtns = userId === postedBy ? isEditing : null;
+
   return <div>{renderBtns}</div>;
 }
 

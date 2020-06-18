@@ -22,6 +22,21 @@ function PostCard({
 }) {
   const [postCardFieldMode, setPostCardFieldMode] = useState(true);
   const [showComments, setShowComments] = useState(false);
+  const [btnMode, setBtnMode] = useState(false);
+  const postCardRef = useRef(null);
+
+  function handleClickOutside(event) {
+    if (postCardRef.current && !postCardRef.current.contains(event.target)) {
+      setBtnMode(false);
+      setPostCardFieldMode(true);
+    }
+    // Bind the event listener
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      // Unbind the event listener on clean up
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }
 
   const deleteCurrentPost = () => {
     deletePost({ postId: post.postId });
@@ -40,7 +55,7 @@ function PostCard({
     />
   ) : null;
   return (
-    <>
+    <div onClick={(e) => handleClickOutside(e)} ref={postCardRef}>
       <div className="d-flex top-post-card mt-4 justify-content-between">
         <div>
           <img
@@ -59,6 +74,9 @@ function PostCard({
             postedBy={post.postedBy.userId}
             userId={myUserId}
             reset={reset}
+            postId={post.postId}
+            btnMode={btnMode}
+            setBtnMode={setBtnMode}
           />
         </div>
       </div>
@@ -69,6 +87,8 @@ function PostCard({
             component={PostCardField}
             postCardFieldMode={postCardFieldMode}
             className="post-card-style"
+            postId={post.postId}
+            userId={myUserId}
           />
         </div>
         <div className="row justify-content-end mr-5 mt-1">
@@ -83,7 +103,7 @@ function PostCard({
         onSetPostForm={setShowCommentForm}
       />
       {isCommentFormShowing}
-    </>
+    </div>
   );
 }
 
