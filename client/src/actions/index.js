@@ -55,3 +55,11 @@ export const deleteComment = (data) => async (dispatch) => {
   const response = await axios.post('/api/deletecomment', data);
   dispatch({ type: types.FETCH_POSTS, payload: response.data });
 };
+export const addLike = (data) => async (dispatch) => {
+  const response = await axios.post('/api/addlike', data);
+  dispatch({ type: types.FETCH_POSTS, payload: response.data });
+};
+export const removeLike = (data) => async (dispatch) => {
+  const response = await axios.post('/api/removelike', data);
+  dispatch({ type: types.FETCH_POSTS, payload: response.data });
+};

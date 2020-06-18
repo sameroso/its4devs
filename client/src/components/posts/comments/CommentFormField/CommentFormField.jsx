@@ -21,7 +21,7 @@ function CommentField({
   const renderError = () => {
     if (touched && error) {
       return (
-        <small className="form-text mx-auto" style={{ color: 'red' }}>
+        <small className="form-text mx-auto" style={{ color: 'black' }}>
           {error}
         </small>
       );

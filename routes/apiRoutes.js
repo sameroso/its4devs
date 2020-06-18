@@ -203,6 +203,29 @@ const apiRoutes = (app) => {
     const updated = await postData.save();
     res.send(updated);
   });
+  app.post('/api/addlike', async (req, res) => {
+    const Posts = mongoose.model('posts');
+    const postData = await Posts.findOne({ id: '1' });
+    const post = postData.posts.find((post) => {
+      return post.postId === req.body.postId;
+    });
+    post.likes.push({ userId: req.body.userId });
+    const updated = await postData.save();
+    res.send(updated);
+  });
+  app.post('/api/removelike', async (req, res) => {
+    const Posts = mongoose.model('posts');
+    const postData = await Posts.findOne({ id: '1' });
+    const post = postData.posts.find((post) => {
+      return post.postId === req.body.postId;
+    });
+    const like = post.likes.find((like) => {
+      return like.userId === req.body.userId;
+    });
+    like.remove();
+    const updated = await postData.save();
+    res.send(updated);
+  });
 };
 
 module.exports = apiRoutes;

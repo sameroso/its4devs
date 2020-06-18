@@ -9,6 +9,7 @@ import PostCardField from '../PostCardField/PostCardField';
 import CommentsList from '../comments/CommentsList/CommentsList';
 import CommentForm from '../comments/CommentForm/CommentForm';
 import dateHelper from '../../../helpers/dateHelper';
+import PostLikes from '../PostLikes/PostLikes';
 
 import './PostCard.scss';
 
@@ -29,6 +30,7 @@ function PostCard({
     if (postCardRef.current && !postCardRef.current.contains(event.target)) {
       setBtnMode(false);
       setPostCardFieldMode(true);
+      reset();
     }
     // Bind the event listener
     document.addEventListener('mousedown', handleClickOutside);
@@ -91,8 +93,11 @@ function PostCard({
             userId={myUserId}
           />
         </div>
-        <div className="row justify-content-end mr-5 mt-1">
-          <small className="my-auto">{dateHelper(post.dateCreated)}</small>
+        <div className="row justify-content-around mt-1 mx-auto">
+          <div className="mx-auto">
+            <PostLikes myUserId={myUserId} postId={post.postId} post={post} />
+          </div>
+          <small className="my-auto mr-3">{dateHelper(post.dateCreated)}</small>
         </div>
       </div>
       <hr className="postcard-bottom-line" />

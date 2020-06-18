@@ -29,6 +29,7 @@ function Comment({
     ) {
       setCommentbtnMode(false);
       setCommentMode(true);
+      reset();
     }
     // Bind the event listener
     document.addEventListener('mousedown', handleClickOutside);
