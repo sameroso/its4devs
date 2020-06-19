@@ -9,7 +9,7 @@ const postSchema = new Schema({
       postedBy: { profileName: String, profilePic: String, userId: String },
       title: String,
       body: String,
-      likes: [{ userId: String }],
+      likes: [{ userId: String, likeType: String }],
       dateCreated: { type: Date, default: Date },
       comments: [
         {

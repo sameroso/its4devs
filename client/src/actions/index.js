@@ -59,7 +59,14 @@ export const addLike = (data) => async (dispatch) => {
   const response = await axios.post('/api/addlike', data);
   dispatch({ type: types.FETCH_POSTS, payload: response.data });
 };
-export const removeLike = (data) => async (dispatch) => {
-  const response = await axios.post('/api/removelike', data);
+export const toggleLike = (data) => async (dispatch) => {
+  const response = await axios.post('/api/togglelike', data);
   dispatch({ type: types.FETCH_POSTS, payload: response.data });
+};
+export const fetchUser = (data) => async (dispatch) => {
+  const response = await axios.post('/api/fetchuser', data);
+  dispatch({ type: types.FETCH_USER, payload: response.data });
+};
+export const emptyUsers = (data) => {
+  return { type: types.EMPTY_USERS };
 };

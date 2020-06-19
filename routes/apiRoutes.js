@@ -209,11 +209,11 @@ const apiRoutes = (app) => {
     const post = postData.posts.find((post) => {
       return post.postId === req.body.postId;
     });
-    post.likes.push({ userId: req.body.userId });
+    post.likes.push({ userId: req.body.userId, likeType: req.body.likeType });
     const updated = await postData.save();
     res.send(updated);
   });
-  app.post('/api/removelike', async (req, res) => {
+  app.post('/api/togglelike', async (req, res) => {
     const Posts = mongoose.model('posts');
     const postData = await Posts.findOne({ id: '1' });
     const post = postData.posts.find((post) => {
@@ -222,9 +222,20 @@ const apiRoutes = (app) => {
     const like = post.likes.find((like) => {
       return like.userId === req.body.userId;
     });
-    like.remove();
+    if (like.likeType === req.body.likeType) {
+      like.remove();
+    } else {
+      like.remove();
+      post.likes.push({ userId: req.body.userId, likeType: req.body.likeType });
+    }
     const updated = await postData.save();
     res.send(updated);
+  });
+  app.post('/api/fetchuser', async (req, res) => {
+    const User = mongoose.model('users');
+    const user = await User.findById(req.body.id);
+    console.log(user);
+    res.send(user);
   });
 };
 
