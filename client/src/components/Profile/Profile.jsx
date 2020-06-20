@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { fetchUserProfile, updateUser } from '../../actions';
 import { Field, reduxForm } from 'redux-form';
-import InitialFormField from '../InitialFormField/InitialFormField';
+import ProfileField from '../ProfileField/ProfileField';
 import { Link } from 'react-router-dom';
 
 function Profile({
@@ -61,7 +61,7 @@ function Profile({
               <div className="col-12 col-sm-9 mx-auto">
                 <Field
                   name="profileName"
-                  component={InitialFormField}
+                  component={ProfileField}
                   label="nome"
                   type="input"
                 />
@@ -69,25 +69,25 @@ function Profile({
             </div>
             <Field
               name="description"
-              component={InitialFormField}
+              component={ProfileField}
               label="Bio"
               type="textarea"
             />
             <Field
               name="facebookLink"
-              component={InitialFormField}
+              component={ProfileField}
               label="facebook"
               type="input"
             />
             <Field
               name="whatsApp"
-              component={InitialFormField}
+              component={ProfileField}
               label="whatsapp"
               type="input"
             />
             <Field
               name="gitHub"
-              component={InitialFormField}
+              component={ProfileField}
               label="giihub"
               type="input"
             />
