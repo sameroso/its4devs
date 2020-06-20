@@ -70,3 +70,8 @@ export const fetchUser = (data) => async (dispatch) => {
 export const emptyUsers = (data) => {
   return { type: types.EMPTY_USERS };
 };
+
+export const fetchUserProfile = (data) => async (dispatch) => {
+  const response = await axios.post('/api/fetchuser', data);
+  dispatch({ type: types.FETCH_PROFILE_USER, payload: response.data });
+};

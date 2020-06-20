@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { connect } from 'react-redux';
 
 import LikeList from '../LikeList/LikeList';
@@ -18,6 +18,10 @@ function PostLikes({
   toggleLike,
   emptyUsers,
 }) {
+  const like1Ref = useRef(null);
+  const like2Ref = useRef(null);
+  const like3Ref = useRef(null);
+
   const isAlreadyLiked = post.likes.some((like) => like.userId === myUserId);
   const addingLike = isAlreadyLiked
     ? (likeType) => toggleLike({ postId, userId: myUserId, likeType })
@@ -32,7 +36,6 @@ function PostLikes({
   const react3type = post.likes.filter((like) => {
     return like.likeType === 'gates';
   });
-  console.log(react1type);
 
   const [showLikeList1, setShowLikeList1] = useState(false);
   const likeList1 = showLikeList1 ? <LikeList likes={react1type} /> : null;
@@ -41,46 +44,95 @@ function PostLikes({
   const [showLikeList3, setShowLikeList3] = useState(false);
   const likeList3 = showLikeList3 ? <LikeList likes={react3type} /> : null;
 
+  function handleClick1Outside(event) {
+    if (like1Ref.current && !like1Ref.current.contains(event.target)) {
+      setShowLikeList1(false);
+      emptyUsers();
+    }
+    // Bind the event listener
+    document.addEventListener('mousedown', handleClick1Outside);
+    return () => {
+      // Unbind the event listener on clean up
+      document.removeEventListener('mousedown', handleClick1Outside);
+    };
+  }
+  function handleClick2Outside(event) {
+    if (like2Ref.current && !like2Ref.current.contains(event.target)) {
+      setShowLikeList2(false);
+      emptyUsers();
+    }
+    // Bind the event listener
+    document.addEventListener('mousedown', handleClick2Outside);
+    return () => {
+      // Unbind the event listener on clean up
+      document.removeEventListener('mousedown', handleClick2Outside);
+    };
+  }
+  function handleClick3Outside(event) {
+    if (like3Ref.current && !like3Ref.current.contains(event.target)) {
+      setShowLikeList3(false);
+      emptyUsers();
+    }
+    // Bind the event listener
+    document.addEventListener('mousedown', handleClick3Outside);
+    return () => {
+      // Unbind the event listener on clean up
+      document.removeEventListener('mousedown', handleClick3Outside);
+    };
+  }
+
   return (
     <div className="row">
-      <div className="dropdown show">
-        <div
-          className="dropdown-toggle"
-          onClick={() => addingLike('lula')}
-          onMouseEnter={() => setShowLikeList1(true)}
-          onMouseOut={() => {
-            setShowLikeList1(false);
-            emptyUsers();
-          }}
-        >
-          <img src={lula} className="like-img-size mx-1" />
+      <div ref={like1Ref} onClick={(e) => handleClick1Outside(e)}>
+        <div>
+          <img
+            onClick={() => addingLike('lula')}
+            src={lula}
+            className="like-img-size mx-1"
+          />
           {react1type.length}
           {likeList1}
         </div>
+        <div
+          onClick={() => setShowLikeList1(true)}
+          className="text-center PostLIkes-arrow"
+        >
+          &darr;
+        </div>
       </div>
-      <div
-        onClick={() => addingLike('dilma')}
-        onMouseEnter={() => setShowLikeList2(true)}
-        onMouseLeave={() => {
-          setShowLikeList2(false);
-          emptyUsers();
-        }}
-      >
-        <img src={dilma} className="like-img-size mx-1" />
-        {react2type.length}
-        {likeList2}
+      <div ref={like2Ref} onClick={(e) => handleClick2Outside(e)}>
+        <div>
+          <img
+            onClick={() => addingLike('dilma')}
+            src={dilma}
+            className="like-img-size mx-1"
+          />
+          {react2type.length}
+          {likeList2}
+        </div>
+        <div
+          onClick={() => setShowLikeList2(true)}
+          className="text-center PostLIkes-arrow"
+        >
+          &darr;
+        </div>
       </div>
-      <div
-        onClick={() => addingLike('gates')}
-        onMouseEnter={() => setShowLikeList3(true)}
-        onMouseLeave={() => {
-          setShowLikeList3(false);
-          emptyUsers();
-        }}
-      >
-        <img src={gates} className="like-img-size mx-1" />
-        {react3type.length}
-        {likeList3}
+      <div ref={like3Ref} onClick={(e) => handleClick3Outside(e)}>
+        <div>
+          <img
+            onClick={() => addingLike('gates')}
+            src={gates}
+            className="like-img-size mx-1"
+          />
+          {react3type.length}
+          {likeList3}
+        </div>
+        <div
+          onClick={() => setShowLikeList3(true)}
+          className="text-center PostLIkes-arrow"
+        >
+          &darr;
+        </div>
       </div>
     </div>
   );

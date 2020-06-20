@@ -12,6 +12,7 @@ import dateHelper from '../../../helpers/dateHelper';
 import PostLikes from '../PostLikes/PostLikes';
 
 import './PostCard.scss';
+import { Link } from 'react-router-dom';
 
 function PostCard({
   post,
@@ -60,13 +61,15 @@ function PostCard({
     <div onClick={(e) => handleClickOutside(e)} ref={postCardRef}>
       <div className="d-flex top-post-card mt-4 justify-content-between">
         <div>
-          <img
-            src={post.postedBy.profilePic}
-            className="img-card-size my-auto ml-1 py-1 px-1"
-          ></img>
-          <span className="text-white ml-2 my-auto mx-auto">
-            {post.postedBy.profileName}
-          </span>
+          <Link to={`profile/${post.postedBy.userId}`}>
+            <img
+              src={post.postedBy.profilePic}
+              className="img-card-size my-auto ml-1 py-1 px-1"
+            ></img>
+            <span className="text-white ml-2 my-auto mx-auto">
+              {post.postedBy.profileName}
+            </span>
+          </Link>
         </div>
         <div>
           <CardButtons

@@ -1,0 +1,9 @@
+.LikeName-style {
+  cursor: pointer;
+  text-decoration: none;
+  color: black;
+  &:hover {
+    background-color: rgba(111, 111, 204, 0.479);
+    text-decoration: none;
+  }
+}

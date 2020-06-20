@@ -1,17 +1,27 @@
 import React, { useEffect, useState } from 'react';
-import { fetchUser } from '../../../actions';
-
 import { connect } from 'react-redux';
+import Loader from 'react-loader-spinner';
+
+import { fetchUser } from '../../../actions';
+import { Link } from 'react-router-dom';
+import './LikeName.scss';
 
 function LikeName({ userId, fetchUser, user, users }) {
-  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     fetchUser({ id: userId });
   }, []);
   if (users.length === 0 || !user) {
-    return <div>loading</div>;
+    return (
+      <div>
+        <Loader type="ThreeDots" color="#9e9493" height={12} width={60} />
+      </div>
+    );
   } else {
-    return <div>{user.profileName}</div>;
+    return (
+      <Link to={`/profile/${userId}`}>
+        <div className="LikeName-style">{user.profileName}</div>
+      </Link>
+    );
   }
 }
 const mapStateToProps = (state, ownProps) => {

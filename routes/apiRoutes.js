@@ -234,7 +234,6 @@ const apiRoutes = (app) => {
   app.post('/api/fetchuser', async (req, res) => {
     const User = mongoose.model('users');
     const user = await User.findById(req.body.id);
-    console.log(user);
     res.send(user);
   });
 };

@@ -6,7 +6,7 @@ function LikeList({ likes }) {
   const likeList = likes.map((like) => (
     <LikeName key={like.userId} userId={like.userId} />
   ));
-  return <>{likeList}</>;
+  return <div className="like-list-style">{likeList}</div>;
 }
 
 export default LikeList;
