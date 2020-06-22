@@ -4,17 +4,30 @@ import Comment from '../Comment/Comment';
 import './CommentsList.scss';
 
 function CommentsList({ post, onSetPostForm, setShowComments, showComments }) {
-  const commentsList = post.comments.map((comment) => (
-    <Comment
-      postId={post._id}
-      comment={comment}
-      key={comment._id}
-      initialValues={{
-        commentFormPosted: comment.body,
-      }}
-      form={comment._id}
-    />
-  ));
+  const [commentQnt, setCommentQnt] = useState(post.comments.length - 3);
+
+  const isBtnshowing =
+    commentQnt <= 0 ? null : (
+      <div onClick={() => setCommentQnt(commentQnt - 3)}>
+        <button>show comments</button>
+      </div>
+    );
+  const commentsList = post.comments.map((comment, index) => {
+    if (index < commentQnt) {
+      return null;
+    }
+    return (
+      <Comment
+        postId={post._id}
+        comment={comment}
+        key={comment._id}
+        initialValues={{
+          commentFormPosted: comment.body,
+        }}
+        form={comment._id}
+      />
+    );
+  });
   const focus = () => {
     onSetPostForm(true);
   };
@@ -43,6 +56,7 @@ function CommentsList({ post, onSetPostForm, setShowComments, showComments }) {
         </button>
         {comment}
       </div>
+      {isBtnshowing}
       <div>{commentsList}</div>
     </>
   ) : (

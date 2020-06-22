@@ -9,7 +9,7 @@ function PostCardList({ postsData }) {
   const renderPostCardList = () => {
     if (postsData.length !== 0) {
       const postqnt =
-        indexValue > postsData.posts.length ? null : (
+        indexValue >= postsData.posts.length ? null : (
           <button onClick={() => setIndexValue(indexValue + 4)}>
             show more
           </button>
