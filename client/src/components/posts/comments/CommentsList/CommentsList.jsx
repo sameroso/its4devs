@@ -6,13 +6,13 @@ import './CommentsList.scss';
 function CommentsList({ post, onSetPostForm, setShowComments, showComments }) {
   const commentsList = post.comments.map((comment) => (
     <Comment
-      postId={post.postId}
+      postId={post._id}
       comment={comment}
-      key={comment.commentId}
+      key={comment._id}
       initialValues={{
         commentFormPosted: comment.body,
       }}
-      form={comment.commentId.toString()}
+      form={comment._id}
     />
   ));
   const focus = () => {
@@ -20,7 +20,7 @@ function CommentsList({ post, onSetPostForm, setShowComments, showComments }) {
   };
   const comment = (
     <label
-      htmlFor={post.postId.toString()}
+      htmlFor={post._id}
       onClick={() => {
         focus();
       }}

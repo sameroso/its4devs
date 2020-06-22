@@ -2,10 +2,8 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const postSchema = new Schema({
   id: String,
-  sequenceId: Number,
   posts: [
     {
-      postId: Number,
       postedBy: { profileName: String, profilePic: String, userId: String },
       title: String,
       body: String,
@@ -13,7 +11,6 @@ const postSchema = new Schema({
       dateCreated: { type: Date, default: Date },
       comments: [
         {
-          commentId: Number,
           profileName: String,
           profilePic: String,
           userId: String,

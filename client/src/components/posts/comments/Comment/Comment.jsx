@@ -44,17 +44,17 @@ function Comment({
   const [commentMode, setCommentMode] = useState(true);
 
   const onDeleteComment = () => {
-    deleteComment({ postId, commentId: comment.commentId });
+    deleteComment({ postId, commentId: comment._id });
   };
   const updateComment = (formValues) => {
-    editComment({ ...formValues, commentId: comment.commentId, postId });
+    editComment({ ...formValues, commentId: comment._id, postId });
   };
   const showbtns =
     myUserId === comment.userId ? (
       <CommentBtns
         commentbtnMode={commentbtnMode}
         setCommentbtnMode={setCommentbtnMode}
-        commentId={comment.commentId}
+        commentId={comment._id}
         onUpdateComment={handleSubmit(updateComment)}
         onDeleteComment={(e) => {
           e.preventDefault();
@@ -89,7 +89,7 @@ function Comment({
         <div className="row">
           <form className="mx-auto form-comment-size">
             <Field
-              commentId={comment.commentId}
+              commentId={comment._id}
               name="commentFormPosted"
               component={CommentField}
               commentMode={commentMode}

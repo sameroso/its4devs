@@ -42,19 +42,19 @@ function PostCard({
   }
 
   const deleteCurrentPost = () => {
-    deletePost({ postId: post.postId });
+    deletePost({ postId: post._id });
   };
 
   const editCurrentPost = (formValues) => {
-    editPost({ ...formValues, postId: post.postId });
+    editPost({ ...formValues, postId: post._id });
   };
 
   const [showCommentForm, setShowCommentForm] = useState(false);
   const isCommentFormShowing = showCommentForm ? (
     <CommentForm
       setShowComments={setShowComments}
-      form={post.postId.toString()}
-      postId={post.postId}
+      form={post._id + post.postedBy.userId}
+      postId={post._id}
     />
   ) : null;
   return (
@@ -79,7 +79,7 @@ function PostCard({
             postedBy={post.postedBy.userId}
             userId={myUserId}
             reset={reset}
-            postId={post.postId}
+            postId={post._id}
             btnMode={btnMode}
             setBtnMode={setBtnMode}
           />
@@ -92,7 +92,7 @@ function PostCard({
             component={PostCardField}
             postCardFieldMode={postCardFieldMode}
             className="post-card-style"
-            postId={post.postId}
+            postId={post._id}
             userId={myUserId}
           />
         </div>

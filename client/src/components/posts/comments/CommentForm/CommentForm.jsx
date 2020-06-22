@@ -12,16 +12,17 @@ function CommentForm({
   createComment,
   postId,
   user,
-  postsData,
   reset,
   setShowComments,
 }) {
   const commentSubmit = (formValues) => {
+    console.log(formValues);
+    console.log(postId);
+    console.log(user);
     createComment({
       ...formValues,
       postId,
       ...user,
-      commentId: postsData.sequenceId + 1,
     });
     setShowComments(true);
     reset();
@@ -55,6 +56,7 @@ function validate(values) {
   return errors;
 }
 const mapStateToProps = (state) => {
+  console.log(state);
   return { user: state.user, postsData: state.postsData };
 };
 
