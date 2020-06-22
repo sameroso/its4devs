@@ -98,7 +98,7 @@ function PostCard({
         </div>
         <div className="row justify-content-around mt-1 mx-auto">
           <div className="mx-auto">
-            <PostLikes myUserId={myUserId} postId={post.postId} post={post} />
+            <PostLikes myUserId={myUserId} postId={post._id} post={post} />
           </div>
           <small className="my-auto mr-3">{dateHelper(post.dateCreated)}</small>
         </div>

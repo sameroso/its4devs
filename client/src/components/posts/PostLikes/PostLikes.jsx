@@ -86,7 +86,9 @@ function PostLikes({
       <div ref={like1Ref} onClick={(e) => handleClick1Outside(e)}>
         <div>
           <img
-            onClick={() => addingLike('lula')}
+            onClick={() => {
+              addingLike('lula');
+            }}
             src={lula}
             className="like-img-size mx-1"
           />

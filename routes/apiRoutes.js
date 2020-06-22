@@ -151,7 +151,7 @@ const apiRoutes = (app) => {
     const Posts = mongoose.model('posts');
     const postData = await Posts.findOne({ id: '1' });
     const post = postData.posts.find((post) => {
-      return post.postId === req.body.postId;
+      return post._id.toString() === req.body.postId;
     });
     post.likes.push({ userId: req.body.userId, likeType: req.body.likeType });
     const updated = await postData.save();
@@ -161,7 +161,7 @@ const apiRoutes = (app) => {
     const Posts = mongoose.model('posts');
     const postData = await Posts.findOne({ id: '1' });
     const post = postData.posts.find((post) => {
-      return post.postId === req.body.postId;
+      return post._id.toString() === req.body.postId;
     });
     const like = post.likes.find((like) => {
       return like.userId === req.body.userId;
