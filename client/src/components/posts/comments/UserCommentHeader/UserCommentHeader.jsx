@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Loader from 'react-loader-spinner';
 
-import { fetchUserPostProfile } from '../../../actions';
+import { fetchUserPostProfile } from '../../../../actions';
 
-function UserPostHeader({ post, fetchUserPostProfile, postHeader }) {
+function UserPostHeader({ comment, fetchUserPostProfile, postHeader }) {
   useEffect(() => {
-    fetchUserPostProfile({ id: post.postedBy.userId });
+    fetchUserPostProfile({ id: comment.userId });
   }, []);
   if (postHeader.length === 0) {
     return (
@@ -18,7 +18,7 @@ function UserPostHeader({ post, fetchUserPostProfile, postHeader }) {
   }
   return (
     <>
-      <Link to={`profile/${post.postedBy.userId}`}>
+      <Link to={`profile/${comment.userId}`}>
         <img
           src={postHeader[0].profilePic}
           className="img-card-size my-auto ml-1 py-1 px-1"
@@ -33,7 +33,7 @@ function UserPostHeader({ post, fetchUserPostProfile, postHeader }) {
 const mapStateToProps = (state, ownProps) => {
   return {
     postHeader: state.postHeader.filter(
-      (user) => user._id === ownProps.post.postedBy.userId
+      (user) => user._id === ownProps.comment.userId
     ),
   };
 };

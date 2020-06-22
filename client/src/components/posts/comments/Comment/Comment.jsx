@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { editComment } from '../../../../actions';
 import { deleteComment } from '../../../../actions';
 import CommentBtns from '../CommentBtns/CommentBtns';
+import UserCommentHeader from '../UserCommentHeader/UserCommentHeader';
 import dateHelper from '../../../../helpers/dateHelper';
 import './Comment.scss';
 import { Link } from 'react-router-dom';
@@ -71,18 +72,7 @@ function Comment({
       ref={refCommentCard}
     >
       <div className="bg-commment-top d-flex justify-content-between">
-        <Link to={`profile/${comment.userId}`}>
-          <div>
-            <img
-              src={comment.profilePic}
-              alt=""
-              className="comment-img px-1 py-1"
-            />
-            <span className="text-white ml-1 comment-profile-name-font-size">
-              {comment.profileName}
-            </span>
-          </div>
-        </Link>
+        <UserCommentHeader comment={comment} />
         <div>{showbtns}</div>
       </div>
       <div className="bg-card-comment">
