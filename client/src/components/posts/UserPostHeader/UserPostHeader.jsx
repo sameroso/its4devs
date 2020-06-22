@@ -1,23 +1,44 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Loader from 'react-loader-spinner';
 
-function UserPostHeader({ comment }) {
+import { fetchUserPostProfile } from '../../../actions';
+
+function UserPostHeader({ post, fetchUserPostProfile, postHeader }) {
+  console.log(postHeader);
+  useEffect(() => {
+    fetchUserPostProfile({ id: post.postedBy.userId });
+  }, []);
+  if (postHeader.length === 0) {
+    return (
+      <>
+        <Loader type="ThreeDots" color="#9e9493" height={12} width={60} />
+      </>
+    );
+  }
   return (
     <>
-      <Link to={`profile/${comment.userId}`}>
-        <div>
-          <img
-            src={comment.profilePic}
-            alt=""
-            className="comment-img px-1 py-1"
-          />
-          <span className="text-white ml-1 comment-profile-name-font-size">
-            {comment.profileName}
-          </span>
-        </div>
+      <Link to={`profile/${post.postedBy.userId}`}>
+        <img
+          src={postHeader[0].profilePic}
+          className="img-card-size my-auto ml-1 py-1 px-1"
+        ></img>
+        <span className="text-white ml-2 my-auto mx-auto">
+          {postHeader[0].profileName}
+        </span>
       </Link>
     </>
   );
 }
-
-export default UserPostHeader;
+const mapStateToProps = (state, ownProps) => {
+  console.log(state);
+  return {
+    postHeader: state.postHeader.filter(
+      (user) => user._id === ownProps.post.postedBy.userId
+    ),
+  };
+};
+export default connect(mapStateToProps, { fetchUserPostProfile })(
+  UserPostHeader
+);

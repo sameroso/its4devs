@@ -75,3 +75,8 @@ export const fetchUserProfile = (data) => async (dispatch) => {
   const response = await axios.post('/api/fetchuser', data);
   dispatch({ type: types.FETCH_PROFILE_USER, payload: response.data });
 };
+
+export const fetchUserPostProfile = (data) => async (dispatch) => {
+  const response = await axios.post('/api/fetchuser', data);
+  dispatch({ type: types.FETCH_PROFILE_USER_HEADER, payload: response.data });
+};

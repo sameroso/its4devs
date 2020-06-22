@@ -10,6 +10,7 @@ import CommentsList from '../comments/CommentsList/CommentsList';
 import CommentForm from '../comments/CommentForm/CommentForm';
 import dateHelper from '../../../helpers/dateHelper';
 import PostLikes from '../PostLikes/PostLikes';
+import UserPostHeader from '../UserPostHeader/UserPostHeader';
 
 import './PostCard.scss';
 import { Link } from 'react-router-dom';
@@ -61,15 +62,7 @@ function PostCard({
     <div onClick={(e) => handleClickOutside(e)} ref={postCardRef}>
       <div className="d-flex top-post-card mt-4 justify-content-between">
         <div>
-          <Link to={`profile/${post.postedBy.userId}`}>
-            <img
-              src={post.postedBy.profilePic}
-              className="img-card-size my-auto ml-1 py-1 px-1"
-            ></img>
-            <span className="text-white ml-2 my-auto mx-auto">
-              {post.postedBy.profileName}
-            </span>
-          </Link>
+          <UserPostHeader post={post} />
         </div>
         <div>
           <CardButtons
