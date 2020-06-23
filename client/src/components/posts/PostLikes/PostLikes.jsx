@@ -8,6 +8,8 @@ import { emptyUsers } from '../../../actions';
 import lula from '../../../assets/lula.jpeg';
 import dilma from '../../../assets/dilma.jpg';
 import gates from '../../../assets/billi.jpg';
+import zuck from '../../../assets/zuck.jpg';
+import jobs from '../../../assets/jobs.jpg';
 import './PostLikes.scss';
 
 function PostLikes({
@@ -89,7 +91,7 @@ function PostLikes({
             onClick={() => {
               addingLike('lula');
             }}
-            src={lula}
+            src={zuck}
             className="like-img-size mx-1"
           />
           {react1type.length}
@@ -106,7 +108,7 @@ function PostLikes({
         <div>
           <img
             onClick={() => addingLike('dilma')}
-            src={dilma}
+            src={jobs}
             className="like-img-size mx-1"
           />
           {react2type.length}
