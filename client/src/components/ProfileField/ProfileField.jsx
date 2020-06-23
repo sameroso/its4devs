@@ -2,12 +2,28 @@ import React from 'react';
 import './ProfileField.scss';
 import TextareaAutosize from 'react-textarea-autosize';
 
-function InitialFormField({ input, label, type, meta: { touched, error } }) {
+function InitialFormField({
+  isMyProfile,
+  input,
+  label,
+  type,
+  meta: { touched, error },
+}) {
+  const isReadOnly = isMyProfile ? 'ProfileField-readonly-input' : '';
   const inputType =
     type === 'input' ? (
-      <input type={type} {...input} className="initial-form-input" />
+      <input
+        type={type}
+        {...input}
+        className={`initial-form-input ${isReadOnly}`}
+        readOnly={isMyProfile}
+      />
     ) : (
-      <TextareaAutosize {...input} className="initial-form-text-area mx-auto" />
+      <TextareaAutosize
+        {...input}
+        className={`initial-form-text-area mx-auto ${isReadOnly}`}
+        readOnly={isMyProfile}
+      />
     );
 
   const renderError = () => {

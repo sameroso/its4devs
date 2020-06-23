@@ -67,7 +67,7 @@ export const fetchUser = (data) => async (dispatch) => {
   const response = await axios.post('/api/fetchuser', data);
   dispatch({ type: types.FETCH_USER, payload: response.data });
 };
-export const emptyUsers = (data) => {
+export const emptyUsers = () => {
   return { type: types.EMPTY_USERS };
 };
 
@@ -79,4 +79,10 @@ export const fetchUserProfile = (data) => async (dispatch) => {
 export const fetchUserPostProfile = (data) => async (dispatch) => {
   const response = await axios.post('/api/fetchuser', data);
   dispatch({ type: types.FETCH_PROFILE_USER_HEADER, payload: response.data });
+};
+export const emptyUserPostProfile = () => {
+  return { type: types.EMPTY_PROFILE_USER_HEADER };
+};
+export const clearPostState = () => {
+  return { type: types.CLEAR_POST_STATE };
 };

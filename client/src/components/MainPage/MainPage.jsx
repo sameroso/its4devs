@@ -6,11 +6,23 @@ import PostCardList from '../posts/PostCardList/PostCardList';
 import PostForm from '../posts/PostForm/PostForm';
 import Header from '../Header/Header';
 import { fetchPosts } from '../../actions/index';
+import { emptyUserPostProfile } from '../../actions/index';
+import { clearPostState } from '../../actions/index';
 import './MainPage.scss';
 
-function MainPage({ user, fetchPosts, postsData }) {
+function MainPage({
+  user,
+  fetchPosts,
+  postsData,
+  emptyUserPostProfile,
+  clearPostState,
+}) {
   useEffect(() => {
+    emptyUserPostProfile();
     fetchPosts();
+    return () => {
+      clearPostState();
+    };
   }, []);
   const userData = {
     profileName: user.profileName,
@@ -46,4 +58,8 @@ const mapStateToProps = (state) => {
   return { user: state.user, postsData: state.postsData };
 };
 
-export default connect(mapStateToProps, { fetchPosts })(MainPage);
+export default connect(mapStateToProps, {
+  fetchPosts,
+  emptyUserPostProfile,
+  clearPostState,
+})(MainPage);

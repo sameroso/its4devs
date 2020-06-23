@@ -1,10 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import PostCard from '../PostCard/PostCard';
-import './PostCardList.scss';
 
-function PostCardList({ postsData }) {
+import { fetchPosts } from '../../../actions';
+import { emptyUserPostProfile } from '../../../actions';
+import { clearPostState } from '../../../actions';
+import './UserPostCardList.scss';
+
+function PostCardList({
+  postsData,
+  userProfile,
+  fetchPosts,
+  emptyUserPostProfile,
+  clearPostState,
+}) {
+  useEffect(() => {
+    emptyUserPostProfile();
+    fetchPosts();
+    return () => {
+      clearPostState();
+    };
+  }, []);
   const [indexValue, setIndexValue] = useState(4);
   const renderPostCardList = () => {
     if (postsData.length !== 0) {
@@ -15,6 +32,7 @@ function PostCardList({ postsData }) {
           </button>
         );
       const postsList = postsData.posts
+        .filter((post) => post.postedBy.userId === userProfile._id)
         .slice(0)
         .reverse()
         .map((post, index) => {
@@ -54,4 +72,8 @@ const mapStateToProps = (state) => {
   return { postsData: state.postsData };
 };
 
-export default connect(mapStateToProps)(PostCardList);
+export default connect(mapStateToProps, {
+  fetchPosts,
+  emptyUserPostProfile,
+  clearPostState,
+})(PostCardList);

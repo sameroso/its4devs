@@ -7,7 +7,7 @@ $border-color-left: #f5efef;
 $border-color-up: #f5efef;
 $warning-color-card: red;
 $warning-color: white;
-
+$top-card-color-comment: rgb(26, 114, 73);
 @mixin boders {
   border-top: $border-color-up 2px solid;
   border-bottom: $border-color-down 2px solid;
