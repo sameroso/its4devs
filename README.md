@@ -1,5 +1,5 @@
 # its4Devs(em desenvolvimento)
-> Aplicação apresenta um website feito em ReactJs integrado com redux no frontend e nodeJs no bakcend
+> Aplicação apresenta uma rede social feito em ReactJs integrado com redux no frontend e nodeJs no bakcend
 <p align="center">
   <a href="#computer-projeto">Projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#high_brightness-live-demo">Live Demo</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
