@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import Modal from '../../Modal/Modal';
 import './CardButtons.scss';
+
 import trashBtn from '../../../assets/trash95.png';
 import editBtn from '../../../assets/edit95.png';
 import cancelBtn from '../../../assets/cancel95.png';
@@ -16,9 +18,19 @@ function CardButtons({
   setBtnMode,
   btnMode,
 }) {
+  const [modalType, setModalType] = useState(true);
+  const modalAction = modalType ? 'deletar' : 'editar';
+  const action = modalType ? onDelete : onEdit;
+
   const deleteMode = (
     <>
-      <button className="my-1 mr-2 btn-style" onClick={onDelete}>
+      <button
+        className="my-1 mr-2 btn-style"
+        /*  onClick={onDelete} */
+        type="button"
+        data-toggle="modal"
+        data-target={`#${postId}`}
+      >
         <img
           src={trashBtn}
           alt="botão de excluir postagem"
@@ -34,6 +46,7 @@ function CardButtons({
         onClick={() => {
           setBtnMode(false);
           onBtnChange(true);
+          setModalType(true);
           reset();
         }}
       >
@@ -43,7 +56,13 @@ function CardButtons({
           className="btn-postcard-top-size"
         />
       </button>
-      <button className="btn-style mr-2 " onClick={onEdit}>
+      <button
+        className="btn-style mr-2 "
+        type="button"
+        data-toggle="modal"
+        data-target={`#${postId}`}
+        /* onClick={onEdit} */
+      >
         <img
           src={saveBtn}
           alt="botão de salvar postagem"
@@ -65,12 +84,19 @@ function CardButtons({
 
   return (
     <div>
+      <Modal
+        postId={postId}
+        actionName={modalAction}
+        message={`Deseja mesmo ${modalAction} a postagem?`}
+        action={action}
+      />
       <label
         htmlFor={postId + userId}
         className={`btn-style mr-2 ${showbtnstyle()}`}
         onClick={() => {
           setBtnMode(true);
           onBtnChange(false);
+          setModalType(false);
         }}
       >
         <img
