@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+import Modal from '../../../Modal/Modal';
 import trashBtn from '../../../../assets/trash95.png';
 import editBtn from '../../../../assets/edit95.png';
 import cancelBtn from '../../../../assets/cancel95.png';
@@ -15,6 +16,8 @@ function CommentBtns({
   commentbtnMode,
   setCommentbtnMode,
 }) {
+  const modalAction = commentbtnMode ? 'editar' : 'deletar';
+  const action = commentbtnMode ? onUpdateComment : onDeleteComment;
   const commentbtnClass = commentbtnMode ? 'display-btn' : '';
   const commentBtn = commentbtnMode ? (
     <>
@@ -34,7 +37,9 @@ function CommentBtns({
         />
       </button>
       <button
-        onClick={onUpdateComment}
+        type="button"
+        data-toggle="modal"
+        data-target={`#${commentId}`}
         alt="botão de salvar comentário"
         className="btn-commentbtns-style mr-2 my-1"
       >
@@ -49,8 +54,9 @@ function CommentBtns({
     <>
       <button
         className="my-1 mr-1 btn-commentbtns-style"
-        type="text"
-        onClick={onDeleteComment}
+        type="button"
+        data-toggle="modal"
+        data-target={`#${commentId}`}
       >
         <img
           src={trashBtn}
@@ -62,6 +68,12 @@ function CommentBtns({
   );
   return (
     <div>
+      <Modal
+        postId={commentId}
+        actionName={modalAction}
+        message={`Deseja mesmo ${modalAction} a postagem?`}
+        action={action}
+      />
       <label
         htmlFor={commentId}
         className={`btn-commentbtns-style mr-2 commentbtns-label ${commentbtnClass}`}

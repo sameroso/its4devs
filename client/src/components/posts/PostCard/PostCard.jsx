@@ -13,7 +13,6 @@ import PostLikes from '../PostLikes/PostLikes';
 import UserPostHeader from '../UserPostHeader/UserPostHeader';
 
 import './PostCard.scss';
-import { Link } from 'react-router-dom';
 
 function PostCard({
   post,

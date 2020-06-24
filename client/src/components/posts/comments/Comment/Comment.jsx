@@ -9,7 +9,6 @@ import CommentBtns from '../CommentBtns/CommentBtns';
 import UserCommentHeader from '../UserCommentHeader/UserCommentHeader';
 import dateHelper from '../../../../helpers/dateHelper';
 import './Comment.scss';
-import { Link } from 'react-router-dom';
 
 function Comment({
   comment,
