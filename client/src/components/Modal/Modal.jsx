@@ -13,7 +13,7 @@ function Modal({ postId, actionName, message, action }) {
         aria-hidden="true"
       >
         <div className="modal-dialog" role="document">
-          <div className="modal-card-style">
+          <div className="modal-content modal-card-style ">
             <div className="header-Modal">
               <h5 className="font text-modal-header-style" id={postId}>
                 {actionName}
@@ -29,7 +29,7 @@ function Modal({ postId, actionName, message, action }) {
             </div>
             <div className="modal-body">
               <div className="font text-center">
-                <h5>{message}</h5>
+                <h4>{message}</h4>
               </div>
             </div>
             <div className="modal-footer">
