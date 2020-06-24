@@ -18,9 +18,8 @@ function CardButtons({
   setBtnMode,
   btnMode,
 }) {
-  const [modalType, setModalType] = useState(true);
-  const modalAction = modalType ? 'deletar' : 'editar';
-  const action = modalType ? onDelete : onEdit;
+  const modalAction = btnMode ? 'editar' : 'deletar';
+  const action = btnMode ? onEdit : onDelete;
 
   const deleteMode = (
     <>
@@ -46,7 +45,6 @@ function CardButtons({
         onClick={() => {
           setBtnMode(false);
           onBtnChange(true);
-          setModalType(true);
           reset();
         }}
       >
@@ -96,7 +94,6 @@ function CardButtons({
         onClick={() => {
           setBtnMode(true);
           onBtnChange(false);
-          setModalType(false);
         }}
       >
         <img

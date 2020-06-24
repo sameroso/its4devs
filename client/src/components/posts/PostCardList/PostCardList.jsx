@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
 import PostCard from '../PostCard/PostCard';
+import Loader from 'react-loader-spinner';
 import './PostCardList.scss';
 
 function PostCardList({ postsData }) {
@@ -40,7 +41,13 @@ function PostCardList({ postsData }) {
         </>
       );
     } else {
-      return <div>nada</div>;
+      return (
+        <div className="row">
+          <div className="mx-auto">
+            <Loader type="ThreeDots" color="#454040" height={80} width={80} />
+          </div>
+        </div>
+      );
     }
   };
   return (

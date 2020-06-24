@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import PostCard from '../PostCard/PostCard';
+import Loader from 'react-loader-spinner';
 
 import { fetchPosts } from '../../../actions';
 import { emptyUserPostProfile } from '../../../actions';
@@ -58,7 +59,13 @@ function PostCardList({
         </>
       );
     } else {
-      return <div>nada</div>;
+      return (
+        <div className="row">
+          <div className="mx-auto">
+            <Loader type="ThreeDots" color="#454040" height={80} width={80} />
+          </div>
+        </div>
+      );
     }
   };
   return (

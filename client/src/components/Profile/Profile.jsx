@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
+import Loader from 'react-loader-spinner';
 
 import { fetchUserProfile, updateUser } from '../../actions';
 import ProfileField from '../ProfileField/ProfileField';
@@ -24,7 +25,13 @@ function Profile({
   };
 
   if (userProfile.length === 0 || myUser === null) {
-    return <div>Profile</div>;
+    return (
+      <div className="row">
+        <div className="mx-auto my-auto">
+          <Loader type="ThreeDots" color="#454040" height={80} width={80} />
+        </div>
+      </div>
+    );
   } else {
     const isMyProfile = myUser._id === userProfile._id ? false : true;
     const showbtn =
