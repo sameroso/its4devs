@@ -12,3 +12,9 @@
 .comment-list-span-position {
   margin: auto auto;
 }
+.CommentList-show-more-btn {
+  @include ui95-btn;
+  width: 70%;
+  margin: auto;
+  margin-top: 15px;
+}

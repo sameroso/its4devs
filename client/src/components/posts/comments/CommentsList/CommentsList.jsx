@@ -8,8 +8,13 @@ function CommentsList({ post, onSetPostForm, setShowComments, showComments }) {
 
   const isBtnshowing =
     commentQnt <= 0 ? null : (
-      <div onClick={() => setCommentQnt(commentQnt - 3)}>
-        <button>show comments</button>
+      <div className="row">
+        <button
+          className="CommentList-show-more-btn"
+          onClick={() => setCommentQnt(commentQnt - 3)}
+        >
+          mostrar mais
+        </button>
       </div>
     );
   const commentsList = post.comments.map((comment, index) => {

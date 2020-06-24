@@ -1,0 +1,6 @@
+@import '../../style/variables.scss';
+.PostCardList-show-more-btn {
+  @include ui95-btn;
+  width: 70%;
+  margin: auto;
+}

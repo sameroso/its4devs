@@ -10,10 +10,15 @@ function PostCardList({ postsData }) {
   const renderPostCardList = () => {
     if (postsData.length !== 0) {
       const postqnt =
-        indexValue >= postsData.posts.length ? null : (
-          <button onClick={() => setIndexValue(indexValue + 4)}>
-            show more
-          </button>
+        indexValue >= postsData.posts.length - 1 ? null : (
+          <div className="row mt-3">
+            <button
+              className="PostCardList-show-more-btn"
+              onClick={() => setIndexValue(indexValue + 4)}
+            >
+              mostrar mais
+            </button>
+          </div>
         );
       const postsList = postsData.posts
         .slice(0)
