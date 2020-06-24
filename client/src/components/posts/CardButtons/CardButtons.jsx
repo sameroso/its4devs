@@ -33,7 +33,7 @@ function CardButtons({
         <img
           src={trashBtn}
           alt="botão de excluir postagem"
-          className="btn-postcard-top-size"
+          className="img-commentbtns-top-size"
         />
       </button>
     </>
@@ -51,7 +51,7 @@ function CardButtons({
         <img
           src={cancelBtn}
           alt="botão de cancelar"
-          className="btn-postcard-top-size"
+          className="img-commentbtns-top-size"
         />
       </button>
       <button
@@ -64,7 +64,7 @@ function CardButtons({
         <img
           src={saveBtn}
           alt="botão de salvar postagem"
-          className="btn-postcard-top-size"
+          className="img-commentbtns-top-size"
         />
       </button>
     </>
@@ -90,7 +90,7 @@ function CardButtons({
       />
       <label
         htmlFor={postId + userId}
-        className={`btn-style mr-2 ${showbtnstyle()}`}
+        className={`commentbtns-label btn-style mr-2 ${showbtnstyle()}`}
         onClick={() => {
           setBtnMode(true);
           onBtnChange(false);
@@ -99,7 +99,7 @@ function CardButtons({
         <img
           src={editBtn}
           alt="botão de editar postagem"
-          className="btn-postcard-top-size"
+          className="img-commentbtns-top-size img-label-btn"
         />
       </label>
       {renderBtns}
