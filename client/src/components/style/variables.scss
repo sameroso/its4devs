@@ -23,6 +23,9 @@ $top-card-color-comment: rgb(26, 114, 73);
   &:focus {
     outline: none;
   }
+  &:hover {
+    background-color: lighten($color: $primary-color, $amount: 3%);
+  }
   &:active {
     background-color: $primary-color;
     box-shadow: 0 2px #666;
