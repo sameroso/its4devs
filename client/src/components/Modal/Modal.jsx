@@ -1,4 +1,5 @@
 import React from 'react';
+import './Modal.scss';
 
 function Modal({ postId, actionName, message, action }) {
   return (
@@ -12,9 +13,9 @@ function Modal({ postId, actionName, message, action }) {
         aria-hidden="true"
       >
         <div className="modal-dialog" role="document">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title font" id={postId}>
+          <div className="modal-card-style">
+            <div className="header-Modal">
+              <h5 className="font text-modal-header-style" id={postId}>
                 {actionName}
               </h5>
               <button
@@ -26,18 +27,22 @@ function Modal({ postId, actionName, message, action }) {
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div className="modal-body">{message}</div>
+            <div className="modal-body">
+              <div className="font text-center">
+                <h5>{message}</h5>
+              </div>
+            </div>
             <div className="modal-footer">
               <button
                 type="button"
-                className="btn btn-secondary"
+                className="btn-modal-95"
                 data-dismiss="modal"
               >
                 cancelar
               </button>
               <button
                 type="button"
-                className="btn btn-primary"
+                className="btn-modal-95"
                 data-dismiss="modal"
                 onClick={action}
               >
