@@ -15,7 +15,7 @@ function CommentField({
   const inputType = (
     <div className={`row`}>
       <TextareaAutosize
-        id={commentId.toString()}
+        id={commentId + '321'}
         {...input}
         className={`initial-form-text-area mx-auto ${inputStyle}`}
         readOnly={commentMode}

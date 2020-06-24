@@ -6,7 +6,7 @@ function Modal({ postId, actionName, message, action }) {
       <div
         className="modal fade"
         id={postId}
-        tabindex="-1"
+        tabIndex="-1"
         role="dialog"
         aria-labelledby={postId}
         aria-hidden="true"

@@ -11,7 +11,7 @@ function CommentField({
 }) {
   const inputType = (
     <TextareaAutosize
-      id={postId}
+      id={postId + '123'}
       {...input}
       className="initial-form-text-area margin-comment-form-field mb-2"
       readOnly={commentMode}

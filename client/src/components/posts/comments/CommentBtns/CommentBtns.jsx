@@ -75,7 +75,7 @@ function CommentBtns({
         action={action}
       />
       <label
-        htmlFor={commentId}
+        htmlFor={commentId + '321'}
         className={`btn-commentbtns-style mr-2 commentbtns-label ${commentbtnClass}`}
         onClick={(e) => {
           setCommentbtnMode(true);

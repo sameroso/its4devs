@@ -16,9 +16,6 @@ function CommentForm({
   setShowComments,
 }) {
   const commentSubmit = (formValues) => {
-    console.log(formValues);
-    console.log(postId);
-    console.log(user);
     createComment({
       ...formValues,
       postId,
@@ -29,7 +26,7 @@ function CommentForm({
   };
 
   return (
-    <div>
+    <>
       <form onSubmit={handleSubmit(commentSubmit)}>
         <div className="row">
           <Field
@@ -44,7 +41,7 @@ function CommentForm({
           </button>
         </div>
       </form>
-    </div>
+    </>
   );
 }
 function validate(values) {

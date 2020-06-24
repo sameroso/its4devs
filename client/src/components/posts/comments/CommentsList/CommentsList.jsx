@@ -38,7 +38,7 @@ function CommentsList({ post, onSetPostForm, setShowComments, showComments }) {
   };
   const comment = (
     <label
-      htmlFor={post._id}
+      htmlFor={post._id + '123'}
       onClick={() => {
         focus();
       }}
