@@ -1,8 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './DropDown.scss';
 import configIcon from '../../assets/artage-io-48142_1592294716.png';
 
-function DropDown({ profilePic, profileName }) {
+function DropDown({ profileName, userId }) {
   return (
     <div className="dropdown show">
       <a
@@ -26,9 +27,9 @@ function DropDown({ profilePic, profileName }) {
         <a className="dropdown-item font" href="#">
           sobre nos
         </a>
-        <a className="dropdown-item font" href="#">
+        <Link className="dropdown-item font" to={`/profile/${userId}`}>
           editar perfil
-        </a>
+        </Link>
         <a className="dropdown-item font" href="#">
           deletar conta
         </a>

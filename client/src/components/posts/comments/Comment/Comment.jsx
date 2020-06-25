@@ -8,6 +8,7 @@ import { deleteComment } from '../../../../actions';
 import CommentBtns from '../CommentBtns/CommentBtns';
 import UserCommentHeader from '../UserCommentHeader/UserCommentHeader';
 import dateHelper from '../../../../helpers/dateHelper';
+import { toast } from 'react-toastify';
 import './Comment.scss';
 
 function Comment({
@@ -20,6 +21,11 @@ function Comment({
   postId,
 }) {
   const refCommentCard = useRef(null);
+  const [deleting, setDeleting] = useState(false);
+  const [editing, setEditing] = useState(false);
+  const [commentbtnMode, setCommentbtnMode] = useState(false);
+  const [commentMode, setCommentMode] = useState(true);
+
   /**
    * Alert if clicked on outside of element
    */
@@ -40,18 +46,66 @@ function Comment({
     };
   }
 
-  const [commentbtnMode, setCommentbtnMode] = useState(false);
-  const [commentMode, setCommentMode] = useState(true);
-
-  const onDeleteComment = () => {
-    deleteComment({ postId, commentId: comment._id });
+  const onDeleteComment = async () => {
+    try {
+      setDeleting(true);
+      await deleteComment({ postId, commentId: comment._id });
+      toast.success('comentário deletado!', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } catch {
+      toast.error('Erro! Tente mais tarde', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      setDeleting(false);
+    }
   };
-  const updateComment = (formValues) => {
-    editComment({ ...formValues, commentId: comment._id, postId });
+  const updateComment = async (formValues) => {
+    try {
+      setEditing(true);
+      await editComment({ ...formValues, commentId: comment._id, postId });
+      setCommentbtnMode(false);
+      setCommentMode(true);
+      setEditing(false);
+      toast.success('comentário editado!', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } catch {
+      toast.error('Erro! Tente mais tarde', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      setEditing(false);
+    }
   };
   const showbtns =
     myUserId === comment.userId ? (
       <CommentBtns
+        deleting={deleting}
+        editing={editing}
         commentbtnMode={commentbtnMode}
         setCommentbtnMode={setCommentbtnMode}
         commentId={comment._id}

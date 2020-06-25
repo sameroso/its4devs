@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Modal from '../../Modal/Modal';
+import Loader from 'react-loader-spinner';
 import './CardButtons.scss';
 
 import trashBtn from '../../../assets/trash95.png';
@@ -17,7 +18,27 @@ function CardButtons({
   postId,
   setBtnMode,
   btnMode,
+  deleting,
+  editing,
 }) {
+  const btnChangeEdit = editing ? (
+    <Loader type="ThreeDots" color="#000000" height={12} width={40} />
+  ) : (
+    <img
+      src={saveBtn}
+      alt="botão de salvar postagem"
+      className="img-commentbtns-top-size"
+    />
+  );
+  const isDeleting = deleting ? (
+    <Loader type="ThreeDots" color="#000000" height={12} width={40} />
+  ) : (
+    <img
+      src={trashBtn}
+      alt="botão de excluir postagem"
+      className="img-commentbtns-top-size"
+    />
+  );
   const modalAction = btnMode ? 'editar' : 'deletar';
   const action = btnMode ? onEdit : onDelete;
 
@@ -25,16 +46,12 @@ function CardButtons({
     <>
       <button
         className="my-1 mr-2 btn-style"
-        /*  onClick={onDelete} */
         type="button"
         data-toggle="modal"
         data-target={`#${postId}`}
+        disabled={deleting}
       >
-        <img
-          src={trashBtn}
-          alt="botão de excluir postagem"
-          className="img-commentbtns-top-size"
-        />
+        {isDeleting}
       </button>
     </>
   );
@@ -55,17 +72,13 @@ function CardButtons({
         />
       </button>
       <button
+        disabled={editing}
         className="btn-style mr-2 "
         type="button"
         data-toggle="modal"
         data-target={`#${postId}`}
-        /* onClick={onEdit} */
       >
-        <img
-          src={saveBtn}
-          alt="botão de salvar postagem"
-          className="img-commentbtns-top-size"
-        />
+        {btnChangeEdit}
       </button>
     </>
   );

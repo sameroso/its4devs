@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Loader from 'react-loader-spinner';
 
 import Modal from '../../../Modal/Modal';
 import trashBtn from '../../../../assets/trash95.png';
@@ -15,10 +16,30 @@ function CommentBtns({
   onDeleteComment,
   commentbtnMode,
   setCommentbtnMode,
+  deleting,
+  editing,
 }) {
   const modalAction = commentbtnMode ? 'editar' : 'deletar';
   const action = commentbtnMode ? onUpdateComment : onDeleteComment;
   const commentbtnClass = commentbtnMode ? 'display-btn' : '';
+  const btnChangeEdit = editing ? (
+    <Loader type="ThreeDots" color="#000000" height={12} width={40} />
+  ) : (
+    <img
+      src={saveBtn}
+      alt="botão de salvar postagem"
+      className="img-commentbtns-top-size"
+    />
+  );
+  const isDeleting = deleting ? (
+    <Loader type="ThreeDots" color="#000000" height={12} width={40} />
+  ) : (
+    <img
+      src={trashBtn}
+      alt="botão de excluir comentario"
+      className="img-commentbtns-top-size"
+    />
+  );
   const commentBtn = commentbtnMode ? (
     <>
       <button
@@ -42,12 +63,9 @@ function CommentBtns({
         data-target={`#${commentId}`}
         alt="botão de salvar comentário"
         className="btn-commentbtns-style mr-2 my-1"
+        disabled={editing}
       >
-        <img
-          src={saveBtn}
-          alt="botão de salvar postagem"
-          className="img-commentbtns-top-size"
-        />
+        {btnChangeEdit}
       </button>
     </>
   ) : (
@@ -57,12 +75,9 @@ function CommentBtns({
         type="button"
         data-toggle="modal"
         data-target={`#${commentId}`}
+        disabled={deleting}
       >
-        <img
-          src={trashBtn}
-          alt="botão de excluir comentario"
-          className="img-commentbtns-top-size"
-        />
+        {isDeleting}
       </button>
     </>
   );

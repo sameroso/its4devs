@@ -44,7 +44,9 @@ function MainPage({
   return (
     <div>
       <div className="fixed-top">
-        <Header data={{ ...userData, profilePic: user.profilePic }} />
+        <Header
+          data={{ ...userData, profilePic: user.profilePic, userId: user._id }}
+        />
       </div>
       <div className="margin-from-header container">
         <PostForm postData={postData} />

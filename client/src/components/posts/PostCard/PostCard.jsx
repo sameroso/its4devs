@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
+import { toast } from 'react-toastify';
 
 import { deletePost } from '../../../actions';
 import { editPost } from '../../../actions';
@@ -22,6 +23,9 @@ function PostCard({
   handleSubmit,
   editPost,
 }) {
+  const [deleting, setDeleting] = useState(false);
+  const [editing, setEditing] = useState(false);
+
   const [postCardFieldMode, setPostCardFieldMode] = useState(true);
   const [showComments, setShowComments] = useState(false);
   const [btnMode, setBtnMode] = useState(false);
@@ -41,12 +45,62 @@ function PostCard({
     };
   }
 
-  const deleteCurrentPost = () => {
-    deletePost({ postId: post._id });
+  const deleteCurrentPost = async () => {
+    try {
+      setDeleting(true);
+      await deletePost({ postId: post._id });
+      toast.success('Post deletado!', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      setDeleting(false);
+    } catch {
+      toast.error('Erro! Tente mais tarde', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      setDeleting(false);
+    }
   };
 
-  const editCurrentPost = (formValues) => {
-    editPost({ ...formValues, postId: post._id });
+  const editCurrentPost = async (formValues) => {
+    try {
+      setEditing(true);
+      await editPost({ ...formValues, postId: post._id });
+      setBtnMode(false);
+      setPostCardFieldMode(true);
+      setEditing(false);
+      toast.success('Post editado!', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } catch {
+      toast.error('Erro! Tente mais tarde', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      setEditing(false);
+    }
   };
 
   const [showCommentForm, setShowCommentForm] = useState(false);
@@ -65,6 +119,8 @@ function PostCard({
         </div>
         <div>
           <CardButtons
+            editing={editing}
+            deleting={deleting}
             onDelete={deleteCurrentPost}
             onEdit={handleSubmit(editCurrentPost)}
             onBtnChange={setPostCardFieldMode}
