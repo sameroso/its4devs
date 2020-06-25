@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import LoginPage from '../LoginPage/LoginPage';
 import MainPage from '../MainPage/MainPage';
 import LoadingPage from '../LoadingPage/LoadingPage';
+import './LandingPage.scss';
 
 function LandinPage({ user }) {
   if (user === false) {
@@ -14,7 +15,10 @@ function LandinPage({ user }) {
     );
   } else if (user === null) {
     return (
-      <div data-test="loading-page">
+      <div
+        data-test="loading-page"
+        className="LandingPage-LoadingPage-position"
+      >
         <LoadingPage />
       </div>
     );
