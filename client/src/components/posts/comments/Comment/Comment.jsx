@@ -88,6 +88,7 @@ function Comment({
         draggable: true,
         progress: undefined,
       });
+      reset();
     } catch {
       toast.error('Erro! Tente mais tarde', {
         position: 'top-right',

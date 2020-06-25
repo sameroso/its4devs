@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
 import Loader from 'react-loader-spinner';
+import { toast } from 'react-toastify';
 
 import { fetchUserProfile, updateUser } from '../../actions';
 import ProfileField from '../ProfileField/ProfileField';
@@ -15,13 +16,45 @@ function Profile({
   updateUser,
   handleSubmit,
   myUser,
+  reset,
 }) {
+  const [saving, setSaving] = useState(false);
+  const isSaving = saving ? (
+    <Loader type="ThreeDots" color="#000000" height={12} width={40} />
+  ) : (
+    'salvar'
+  );
   useEffect(() => {
     fetchUserProfile(params);
   }, []);
 
-  const onSubmit = (formValues) => {
-    updateUser(formValues);
+  const onSubmit = async (formValues) => {
+    try {
+      setSaving(true);
+      await updateUser(formValues);
+      setSaving(false);
+      toast.success('perfil atualizado!', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      reset();
+    } catch {
+      setSaving(false);
+      toast.error('Erro! Tente mais tarde', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
   };
 
   if (userProfile.length === 0 || myUser === null) {
@@ -43,7 +76,7 @@ function Profile({
             </button>
           </Link>
           <button type="submit" className="initial-form-btn-save font">
-            salvar
+            {isSaving}
           </button>
         </>
       ) : (
