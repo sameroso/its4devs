@@ -13,7 +13,7 @@ function CommentField({
     <TextareaAutosize
       id={postId + '123'}
       {...input}
-      className="initial-form-text-area margin-comment-form-field mb-2"
+      className="_CommentFormTextsArea initial-form-text-area margin-comment-form-field mb-2"
       readOnly={commentMode}
     />
   );

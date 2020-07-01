@@ -43,7 +43,7 @@ function CommentBtns({
   const commentBtn = commentbtnMode ? (
     <>
       <button
-        className="btn-commentbtns-style mr-2 my-1"
+        className="btn-commentbtns-style mr-2 my-1 _CommentBtns_cancelBtn"
         onClick={(e) => {
           e.preventDefault();
           setCommentbtnMode(false);
@@ -62,7 +62,7 @@ function CommentBtns({
         data-toggle="modal"
         data-target={`#${commentId}`}
         alt="botão de salvar comentário"
-        className="btn-commentbtns-style mr-2 my-1"
+        className="btn-commentbtns-style mr-2 my-1 _CommentBtns_saveBtn"
         disabled={editing}
       >
         {btnChangeEdit}
@@ -91,7 +91,7 @@ function CommentBtns({
       />
       <label
         htmlFor={commentId + '321'}
-        className={`btn-commentbtns-style mr-2 commentbtns-label ${commentbtnClass}`}
+        className={`btn-commentbtns-style mr-2 commentbtns-label _CommentLabel${commentbtnClass}`}
         onClick={(e) => {
           setCommentbtnMode(true);
           commentMode(false);

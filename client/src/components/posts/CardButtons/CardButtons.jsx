@@ -36,7 +36,7 @@ function CardButtons({
     <img
       src={trashBtn}
       alt="botão de excluir postagem"
-      className="img-commentbtns-top-size"
+      className="img-commentbtns-top-size trash-btn"
     />
   );
   const modalAction = btnMode ? 'editar' : 'deletar';
@@ -58,7 +58,7 @@ function CardButtons({
   const editMode = (
     <>
       <button
-        className="btn-style mr-2 my-1"
+        className="btn-style mr-2 my-1 cardbtns-cancelbtn"
         onClick={() => {
           setBtnMode(false);
           onBtnChange(true);
@@ -73,7 +73,7 @@ function CardButtons({
       </button>
       <button
         disabled={editing}
-        className="btn-style mr-2 "
+        className="btn-style mr-2 cardbtns-savebtn"
         type="button"
         data-toggle="modal"
         data-target={`#${postId}`}

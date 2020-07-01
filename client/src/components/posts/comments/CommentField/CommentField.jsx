@@ -17,7 +17,7 @@ function CommentField({
       <TextareaAutosize
         id={commentId + '321'}
         {...input}
-        className={`initial-form-text-area mx-auto ${inputStyle}`}
+        className={`initial-form-text-area mx-auto  _CommentField_textarea ${inputStyle}`}
         readOnly={commentMode}
       />
     </div>

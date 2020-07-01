@@ -42,7 +42,6 @@ function Profile({
         draggable: true,
         progress: undefined,
       });
-      reset();
     } catch {
       setSaving(false);
       toast.error('Erro! Tente mais tarde', {
@@ -75,7 +74,11 @@ function Profile({
               voltar
             </button>
           </Link>
-          <button type="submit" className="initial-form-btn-save font">
+          <button
+            disabled={saving}
+            type="submit"
+            className="initial-form-btn-save font"
+          >
             {isSaving}
           </button>
         </>
@@ -93,7 +96,7 @@ function Profile({
             Boas Vindas
           </div>
           <div className="card card-secondary">
-            <form onSubmit={handleSubmit(onSubmit)} data-test="initial-form">
+            <form onSubmit={handleSubmit(onSubmit)} data-test="profile-form">
               <div className="row">
                 <div className="col-12 col-sm-3 d-flex mx-auto my-auto">
                   <img
@@ -173,7 +176,6 @@ function validate(values) {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state);
   return {
     userProfile: state.userProfile,
     myUser: state.user,

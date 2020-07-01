@@ -27,7 +27,7 @@ function CommentForm({
 
   return (
     <>
-      <form onSubmit={handleSubmit(commentSubmit)}>
+      <form onSubmit={handleSubmit(commentSubmit)} className="_CommentForm">
         <div className="row">
           <Field
             postId={postId}
@@ -53,7 +53,6 @@ function validate(values) {
   return errors;
 }
 const mapStateToProps = (state) => {
-  console.log(state);
   return { user: state.user, postsData: state.postsData };
 };
 

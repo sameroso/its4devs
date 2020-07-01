@@ -73,7 +73,7 @@ function CommentsList({ post, onSetPostForm, setShowComments, showComments }) {
           onSetPostForm(true);
         }}
       >
-        <span className="font">mostrar comentarios</span>
+        <span className="font _ShowComments_btn">mostrar comentarios</span>
       </button>
       {comment}
     </div>

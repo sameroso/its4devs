@@ -105,6 +105,7 @@ function Comment({
   const showbtns =
     myUserId === comment.userId ? (
       <CommentBtns
+        className="_CommentBtns"
         deleting={deleting}
         editing={editing}
         commentbtnMode={commentbtnMode}
@@ -122,7 +123,7 @@ function Comment({
   return (
     <div
       onClick={(e) => handleClickOutside(e)}
-      className="mt-2 comment-commentcard-width align-center"
+      className="mt-2 comment-commentcard-width align-center _Comment"
       ref={refCommentCard}
     >
       <div className="bg-commment-top d-flex justify-content-between">
