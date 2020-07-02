@@ -1,11 +1,11 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import moxios from 'moxios';
-import Postcard from './PostCard';
+import Postcard from '../posts/PostCard/PostCard';
 import { Provider } from 'react-redux';
 import { act } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import { storeFactory } from '../../../../tests/testUtils';
+import { storeFactory } from '../../../tests/testUtils';
 
 const props = {
   form: '5ef12ca91d67c9002466be55',

@@ -1,7 +1,6 @@
-import { storeFactory } from '../../tests/testUtils';
+/* import { storeFactory } from '../../tests/testUtils';
 import { fetchMyUser } from '../actions';
 import moxios from 'moxios';
-import { request } from 'express';
 
 describe('fetchMyUser action dispatcher', () => {
   const user = {
@@ -43,4 +42,4 @@ describe('fetchMyUser action dispatcher', () => {
       expect(newState).toEqual(expectedState);
     });
   });
-});
+}); */

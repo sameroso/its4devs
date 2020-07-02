@@ -22,7 +22,7 @@ function InitialForm({ profilePic, handleSubmit, updateUser }) {
             <div className="col-12 col-sm-3 d-flex mx-auto my-auto">
               <img
                 src={profilePic}
-                className="form-pic mr-4 mb-3 mx-auto mt-1"
+                className="form-pic mr-4 mb-3 mx-auto mt-1 _PofilePIcInitialFormField"
                 alt=""
               />
             </div>

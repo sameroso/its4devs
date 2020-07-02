@@ -2,7 +2,7 @@ import React from 'react';
 import Loader from 'react-loader-spinner';
 import './LoadingPage.scss';
 
-function LoadingPage(props) {
+function LoadingPage() {
   return (
     <div className="container">
       <div className="row">

@@ -10,13 +10,7 @@ import { emptyUserPostProfile } from '../../actions/index';
 import { clearPostState } from '../../actions/index';
 import './MainPage.scss';
 
-function MainPage({
-  user,
-  fetchPosts,
-  postsData,
-  emptyUserPostProfile,
-  clearPostState,
-}) {
+function MainPage({ user, fetchPosts, emptyUserPostProfile, clearPostState }) {
   useEffect(() => {
     emptyUserPostProfile();
     fetchPosts();
@@ -34,15 +28,18 @@ function MainPage({
   const postData = {
     profileName: user.profileName,
     profilePic: user.profilePic,
-    sequenceId: postsData.sequenceId,
   };
   if (!user.initialFormFilled) {
     return (
-      <InitialForm profilePic={user.profilePic} initialValues={userData} />
+      <InitialForm
+        profilePic={user.profilePic}
+        initialValues={userData}
+        className="_MainPage_InitialForm"
+      />
     );
   }
   return (
-    <div>
+    <div className="_MainPage_Header_And_Posts">
       <div className="fixed-top">
         <Header
           data={{ ...userData, profilePic: user.profilePic, userId: user._id }}
@@ -57,7 +54,7 @@ function MainPage({
 }
 
 const mapStateToProps = (state) => {
-  return { user: state.user, postsData: state.postsData };
+  return { user: state.user };
 };
 
 export default connect(mapStateToProps, {
