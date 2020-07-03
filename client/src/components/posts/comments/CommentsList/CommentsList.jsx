@@ -5,7 +5,6 @@ import './CommentsList.scss';
 
 function CommentsList({ post, onSetPostForm, setShowComments, showComments }) {
   const [commentQnt, setCommentQnt] = useState(post.comments.length - 3);
-
   const isBtnshowing =
     commentQnt <= 0 ? null : (
       <div className="row">
@@ -23,6 +22,7 @@ function CommentsList({ post, onSetPostForm, setShowComments, showComments }) {
     }
     return (
       <Comment
+        className="_Comment_Component"
         postId={post._id}
         comment={comment}
         key={comment._id}

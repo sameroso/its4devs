@@ -1,5 +1,4 @@
-import React, { useRef, useEffect } from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react';
 import CommentFormField from '../CommentFormField/CommentFormField';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';

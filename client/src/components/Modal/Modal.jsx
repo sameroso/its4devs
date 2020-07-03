@@ -42,7 +42,7 @@ function Modal({ postId, actionName, message, action }) {
               </button>
               <button
                 type="button"
-                className="btn-modal-95"
+                className="btn-modal-95 _Modal_Btn_Action"
                 data-dismiss="modal"
                 onClick={action}
               >

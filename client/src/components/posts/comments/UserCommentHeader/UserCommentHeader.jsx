@@ -5,14 +5,20 @@ import Loader from 'react-loader-spinner';
 
 import { fetchUserPostProfile } from '../../../../actions';
 
-function UserPostHeader({ comment, fetchUserPostProfile, postHeader }) {
+function UserCommentHeader({ comment, fetchUserPostProfile, postHeader }) {
   useEffect(() => {
     fetchUserPostProfile({ id: comment.userId });
   }, []);
   if (postHeader.length === 0) {
     return (
       <>
-        <Loader type="ThreeDots" color="#9e9493" height={12} width={60} />
+        <Loader
+          type="ThreeDots"
+          color="#9e9493"
+          height={12}
+          width={60}
+          className="_UserCommentHeader_Loader"
+        />
       </>
     );
   }
@@ -21,7 +27,7 @@ function UserPostHeader({ comment, fetchUserPostProfile, postHeader }) {
       <Link to={`profile/${comment.userId}`}>
         <img
           src={postHeader[0].profilePic}
-          className="img-card-size my-auto ml-1 py-1 px-1"
+          className="img-card-size my-auto ml-1 py-1 px-1 _UserCommentHeader_Img"
         ></img>
         <span className="text-white ml-2 my-auto mx-auto">
           {postHeader[0].profileName}
@@ -37,6 +43,7 @@ const mapStateToProps = (state, ownProps) => {
     ),
   };
 };
+
 export default connect(mapStateToProps, { fetchUserPostProfile })(
-  UserPostHeader
+  UserCommentHeader
 );
