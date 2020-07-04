@@ -46,7 +46,7 @@ function PostCardList({
             return null;
           }
           return (
-            <div key={post._id} className="my-2">
+            <div key={post._id} className="my-2 _UserPostCardList_PostCard">
               <PostCard
                 post={post}
                 form={post._id}
@@ -65,7 +65,7 @@ function PostCardList({
       );
     } else {
       return (
-        <div className="row">
+        <div className="row _UserPostCardList_Loader">
           <div className="mx-auto">
             <Loader type="ThreeDots" color="#454040" height={80} width={80} />
           </div>
