@@ -40,7 +40,9 @@ function PostLikes({
   });
 
   const [showLikeList1, setShowLikeList1] = useState(false);
-  const likeList1 = showLikeList1 ? <LikeList likes={react1type} /> : null;
+  const likeList1 = showLikeList1 ? (
+    <LikeList likes={react1type} className="_LikeList1" />
+  ) : null;
   const [showLikeList2, setShowLikeList2] = useState(false);
   const likeList2 = showLikeList2 ? <LikeList likes={react2type} /> : null;
   const [showLikeList3, setShowLikeList3] = useState(false);
@@ -94,12 +96,12 @@ function PostLikes({
             src={zuck}
             className="like-img-size mx-1"
           />
-          {react1type.length}
+          <span className="_PostLikes_React_1_Value">{react1type.length}</span>
           {likeList1}
         </div>
         <div
           onClick={() => setShowLikeList1(true)}
-          className="text-center PostLIkes-arrow"
+          className="text-center PostLIkes-arrow _PostLikes_Arrow"
         >
           &darr;
         </div>

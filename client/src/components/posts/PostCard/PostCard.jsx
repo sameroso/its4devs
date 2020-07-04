@@ -112,10 +112,14 @@ function PostCard({
     />
   ) : null;
   return (
-    <div onClick={(e) => handleClickOutside(e)} ref={postCardRef}>
+    <div
+      onClick={(e) => handleClickOutside(e)}
+      ref={postCardRef}
+      className="_PostCard"
+    >
       <div className="d-flex top-post-card mt-4 justify-content-between">
         <div>
-          <UserPostHeader post={post} />
+          <UserPostHeader post={post} className="_UserPostHeader" />
         </div>
         <div>
           <CardButtons
@@ -146,7 +150,12 @@ function PostCard({
         </div>
         <div className="row justify-content-around mt-1 mx-auto">
           <div className="mx-auto">
-            <PostLikes myUserId={myUserId} postId={post._id} post={post} />
+            <PostLikes
+              myUserId={myUserId}
+              postId={post._id}
+              post={post}
+              className="_PostLikes"
+            />
           </div>
           <small className="my-auto mr-3">{dateHelper(post.dateCreated)}</small>
         </div>

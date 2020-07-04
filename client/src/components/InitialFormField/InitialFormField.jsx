@@ -7,13 +7,16 @@ function InitialFormField({ input, label, type, meta: { touched, error } }) {
     type === 'input' ? (
       <input type={type} {...input} className="initial-form-input" />
     ) : (
-      <TextareaAutosize {...input} className="initial-form-text-area mx-auto" />
+      <TextareaAutosize
+        {...input}
+        className="initial-form-text-area mx-auto _InitialFormFiel_textarea"
+      />
     );
 
   const renderError = () => {
     if (touched && error) {
       return (
-        <div className="row">
+        <div className="row _Initial_Form_Field_Render_Error">
           <small className="form-text mx-auto" style={{ color: 'black' }}>
             {error}
           </small>

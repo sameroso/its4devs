@@ -12,21 +12,19 @@ function LikeName({ userId, fetchUser, user, users }) {
   }, []);
   if (users.length === 0 || !user) {
     return (
-      <div>
+      <div className="_LikeName_Loader">
         <Loader type="ThreeDots" color="#9e9493" height={12} width={60} />
       </div>
     );
   } else {
     return (
       <Link to={`/profile/${userId}`}>
-        <div className="LikeName-style">{user.profileName}</div>
+        <div className="LikeName-style _LikeName_User">{user.profileName}</div>
       </Link>
     );
   }
 }
 const mapStateToProps = (state, ownProps) => {
-  console.log(state);
-  console.log(ownProps);
   return {
     users: state.users,
     user: state.users.find((user) => user._id === ownProps.userId),

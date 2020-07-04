@@ -10,7 +10,7 @@ import { storeFactory } from '../../../tests/testUtils';
 const props = {
   form: '5ef12ca91d67c9002466be55',
   post: {
-    likes: [],
+    likes: [{ userId: '5ef12ca91d67c9002466be54', likeType: 'lula' }],
     body: '3',
     comments: [],
     postedBy: {
@@ -86,7 +86,9 @@ const postResponseWithComments = {
   _id: '5ef12ca91d67c9002466be55',
 };
 let wrapper;
+
 const store = storeFactory(initialState);
+
 beforeEach(() => {
   moxios.install();
 
@@ -202,6 +204,9 @@ describe('user is the same of post and props with comments', () => {
       );
     });
   });
+  afterEach(() => {
+    wrapper.unmount();
+  });
   it('shows comments after clicking on show comments btn', () => {
     expect(wrapper.find('._Comment').length).toBe(0);
     wrapper.find('._ShowComments_btn').simulate('click');
@@ -243,5 +248,74 @@ describe('user is the same of post and props with comments', () => {
     wrapper.find('._CommentForm').simulate('submit');
 
     expect(wrapper.find('._Comment').length).toBe(1);
+  });
+});
+
+describe('post with likes', () => {
+  beforeEach(async () => {
+    moxios.install();
+    await act(async () => {
+      wrapper = mount(
+        <Provider store={store}>
+          <BrowserRouter>
+            <Postcard {...props} />
+          </BrowserRouter>
+        </Provider>
+      );
+    });
+    moxios.stubRequest('/api/fetchuser', {
+      status: 200,
+      response: responseSameUserPost,
+    });
+  });
+  it('number of likes updates correctly', (done) => {
+    moxios.wait(() => {
+      wrapper.update();
+      expect(wrapper.find('._PostLikes_React_1_Value').text()).toEqual('1');
+      done();
+    });
+  });
+  it('clicking on arrow down like list shows', (done) => {
+    moxios.wait(() => {
+      wrapper.update();
+      expect(wrapper.find('._LikeList1').length).toEqual(0);
+
+      wrapper.find('._PostLikes_Arrow').simulate('click');
+
+      expect(wrapper.find('._LikeList1').length).toEqual(1);
+
+      done();
+    });
+  });
+
+  it('name loads correctly on the list', (done) => {
+    moxios.wait(() => {
+      wrapper.update();
+      wrapper.find('._PostLikes_Arrow').simulate('click');
+      moxios.wait(() => {
+        wrapper.update();
+        expect(wrapper.find('._LikeName_User').length).toEqual(1);
+        done();
+      });
+    });
+  });
+
+  it.skip('name clicking outside closes likes list', (done) => {
+    console.log(wrapper.debug());
+    moxios.wait(() => {
+      wrapper.update();
+      wrapper.find('._PostLikes_Arrow').simulate('click');
+      moxios.wait(() => {
+        wrapper.update();
+        expect(wrapper.find('._LikeName_User').length).toEqual(1);
+        console.log(wrapper.html());
+        wrapper.find('._PostCard').at(0).simulate('click');
+        wrapper.update();
+        wrapper.setProps({});
+        console.log(wrapper.html());
+        expect(wrapper.find('._LikeName_User').length).toEqual(0);
+        done();
+      });
+    });
   });
 });
