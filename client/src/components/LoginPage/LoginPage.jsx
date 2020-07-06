@@ -15,7 +15,7 @@ const LoginPage = () => {
           </div>
           <div className="LoginPage-Card mx-auto">
             <div className="LoginPage-bg-card-header mt-5">
-              <span className="LoginPage-font-card-header">
+              <span className="LoginPage-font-card-header ml-3">
                 como deseja fazer login?
               </span>
             </div>
