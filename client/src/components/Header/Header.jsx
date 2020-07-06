@@ -13,7 +13,7 @@ const Header = ({ currentUser }) => {
         <div className="row ml-1 py-1">
           <DropDown
             profileName={currentUser.profileName}
-            userId={currentUser.userId}
+            userId={currentUser._id}
           />
         </div>
       </div>
