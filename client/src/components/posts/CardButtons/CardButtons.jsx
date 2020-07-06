@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Modal from '../../Modal/Modal';
 import Loader from 'react-loader-spinner';
 import './CardButtons.scss';
@@ -12,16 +12,15 @@ function CardButtons({
   reset,
   onDelete,
   onEdit,
-  onBtnChange,
+  setIsOnDeleteMode,
+  isOnDeleteMode,
   postedBy,
   userId,
   postId,
-  setBtnMode,
-  btnMode,
-  deleting,
+  isDeleting,
   editing,
 }) {
-  const btnChangeEdit = editing ? (
+  const renderSaveImgOrLoader = editing ? (
     <Loader type="ThreeDots" color="#000000" height={12} width={40} />
   ) : (
     <img
@@ -30,7 +29,8 @@ function CardButtons({
       className="img-commentbtns-top-size"
     />
   );
-  const isDeleting = deleting ? (
+
+  const renderLoaderOrTrashImg = isDeleting ? (
     <Loader type="ThreeDots" color="#000000" height={12} width={40} />
   ) : (
     <img
@@ -39,8 +39,9 @@ function CardButtons({
       className="img-commentbtns-top-size trash-btn"
     />
   );
-  const modalAction = btnMode ? 'editar' : 'deletar';
-  const action = btnMode ? onEdit : onDelete;
+
+  const modalAction = isOnDeleteMode ? 'deletar' : 'editar';
+  const action = isOnDeleteMode ? onDelete : onEdit;
 
   const deleteMode = (
     <>
@@ -49,9 +50,9 @@ function CardButtons({
         type="button"
         data-toggle="modal"
         data-target={`#${postId}`}
-        disabled={deleting}
+        disabled={isDeleting}
       >
-        {isDeleting}
+        {renderLoaderOrTrashImg}
       </button>
     </>
   );
@@ -60,8 +61,7 @@ function CardButtons({
       <button
         className="btn-style mr-2 my-1 cardbtns-cancelbtn"
         onClick={() => {
-          setBtnMode(false);
-          onBtnChange(true);
+          setIsOnDeleteMode(true);
           reset();
         }}
       >
@@ -78,15 +78,15 @@ function CardButtons({
         data-toggle="modal"
         data-target={`#${postId}`}
       >
-        {btnChangeEdit}
+        {renderSaveImgOrLoader}
       </button>
     </>
   );
 
-  const isEditing = btnMode ? editMode : deleteMode;
+  const isEditing = isOnDeleteMode ? deleteMode : editMode;
   const renderBtns = userId === postedBy ? isEditing : null;
-  const showbtnstyle = () => {
-    if (btnMode || userId !== postedBy) {
+  const labelDisplay = () => {
+    if (!isOnDeleteMode || userId !== postedBy) {
       return 'CardButtons-display-btn';
     } else {
       return '';
@@ -103,10 +103,9 @@ function CardButtons({
       />
       <label
         htmlFor={postId + userId}
-        className={`commentbtns-label btn-style mr-2 ${showbtnstyle()}`}
+        className={`commentbtns-label btn-style mr-2 ${labelDisplay()}`}
         onClick={() => {
-          setBtnMode(true);
-          onBtnChange(false);
+          setIsOnDeleteMode(false);
         }}
       >
         <img

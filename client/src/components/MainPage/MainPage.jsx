@@ -18,14 +18,7 @@ function MainPage({ user, fetchPosts, emptyUserPostProfile, clearPostState }) {
       clearPostState();
     };
   }, []);
-  const userData = {
-    profileName: user.profileName,
-    facebookLink: user.facebookLink,
-    gitHub: user.gitHub,
-    description: user.description,
-    whatsApp: user.whatsApp,
-  };
-  const postData = {
+  const userInfoForPost = {
     profileName: user.profileName,
     profilePic: user.profilePic,
   };
@@ -33,7 +26,13 @@ function MainPage({ user, fetchPosts, emptyUserPostProfile, clearPostState }) {
     return (
       <InitialForm
         profilePic={user.profilePic}
-        initialValues={userData}
+        initialValues={{
+          profileName: user.profileName,
+          facebookLink: user.facebookLink,
+          gitHub: user.gitHub,
+          description: user.description,
+          whatsApp: user.whatsApp,
+        }}
         className="_MainPage_InitialForm"
       />
     );
@@ -41,12 +40,10 @@ function MainPage({ user, fetchPosts, emptyUserPostProfile, clearPostState }) {
   return (
     <div className="_MainPage_Header_And_Posts">
       <div className="fixed-top">
-        <Header
-          data={{ ...userData, profilePic: user.profilePic, userId: user._id }}
-        />
+        <Header currentUser={user} />
       </div>
       <div className="margin-from-header container">
-        <PostForm postData={postData} />
+        <PostForm userInfoForPost={userInfoForPost} />
         <PostCardList />
       </div>
     </div>

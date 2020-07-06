@@ -3,21 +3,29 @@ import Comment from '../Comment/Comment';
 
 import './CommentsList.scss';
 
-function CommentsList({ post, onSetPostForm, setShowComments, showComments }) {
-  const [commentQnt, setCommentQnt] = useState(post.comments.length - 3);
-  const isBtnshowing =
-    commentQnt <= 0 ? null : (
+function CommentsList({
+  post,
+  setShowCommentForm,
+  setShowComments,
+  showComments,
+}) {
+  const [commentCounter, setCommentCounter] = useState(
+    post.comments.length - 3
+  );
+
+  const renderShowMoreBtn =
+    commentCounter <= 0 ? null : (
       <div className="row">
         <button
           className="CommentList-show-more-btn"
-          onClick={() => setCommentQnt(commentQnt - 3)}
+          onClick={() => setCommentCounter(commentCounter - 3)}
         >
           mostrar mais
         </button>
       </div>
     );
   const commentsList = post.comments.map((comment, index) => {
-    if (index < commentQnt) {
+    if (index < commentCounter) {
       return null;
     }
     return (
@@ -33,20 +41,19 @@ function CommentsList({ post, onSetPostForm, setShowComments, showComments }) {
       />
     );
   });
-  const focus = () => {
-    onSetPostForm(true);
-  };
-  const comment = (
+
+  const commentBtn = (
     <label
       htmlFor={post._id + '123'}
       onClick={() => {
-        focus();
+        setShowCommentForm(true);
       }}
       className="ml-2 comment-btn-comment-list d-flex m-0"
     >
       <span className="font comment-list-span-position">comentar</span>
     </label>
   );
+
   const toggle = showComments ? (
     <>
       <div className="bg-comment-list-bottom-top py-2 d-flex justify-content-around">
@@ -54,14 +61,14 @@ function CommentsList({ post, onSetPostForm, setShowComments, showComments }) {
           className="ui-95 ml-2"
           onClick={() => {
             setShowComments(false);
-            onSetPostForm(false);
+            setShowCommentForm(false);
           }}
         >
           <span className="font">esconder comentarios</span>
         </button>
-        {comment}
+        {commentBtn}
       </div>
-      {isBtnshowing}
+      {renderShowMoreBtn}
       <div>{commentsList}</div>
     </>
   ) : (
@@ -70,12 +77,12 @@ function CommentsList({ post, onSetPostForm, setShowComments, showComments }) {
         className="ui-95 ml-2"
         onClick={() => {
           setShowComments(true);
-          onSetPostForm(true);
+          setShowCommentForm(true);
         }}
       >
         <span className="font _ShowComments_btn">mostrar comentarios</span>
       </button>
-      {comment}
+      {commentBtn}
     </div>
   );
   return <div className="mb-2 pb-2">{toggle}</div>;

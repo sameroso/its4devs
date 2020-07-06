@@ -10,7 +10,7 @@ import { clearPostState } from '../../../actions';
 import './UserPostCardList.scss';
 
 function PostCardList({
-  postsData,
+  postsDatabase,
   userProfile,
   fetchPosts,
   emptyUserPostProfile,
@@ -23,44 +23,64 @@ function PostCardList({
       clearPostState();
     };
   }, []);
-  const [indexValue, setIndexValue] = useState(4);
+  const postsToRenderFirstOnScreen = 4;
+  const [numberOfPostsOnScreen, setNumberOfPostsOnScreen] = useState(
+    postsToRenderFirstOnScreen
+  );
+
+  const renderBtnShowMore = () => {
+    const userPosts = postsDatabase.posts.filter(
+      (post) => post.postedBy.userId === userProfile._id
+    );
+
+    const isShowMoreBtnShowing =
+      numberOfPostsOnScreen >= userPosts.length ? null : (
+        <div className="row mt-3">
+          <button
+            className="PostCardList-show-more-btn"
+            onClick={() => setNumberOfPostsOnScreen(numberOfPostsOnScreen + 4)}
+          >
+            mostrar mais
+          </button>
+        </div>
+      );
+    return isShowMoreBtnShowing;
+  };
+
   const renderPostCardList = () => {
-    if (postsData.length !== 0) {
-      const postqnt =
-        indexValue >= postsData.posts.length - 1 ? null : (
-          <div className="row mt-3">
-            <button
-              className="PostCardList-show-more-btn"
-              onClick={() => setIndexValue(indexValue + 4)}
-            >
-              show more
-            </button>
+    const userPosts = postsDatabase.posts.filter(
+      (post) => post.postedBy.userId === userProfile._id
+    );
+
+    const postsList = userPosts
+      .slice(0)
+      .reverse()
+      .map((post, index) => {
+        if (index > numberOfPostsOnScreen) {
+          return null;
+        }
+        return (
+          <div key={post._id} className="my-2 _UserPostCardList_PostCard">
+            <PostCard
+              post={post}
+              form={post._id}
+              initialValues={{
+                postCardBody: post.body,
+              }}
+            />
           </div>
         );
-      const postsList = postsData.posts
-        .filter((post) => post.postedBy.userId === userProfile._id)
-        .slice(0)
-        .reverse()
-        .map((post, index) => {
-          if (index > indexValue) {
-            return null;
-          }
-          return (
-            <div key={post._id} className="my-2 _UserPostCardList_PostCard">
-              <PostCard
-                post={post}
-                form={post._id}
-                initialValues={{
-                  postCardBody: post.body,
-                }}
-              />
-            </div>
-          );
-        });
+      });
+
+    return postsList;
+  };
+
+  const renderLoaderOrPosts = () => {
+    if (postsDatabase.length !== 0) {
       return (
         <>
-          {postsList}
-          {postqnt}
+          {renderPostCardList()}
+          {renderBtnShowMore()}
         </>
       );
     } else {
@@ -73,15 +93,16 @@ function PostCardList({
       );
     }
   };
+
   return (
     <>
-      <div className="my-3">{renderPostCardList()}</div>
+      <div className="my-3">{renderLoaderOrPosts()}</div>
     </>
   );
 }
 
 const mapStateToProps = (state) => {
-  return { postsData: state.postsData };
+  return { postsDatabase: state.postsData };
 };
 
 export default connect(mapStateToProps, {

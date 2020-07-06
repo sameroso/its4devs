@@ -6,17 +6,17 @@ import './PostCardField.scss';
 function PostCardField({
   postId,
   userId,
-  postCardFieldMode,
+  isOnDeleteMode,
   input,
   meta: { touched, error },
 }) {
-  const showbgonEdit = postCardFieldMode ? 'PostcardField-bg-none' : '';
+  const showbgonEdit = isOnDeleteMode ? 'PostcardField-bg-none' : '';
   const inputType = (
     <TextareaAutosize
       id={postId + userId}
       {...input}
       className={`initial-form-text-area mx-auto ${showbgonEdit}`}
-      readOnly={postCardFieldMode}
+      readOnly={isOnDeleteMode}
     />
   );
 

@@ -1,27 +1,28 @@
 import React, { useState } from 'react';
 import { Field, reduxForm, submit } from 'redux-form';
 import { connect } from 'react-redux';
-import { toast } from 'react-toastify';
 import Loader from 'react-loader-spinner';
 
 import { sendPost } from '../../../actions';
 import InitialFormField from '../../InitialFormField/InitialFormField';
+import successMessage from '../../../functions/successMessage';
+import errorMessage from '../../../functions/errorMessage';
 
 import './PostForm.scss';
 
 function PostForm({
   handleSubmit,
-  postData: { profileName, profilePic },
+  userInfoForPost: { profileName, profilePic },
   sendPost,
   reset,
 }) {
-  const postData = {
+  const additionalPostInfo = {
     profileName,
     profilePic,
     databasePostId: '1',
   };
-  const [posting, setPosting] = useState(false);
-  const isPosting = posting ? (
+  const [isPosting, setIsPosting] = useState(false);
+  const isLoaderShowing = isPosting ? (
     <Loader type="ThreeDots" color="#000000" height={12} width={40} />
   ) : (
     'postar'
@@ -29,32 +30,17 @@ function PostForm({
 
   const submitForm = async (formValues) => {
     try {
-      setPosting(true);
-      await sendPost({ ...postData, ...formValues });
-      toast.success('Postado com sucesso', {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-      setPosting(false);
+      setIsPosting(true);
+      await sendPost({ ...additionalPostInfo, ...formValues });
+      successMessage('Postado com sucesso');
+      setIsPosting(false);
       reset();
     } catch {
-      toast.error('Erro! Tente mais tarde', {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-      setPosting(false);
+      errorMessage('Erro! Tente mais tarde');
+      setIsPosting(false);
     }
   };
+
   return (
     <div>
       <form onSubmit={handleSubmit(submitForm)}>
@@ -66,7 +52,7 @@ function PostForm({
         />
         <div className="row justify-content-end">
           <button type="submit" className="mr-5 font postform-btn">
-            <span className="postform-btn-text">{isPosting}</span>
+            <span className="postform-btn-text">{isLoaderShowing}</span>
           </button>
         </div>
       </form>

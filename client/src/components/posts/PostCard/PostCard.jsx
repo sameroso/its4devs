@@ -1,7 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
-import { toast } from 'react-toastify';
 
 import { deletePost } from '../../../actions';
 import { editPost } from '../../../actions';
@@ -12,6 +11,8 @@ import CommentForm from '../comments/CommentForm/CommentForm';
 import dateHelper from '../../../helpers/dateHelper';
 import PostLikes from '../PostLikes/PostLikes';
 import UserPostHeader from '../UserPostHeader/UserPostHeader';
+import successMessage from '../../../functions/successMessage';
+import errorMessage from '../../../functions/errorMessage';
 
 import './PostCard.scss';
 
@@ -19,22 +20,20 @@ function PostCard({
   post,
   deletePost,
   reset,
-  myUserId,
+  currentUserId,
   handleSubmit,
   editPost,
 }) {
-  const [deleting, setDeleting] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
   const [editing, setEditing] = useState(false);
 
-  const [postCardFieldMode, setPostCardFieldMode] = useState(true);
+  const [isOnDeleteMode, setIsOnDeleteMode] = useState(true);
   const [showComments, setShowComments] = useState(false);
-  const [btnMode, setBtnMode] = useState(false);
   const postCardRef = useRef(null);
 
   function handleClickOutside(event) {
     if (postCardRef.current && !postCardRef.current.contains(event.target)) {
-      setBtnMode(false);
-      setPostCardFieldMode(true);
+      setIsOnDeleteMode(true);
       reset();
     }
     // Bind the event listener
@@ -47,29 +46,13 @@ function PostCard({
 
   const deleteCurrentPost = async () => {
     try {
-      setDeleting(true);
+      setIsDeleting(true);
       await deletePost({ postId: post._id });
-      toast.success('Post deletado!', {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-      setDeleting(false);
+      successMessage('Post deletado!');
+      setIsDeleting(false);
     } catch {
-      toast.error('Erro! Tente mais tarde', {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-      setDeleting(false);
+      errorMessage('Erro! Tente mais tarde');
+      setIsDeleting(false);
     }
   };
 
@@ -77,34 +60,17 @@ function PostCard({
     try {
       setEditing(true);
       await editPost({ ...formValues, postId: post._id });
-      setBtnMode(false);
-      setPostCardFieldMode(true);
+      setIsOnDeleteMode(true);
       setEditing(false);
-      toast.success('Post editado!', {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      successMessage('Post editado!');
     } catch {
-      toast.error('Erro! Tente mais tarde', {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      errorMessage('Erro! Tente mais tarde');
       setEditing(false);
     }
   };
 
   const [showCommentForm, setShowCommentForm] = useState(false);
-  const isCommentFormShowing = showCommentForm ? (
+  const renderCommentForm = showCommentForm ? (
     <CommentForm
       setShowComments={setShowComments}
       form={post._id + post.postedBy.userId}
@@ -124,16 +90,15 @@ function PostCard({
         <div>
           <CardButtons
             editing={editing}
-            deleting={deleting}
+            isDeleting={isDeleting}
             onDelete={deleteCurrentPost}
             onEdit={handleSubmit(editCurrentPost)}
-            onBtnChange={setPostCardFieldMode}
+            setIsOnDeleteMode={setIsOnDeleteMode}
+            isOnDeleteMode={isOnDeleteMode}
             postedBy={post.postedBy.userId}
-            userId={myUserId}
+            userId={currentUserId}
             reset={reset}
             postId={post._id}
-            btnMode={btnMode}
-            setBtnMode={setBtnMode}
           />
         </div>
       </div>
@@ -142,16 +107,16 @@ function PostCard({
           <Field
             name="postCardBody"
             component={PostCardField}
-            postCardFieldMode={postCardFieldMode}
+            isOnDeleteMode={isOnDeleteMode}
             className="post-card-style"
             postId={post._id}
-            userId={myUserId}
+            userId={currentUserId}
           />
         </div>
         <div className="row justify-content-around mt-1 mx-auto">
           <div className="mx-auto">
             <PostLikes
-              myUserId={myUserId}
+              currentUserId={currentUserId}
               postId={post._id}
               post={post}
               className="_PostLikes"
@@ -165,21 +130,21 @@ function PostCard({
         showComments={showComments}
         setShowComments={setShowComments}
         post={post}
-        onSetPostForm={setShowCommentForm}
+        setShowCommentForm={setShowCommentForm}
       />
-      {isCommentFormShowing}
+      {renderCommentForm}
     </div>
   );
 }
 
 const mapStateToProps = (state) => {
-  return { myUserId: state.user._id };
+  return { currentUserId: state.user._id };
 };
 
 function validate(values) {
   const errors = {};
   if (!values.postCardBody) {
-    errors.postCardBody = 'NÃO PODE POST VAZIO';
+    errors.postCardBody = 'A postagem deve conter alguma informação';
   }
 
   return errors;

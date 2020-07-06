@@ -5,12 +5,13 @@ import PostCard from '../PostCard/PostCard';
 import Loader from 'react-loader-spinner';
 import './PostCardList.scss';
 
-function PostCardList({ postsData }) {
+function PostCardList({ postsDatabase }) {
   const [indexValue, setIndexValue] = useState(4);
+
   const renderPostCardList = () => {
-    if (postsData.length !== 0) {
+    if (postsDatabase.length !== 0) {
       const postqnt =
-        indexValue >= postsData.posts.length - 1 ? null : (
+        indexValue >= postsDatabase.posts.length - 1 ? null : (
           <div className="row mt-3">
             <button
               className="PostCardList-show-more-btn"
@@ -20,7 +21,7 @@ function PostCardList({ postsData }) {
             </button>
           </div>
         );
-      const postsList = postsData.posts
+      const postsList = postsDatabase.posts
         .slice(0)
         .reverse()
         .map((post, index) => {
@@ -63,7 +64,7 @@ function PostCardList({ postsData }) {
 }
 
 const mapStateToProps = (state) => {
-  return { postsData: state.postsData };
+  return { postsDatabase: state.postsData };
 };
 
 export default connect(mapStateToProps)(PostCardList);

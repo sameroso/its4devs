@@ -3,7 +3,7 @@ import React from 'react';
 import DropDown from '../DropDown/DropDown';
 import './Header.scss';
 
-const Header = ({ data: { profileName, userId } }) => {
+const Header = ({ currentUser }) => {
   return (
     <>
       <div className="container header-top header-background">
@@ -11,7 +11,10 @@ const Header = ({ data: { profileName, userId } }) => {
       </div>
       <div className="container header-background bg-card">
         <div className="row ml-1 py-1">
-          <DropDown profileName={profileName} userId={userId} />
+          <DropDown
+            profileName={currentUser.profileName}
+            userId={currentUser.userId}
+          />
         </div>
       </div>
     </>
