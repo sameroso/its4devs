@@ -2,12 +2,57 @@
 
 .windows-btn {
   @include ui95-btn;
-  padding: 2px 15px;
+  width: 100%;
+  padding: 4px 15px;
+  height: 30px;
+}
+
+@media (max-width: 600px) {
+  .login-title {
+    font-size: 50px;
+  }
+}
+@media (min-width: 600px) {
+  .login-title {
+    font-size: 80px;
+  }
 }
 
 .login-title {
-  font-size: 50px;
+  @include font-share-tech-mono;
+  font-weight: 900;
   margin-top: 90px;
   margin-bottom: 90px;
-  color: rgb(0, 0, 0);
+  color: white;
+}
+.LoginPage-login-card-body {
+  background-color: $primary-color;
+  @include boders;
+}
+.LoginPage-bg-card-header {
+  background-color: $top-card-color;
+}
+.LoginPage-font-card-header {
+  @include font-95;
+  color: white;
+  font-size: 10px;
+}
+.LoginPage-Number-Style {
+  border: 15px $primary-color solid;
+  background-color: $top-card-color;
+  padding: 0 20px;
+}
+.LoginPage-container-position {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translateY(-50%) translateX(-50%);
+  transform: translateY(-50%) translateX(-50%);
+}
+.LoginPage-Card {
+  max-width: 600px;
+}
+.LoginPage-Link-Size {
+  width: 90%;
 }

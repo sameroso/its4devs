@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
 $background-color: #008080;
 $primary-color: #bbb0b0;
 $top-card-color: #010388;
@@ -48,4 +50,7 @@ $top-card-color-comment: rgb(26, 114, 73);
 
 @mixin font-95 {
   font-family: windows95, sans-serif;
+}
+@mixin font-share-tech-mono {
+  font-family: 'Share Tech Mono', monospace;
 }
