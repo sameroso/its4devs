@@ -10,7 +10,7 @@ function InitialFormField({ input, type, meta: { touched, error } }) {
       <TextareaAutosize
         {...input}
         className={`initial-form-text-area mx-auto _InitialFormFiel_textarea initialForm-scroll 
-        PostForm_Textarea_Borders`}
+        PostForm_Textarea_Borders PostForm_Textarea_Font`}
       />
     );
 

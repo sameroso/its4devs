@@ -43,6 +43,18 @@ $top-card-color-comment: rgb(26, 114, 73);
     url('../../assets/fonts/ms-sans-serif.ttf') format('ttf');
 }
 
+@font-face {
+  font-family: 'Menlo Regular';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Menlo Regular'),
+    url('../../assets/fonts/Menlo-Regular.woff') format('woff');
+}
+
+@mixin menlo {
+  font-family: 'Menlo Regular';
+}
+
 .font {
   font-family: windows95, sans-serif;
   font-size: 10px;

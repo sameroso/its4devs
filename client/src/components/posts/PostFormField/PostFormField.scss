@@ -2,3 +2,7 @@
 .PostForm_Textarea_Borders {
   @include boders;
 }
+
+.PostForm_Textarea_Font {
+  @include menlo;
+}

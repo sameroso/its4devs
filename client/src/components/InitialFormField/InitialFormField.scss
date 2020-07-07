@@ -8,8 +8,26 @@
 
 .initial-form-text-area {
   height: 150px !important;
-  width: 94%;
+  width: 90%;
 }
 .initialForm-scroll {
   overflow: scroll;
+}
+::-webkit-scrollbar {
+  width: 12px !important;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3) !important;
+  -webkit-border-radius: 0px !important;
+  border-radius: 0px !important;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5) !important;
+}
+::-webkit-scrollbar-thumb:window-inactive {
+  background: #41617d !important;
 }
