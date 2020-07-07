@@ -8,6 +8,7 @@ function InitialFormField({ input, type, meta: { touched, error } }) {
       <input type={type} {...input} className="initial-form-input" />
     ) : (
       <TextareaAutosize
+        minRows="7"
         {...input}
         className={`initial-form-text-area mx-auto _InitialFormFiel_textarea initialForm-scroll 
         PostForm_Textarea_Borders PostForm_Textarea_Font`}

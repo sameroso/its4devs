@@ -15,7 +15,7 @@ function PostCardField({
     <TextareaAutosize
       id={postId + userId}
       {...input}
-      className={`initial-form-text-area mx-auto ${showbgonEdit}`}
+      className={`initial-form-text-area mx-auto PostCardField-Font ${showbgonEdit}`}
       readOnly={isOnDeleteMode}
     />
   );
