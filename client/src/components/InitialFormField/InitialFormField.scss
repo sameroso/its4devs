@@ -7,6 +7,9 @@
 }
 
 .initial-form-text-area {
-  height: 150px;
-  width: 90%;
+  height: 150px !important;
+  width: 94%;
+}
+.initialForm-scroll {
+  overflow: scroll;
 }

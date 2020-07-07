@@ -1,15 +1,16 @@
 import React from 'react';
-import './InitialFormField.scss';
+import './PostFormField.scss';
 import TextareaAutosize from 'react-textarea-autosize';
 
-function InitialFormField({ input, label, type, meta: { touched, error } }) {
+function InitialFormField({ input, type, meta: { touched, error } }) {
   const inputType =
     type === 'input' ? (
       <input type={type} {...input} className="initial-form-input" />
     ) : (
       <TextareaAutosize
         {...input}
-        className="initial-form-text-area mx-auto _InitialFormFiel_textarea initialForm-scroll"
+        className={`initial-form-text-area mx-auto _InitialFormFiel_textarea initialForm-scroll 
+        PostForm_Textarea_Borders`}
       />
     );
 
@@ -29,7 +30,6 @@ function InitialFormField({ input, label, type, meta: { touched, error } }) {
 
   return (
     <div className="pb-3">
-      <span className="font initial-form-label-position">{label}</span>
       <div className="row">{inputType}</div>
       {renderError()}
     </div>
