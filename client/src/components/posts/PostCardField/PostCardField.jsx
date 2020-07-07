@@ -11,6 +11,7 @@ function PostCardField({
   meta: { touched, error },
 }) {
   const showbgonEdit = isOnDeleteMode ? 'PostcardField-bg-none' : '';
+
   const inputType = (
     <TextareaAutosize
       id={postId + userId}

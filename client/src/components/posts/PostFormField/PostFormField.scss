@@ -1,6 +1,7 @@
 @import '../../style/variables.scss';
 .PostForm_Textarea_Borders {
   @include boders;
+  outline: none;
 }
 
 .PostForm_Textarea_Font {

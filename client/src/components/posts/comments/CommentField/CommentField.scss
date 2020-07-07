@@ -3,9 +3,21 @@
 .readonly-commentField-input-style {
   background-color: transparent;
   border: transparent;
+  outline: none;
+  &:hover {
+    outline: none;
+    border: none;
+  }
+  &:active {
+    outline: none;
+    border: none;
+  }
 }
 .edit-commentField-input-style {
   background-color: white;
+  &:hover {
+    outline: none;
+  }
 }
 .CommentField-font {
   @include menlo;

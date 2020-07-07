@@ -6,6 +6,7 @@ import Loader from 'react-loader-spinner';
 
 import { sendPost } from '../../../actions';
 import PostFormField from '../PostFormField/PostFormField';
+import PostFormDropDown from '../PostFormDropDown/PostFormDropDown';
 import successMessage from '../../../functions/successMessage';
 import errorMessage from '../../../functions/errorMessage';
 
@@ -23,13 +24,17 @@ function PostForm({
     databasePostId: '1',
   };
   const [isPosting, setIsPosting] = useState(false);
+  const [youtubeInput, setYoutubeInput] = useState(false);
   const isLoaderShowing = isPosting ? (
     <Loader type="ThreeDots" color="#FFFFFF" height={12} width={40} />
   ) : (
     'Untitled - Notepad'
   );
-
+  const renderYoutubeInput = youtubeInput ? (
+    <Field name="youtubeInput" component="input"></Field>
+  ) : null;
   const submitForm = async (formValues) => {
+    console.log(formValues);
     try {
       setIsPosting(true);
       await sendPost({ ...additionalPostInfo, ...formValues });
@@ -50,24 +55,8 @@ function PostForm({
       </div>
       <form onSubmit={handleSubmit(submitForm)}>
         <div className="d-flex">
-          <span
-            className="PostForm-file-font dropdown-toggle"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-          >
-            <span className="PostForm-file-first-letter">f</span>
-            <span>ile</span>
-          </span>
-          <div className="dropdown-menu PostForm-DropDown-config">
-            <a className="dropdown-item d-flex m-0 p-0" href="#">
-              <button className="mx-auto font postform-btn">
-                <span type="submit" className="postform-btn-text">
-                  postar
-                </span>
-              </button>
-            </a>
-          </div>
+          <PostFormDropDown setYoutubeInput={setYoutubeInput} />
+          {renderYoutubeInput}
         </div>
         <Field
           name="postForm"
@@ -82,7 +71,7 @@ function PostForm({
 
 function validate(values) {
   const errors = {};
-  if (!values.postForm) {
+  if (!values.postForm && !values.youtubeInput) {
     errors.postForm = 'É preciso escrever alguma coisa pra postar';
   }
 

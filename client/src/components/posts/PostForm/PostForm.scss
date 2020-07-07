@@ -11,6 +11,7 @@
   background-color: transparent;
   &:hover {
     background-color: $top-card-color;
+    color: white;
   }
 }
 .Toastify__toast--success {
@@ -47,10 +48,10 @@
 }
 .PostForm-file-font {
   @include font-95;
-  font-size: 11px;
+  font-size: 12px;
   margin-left: 20px;
-  margin-top: 2px;
-  margin-bottom: 2px;
+  margin-top: 3px;
+  margin-bottom: 3px;
   cursor: pointer;
 }
 .PostForm-DropDown-config {

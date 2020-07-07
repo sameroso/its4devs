@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
+import ReactPlayer from 'react-player';
 
 import { deletePost } from '../../../actions';
 import { editPost } from '../../../actions';
@@ -31,6 +32,18 @@ function PostCard({
   const [showComments, setShowComments] = useState(false);
   const postCardRef = useRef(null);
 
+  const willPlayerShow =
+    !post.youtubeLink || post.youtubeLink === '' ? null : (
+      <div className="mx-auto">
+        <ReactPlayer
+          url={post.youtubeLink}
+          height="250px"
+          width="100%"
+          className="mx-auto mt-2"
+          controls={true}
+        />
+      </div>
+    );
   function handleClickOutside(event) {
     if (postCardRef.current && !postCardRef.current.contains(event.target)) {
       setIsOnDeleteMode(true);
@@ -104,6 +117,7 @@ function PostCard({
       </div>
       <div className="postcard-bg pb-3">
         <div className="row">
+          {willPlayerShow}
           <Field
             name="postCardBody"
             component={PostCardField}

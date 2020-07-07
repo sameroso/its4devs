@@ -5,6 +5,7 @@
 .PostcardField-bg-none {
   background-color: transparent;
   border: transparent;
+  outline: none;
 }
 .PostCardField-Font {
   @include menlo;
