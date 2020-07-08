@@ -35,6 +35,7 @@ function PostCardList({ postsDatabase }) {
                 form={post._id}
                 initialValues={{
                   postCardBody: post.body,
+                  postCardYoutubeLink: post.youtubeLink,
                 }}
               />
             </div>

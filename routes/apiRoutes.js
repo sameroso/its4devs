@@ -98,6 +98,7 @@ const apiRoutes = (app) => {
       return el._id.toString() === req.body.postId;
     });
     post.body = await req.body.postCardBody;
+    post.youtubeLink = await req.body.postCardYoutubeLink;
     const updated = await postsData.save();
 
     res.send(updated);

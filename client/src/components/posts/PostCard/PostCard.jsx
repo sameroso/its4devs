@@ -44,6 +44,20 @@ function PostCard({
         />
       </div>
     );
+
+  const showFieldOrPlayer = isOnDeleteMode ? (
+    willPlayerShow
+  ) : (
+    <Field
+      name="postCardYoutubeLink"
+      component={PostCardField}
+      isOnDeleteMode={isOnDeleteMode}
+      className="post-card-style"
+      postId={post._id}
+      userId={currentUserId}
+    />
+  );
+
   function handleClickOutside(event) {
     if (postCardRef.current && !postCardRef.current.contains(event.target)) {
       setIsOnDeleteMode(true);
@@ -117,7 +131,7 @@ function PostCard({
       </div>
       <div className="postcard-bg pb-3">
         <div className="row">
-          {willPlayerShow}
+          {showFieldOrPlayer}
           <Field
             name="postCardBody"
             component={PostCardField}
