@@ -145,7 +145,7 @@ describe('user is the same of post and props without comments', () => {
       wrapper.update();
       expect(wrapper.find('textarea').prop('readOnly')).toBe(true);
       wrapper.find('.commentbtns-label').simulate('click');
-      expect(wrapper.find('textarea').prop('readOnly')).toBe(false);
+      expect(wrapper.find('textarea').at(1).prop('readOnly')).toBe(false);
       done();
       wrapper.unmount();
     });

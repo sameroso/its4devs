@@ -10,7 +10,7 @@ import { act } from '@testing-library/react';
 let wrapper;
 const store = storeFactory();
 const props = {
-  postData: { profileName: 'profileName', profilePic: 'profilepic' },
+  userInfoForPost: { profileName: 'profileName', profilePic: 'profilepic' },
 };
 beforeEach(() => {
   moxios.install();

@@ -4,9 +4,9 @@ import DropDown from '../DropDown/DropDown';
 import { shallow } from 'enzyme';
 
 const props = {
-  data: {
+  currentUser: {
     profileName: 'samer',
-    userId: '123',
+    _id: '123',
   },
 };
 
