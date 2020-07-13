@@ -34,7 +34,6 @@ function PostForm({
     <Field name="youtubeInput" component="input"></Field>
   ) : null;
   const submitForm = async (formValues) => {
-    console.log(formValues);
     try {
       setIsPosting(true);
       await sendPost({ ...additionalPostInfo, ...formValues });

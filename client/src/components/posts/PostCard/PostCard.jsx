@@ -27,7 +27,6 @@ function PostCard({
 }) {
   const [isDeleting, setIsDeleting] = useState(false);
   const [editing, setEditing] = useState(false);
-
   const [isOnDeleteMode, setIsOnDeleteMode] = useState(true);
   const [showComments, setShowComments] = useState(false);
   const postCardRef = useRef(null);

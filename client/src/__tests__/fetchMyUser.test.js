@@ -1,4 +1,4 @@
-/* import { storeFactory } from '../../tests/testUtils';
+import { storeFactory } from '../../tests/testUtils';
 import { fetchMyUser } from '../actions';
 import moxios from 'moxios';
 
@@ -9,18 +9,17 @@ describe('fetchMyUser action dispatcher', () => {
       'https://lh3.googleusercontent.com/a-/AOh14Ggp7sJAENlDO87g6fG0U9xSv8MmPTZUC-aI_x7BQw',
     profileName: 'Samer',
     description: 'my description',
-    whatsApp: '',
-    facebookLink: '',
-    gitHub: '',
+    whatsApp: 'whatsApp',
+    facebookLink: 'FacebookLink',
+    gitHub: 'github',
     posts: [],
-    dateCreated: { type: Date, default: Date },
+    dateCreated: 'dateCreated',
   };
 
   let store;
-  const initialState = { user: null };
   beforeEach(() => {
     moxios.install();
-    store = storeFactory(initialState);
+    store = storeFactory();
   });
   afterEach(() => {
     moxios.uninstall();
@@ -34,12 +33,11 @@ describe('fetchMyUser action dispatcher', () => {
       });
     });
     return store.dispatch(fetchMyUser()).then(() => {
-      const newState = store.getState();
+      const newState = store.getState().user;
       const expectedState = {
         user: user,
-        form: {},
       };
-      expect(newState).toEqual(expectedState);
+      expect(newState).toEqual(expectedState.user);
     });
   });
-}); */
+});

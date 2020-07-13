@@ -12,7 +12,13 @@ function UserPostHeader({ post, fetchUserPostProfile, postHeader }) {
   if (postHeader.length === 0) {
     return (
       <>
-        <Loader type="ThreeDots" color="#9e9493" height={12} width={60} />
+        <Loader
+          type="ThreeDots"
+          color="#9e9493"
+          height={12}
+          width={60}
+          className="_UserPostHeader_Loader"
+        />
       </>
     );
   }
@@ -21,9 +27,9 @@ function UserPostHeader({ post, fetchUserPostProfile, postHeader }) {
       <Link to={`profile/${post.postedBy.userId}`}>
         <img
           src={postHeader[0].profilePic}
-          className="img-card-size my-auto ml-1 py-1 px-1"
+          className="img-card-size my-auto ml-1 py-1 px-1 _UserPostHeader_img"
         ></img>
-        <span className="text-white ml-2 my-auto mx-auto">
+        <span className="text-white ml-2 my-auto mx-auto _UserPostHeader_name">
           {postHeader[0].profileName}
         </span>
       </Link>
