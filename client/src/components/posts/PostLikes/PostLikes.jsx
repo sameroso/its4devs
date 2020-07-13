@@ -5,29 +5,25 @@ import LikeList from '../LikeList/LikeList';
 import { addLike } from '../../../actions';
 import { toggleLike } from '../../../actions';
 import { emptyUsers } from '../../../actions';
-import lula from '../../../assets/lula.jpeg';
-import dilma from '../../../assets/dilma.jpg';
 import gates from '../../../assets/billi.jpg';
 import zuck from '../../../assets/zuck.jpg';
 import jobs from '../../../assets/jobs.jpg';
 import './PostLikes.scss';
+import bindUnbindEvent from '../../../functions/bindUnbindEvent';
 
-function PostLikes({
-  myUserId,
-  postId,
-  addLike,
-  post,
-  toggleLike,
-  emptyUsers,
-}) {
+function PostLikes({ currentUserId, addLike, post, toggleLike, emptyUsers }) {
   const like1Ref = useRef(null);
   const like2Ref = useRef(null);
   const like3Ref = useRef(null);
 
-  const isAlreadyLiked = post.likes.some((like) => like.userId === myUserId);
-  const addingLike = isAlreadyLiked
-    ? (likeType) => toggleLike({ postId, userId: myUserId, likeType })
-    : (likeType) => addLike({ postId, userId: myUserId, likeType });
+  const wasAlreadyLikedByCurrentUser = post.likes.some(
+    (like) => like.userId === currentUserId
+  );
+  const addingLike = wasAlreadyLikedByCurrentUser
+    ? (likeType) =>
+        toggleLike({ postId: post._id, userId: currentUserId, likeType })
+    : (likeType) =>
+        addLike({ postId: post._id, userId: currentUserId, likeType });
 
   const react1type = post.likes.filter((like) => {
     return like.likeType === 'lula';
@@ -53,36 +49,21 @@ function PostLikes({
       setShowLikeList1(false);
       emptyUsers();
     }
-    // Bind the event listener
-    document.addEventListener('mousedown', handleClick1Outside);
-    return () => {
-      // Unbind the event listener on clean up
-      document.removeEventListener('mousedown', handleClick1Outside);
-    };
+    bindUnbindEvent(handleClick1Outside);
   }
   function handleClick2Outside(event) {
     if (like2Ref.current && !like2Ref.current.contains(event.target)) {
       setShowLikeList2(false);
       emptyUsers();
     }
-    // Bind the event listener
-    document.addEventListener('mousedown', handleClick2Outside);
-    return () => {
-      // Unbind the event listener on clean up
-      document.removeEventListener('mousedown', handleClick2Outside);
-    };
+    bindUnbindEvent(handleClick2Outside);
   }
   function handleClick3Outside(event) {
     if (like3Ref.current && !like3Ref.current.contains(event.target)) {
       setShowLikeList3(false);
       emptyUsers();
     }
-    // Bind the event listener
-    document.addEventListener('mousedown', handleClick3Outside);
-    return () => {
-      // Unbind the event listener on clean up
-      document.removeEventListener('mousedown', handleClick3Outside);
-    };
+    bindUnbindEvent(handleClick3Outside);
   }
 
   return (
